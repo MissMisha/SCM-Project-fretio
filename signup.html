@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Fretio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(45deg, #1a1a1a, #2d2d2d);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo {
+            padding: 20px;
+            width: 300px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            gap: 50px;
+            align-items: flex-start;  /* Align children to the top */
+            justify-content: center;
+            padding: 20px;
+            margin-top: 20px;         /* Reduced top margin to shift container upward */
+        }
+
+        h1 {
+            position: absolute;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #ffa500;
+            font-size: 2.5rem;
+        }
+
+        .form-container {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 40px;
+            border-radius: 15px;
+            width: 400px;
+        }
+
+        .form-title {
+            color: #ffa500;
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+
+        .subtitle {
+            color: white;
+            margin-bottom: 30px;
+            font-size: 1.2rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px 0;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #555;
+            color: white;
+            outline: none;
+        }
+
+        input::placeholder {
+            color: #666;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #666;
+        }
+
+        .sign-up-btn {
+            width: 100%;
+            padding: 15px;
+            background: #ffa500;
+            border: none;
+            border-radius: 25px;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .sign-up-btn:hover {
+            background: #ff8c00;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+        }
+
+        .login-link a {
+            color: #ffa500;
+            text-decoration: none;
+        }
+
+        .character-image {
+            max-width: 300px;
+            margin-left: 50px;  /* Remove or adjust if you need further alignment changes */
+            margin-top: 0;      
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .character-image {
+                display: none;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+                text-align: center;
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <img src="kh2ZWeP.png" alt="Fretio Logo" class="logo">
+    <h1>WELCOME TO FRETIO !</h1>
+
+    <div class="container">
+        <div class="form-container">
+            <h2 class="form-title">Create a New Account</h2>
+            <h3 class="subtitle">BE A FRETION !!</h3>
+            
+            <form id="signupForm">
+                <div class="form-group">
+                    <input type="text" placeholder="Full Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Email Address" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="Password" required>
+                    <span class="toggle-password">👁️</span>
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="Confirm Password" required>
+                    <span class="toggle-password">👁️</span>
+                </div>
+                
+                <button type="submit" class="sign-up-btn">Sign Up</button>
+            </form>
+            
+            <div class="login-link">
+                Already have an account? <a href="login.html">Log In</a>
+            </div>
+        </div>
+        
+        <img src="votyKTC.png" alt="Character" class="character-image">
+    </div>
+
+    <script>
+        document.querySelectorAll('.toggle-password').forEach(button => {
+            button.addEventListener('click', () => {
+                const input = button.previousElementSibling;
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    button.textContent = '👁️‍🗨️';
+                } else {
+                    input.type = 'password';
+                    button.textContent = '👁️';
+                }
+            });
+        });
+
+        document.getElementById('signupForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Add your form submission logic here
+            alert('Sign up functionality would be implemented here!');
+        });
+    </script>
+</body>
+</html>

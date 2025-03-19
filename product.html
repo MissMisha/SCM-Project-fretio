@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - Fretio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #1a1a1a;
+            color: white;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 4rem;
+            background-color: #1a1a1a;
+        }
+
+        .logo {
+            width: 220px;
+            height: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .product-container {
+            display: flex;
+            padding: 2rem 4rem;
+            gap: 4rem;
+            align-items: flex-start;
+        }
+
+        .product-details {
+            flex: 1;
+            background: #2a2a2a;
+            padding: 2rem;
+            border-radius: 8px;
+        }
+
+        .product-title {
+            font-size: 2rem;
+            color: #F5B041;
+            margin-bottom: 1rem;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .add-cart {
+            background: #F5B041;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+
+        .add-cart:hover {
+            background: #E59C2C;
+        }
+
+        .description-container {
+            flex: 2;
+            background: #222;
+            padding: 2rem;
+            border-radius: 8px;
+        }
+
+        .description-title {
+            font-size: 2rem;
+            color: #F5B041;
+            margin-bottom: 1rem;
+        }
+
+        .description-text {
+            font-size: 1.2rem;
+            color: #ccc;
+            line-height: 1.6;
+        }
+        .img4{
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <img src="kh2ZWeP.png" alt="Fretio Logo" class="logo">
+        <div class="nav-links">
+            <a href="#home">HOME</a>
+            <a href="#medicine">MEDICINE</a>
+            <a href="#food">FOOD ITEMS</a>
+            <a href="#clothes">CLOTHES</a>
+            <a href="#more">MORE</a>
+        </div>
+    </nav>
+
+    <div class="product-container">
+        <div class="product-details">
+            <h2 class="product-title">Lay’s Spanish Tomato Tango Potato Chips 82g</h2>
+            <img class="img4" src="product2.png" alt="Lays Chips" width="200">
+            <p class="product-price">₹20</p>
+            <button class="add-cart">Add to Cart</button>
+        </div>
+
+        <div class="description-container">
+            <h2 class="description-title">Description</h2>
+            <p class="description-text">
+                - Made from high-quality ingredients<br>
+                - Perfect snack for any occasion<br>
+                - Loved by both kids and adults<br>
+                - Packaged for freshness<br>
+                <br>
+                <b>Disclaimer:</b><br>
+                Despite our efforts to provide accurate product information, actual packaging and ingredients may vary. Please read the label and warnings carefully before use.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
