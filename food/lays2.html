@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - Fretio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #1a2634;
+            color: white;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 4rem;
+            background-color: #1a2634;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            width: 220px;
+            height: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-icons img {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+        }
+
+        .ms-tag {
+            background: #00a650;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .main-content {
+            display: flex;
+            padding: 2rem 4rem;
+            gap: 4rem;
+        }
+
+        .product-details {
+            flex: 1;
+        }
+
+        .product-title {
+            color: #F5B041;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .product-card {
+            background: #000; /* Changed to black */
+            border-radius: 12px;
+            padding: 1.5rem;
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .heart-icon {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            cursor: pointer;
+        }
+
+        .product-image {
+            width: 200px;
+            display: block;
+            margin: 0 auto;
+            background-color: #000; /* Changed to black */
+            padding: 10px;
+            border-radius: 12px;
+        }
+
+        .product-name {
+            color: #F5B041; /* Changed to match the theme */
+            margin-top: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            color: #F5B041; /* Changed to match the theme */
+            margin-top: 0.5rem;
+        }
+
+        .add-to-cart {
+            background: #F5B041;
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 1rem;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        /* Add new styles for quantity controls */
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .quantity-btn {
+            background: #F5B041;
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 4px;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .quantity-display {
+            color: white;
+            font-size: 1.2rem;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        .description {
+            flex: 2;
+        }
+
+        .description-title {
+            color: #F5B041;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .description-content {
+            line-height: 1.8;
+        }
+
+        .description-content ul {
+            list-style: none;
+        }
+
+        .description-content ul li {
+            margin-bottom: 1rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .description-content ul li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #F5B041;
+        }
+
+        .disclaimer {
+            margin-top: 1.5rem;
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <img src="kh2ZWeP.png" alt="Fretio Logo" class="logo">
+        <div class="nav-links">
+            <a href="index.html">HOME</a>
+            <a href="medi.html">MEDICINE</a>
+            <a href="#food">FOOD ITEMS</a>
+            <a href="#clothes">CLOTHES</a>
+            <a href="#more">MORE</a>
+        </div>
+        <div class="nav-right">
+            <div class="nav-icons">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='white' viewBox='0 0 24 24'%3E%3Cpath d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'/%3E%3C/svg%3E" alt="Search">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='white' viewBox='0 0 24 24'%3E%3Cpath d='M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z'/%3E%3C/svg%3E" alt="Cart">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='white' viewBox='0 0 24 24'%3E%3Cpath d='M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z'/%3E%3C/svg%3E" alt="User">
+            </div>
+            
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="product-details">
+            <h1 class="product-title">Product Details</h1>
+            <div class="product-card">
+                <svg class="heart-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+                <img src="food1.jpeg" alt="Lay's Spanish Tomato Tango" class="product-image">
+                <h2 class="product-name">Lay's Spanish Tomato Tango Potato Chips 82 g</h2>
+                <div class="product-price">₹20</div>
+                <div class="quantity-controls">
+                    <button class="quantity-btn minus-btn">-</button>
+                    <span class="quantity-display">1</span>
+                    <button class="quantity-btn plus-btn">+</button>
+                </div>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="description">
+            <h2 class="description-title">Description</h2>
+            <div class="description-content">
+                <ul>
+                    <li>Made from high-quality ingredients</li>
+                    <li>Perfect for any occasion. Feel like having a tasty treat? Lay's Spanish Tomato Tango Potato Chips is for you. Enjoy it with your favourite beverage or drink! It's the perfect party snack for when your friends and family are over. So, what are you waiting for? Go ahead and buy this product online today!</li>
+                    <li>
+                        <strong>Disclaimer:</strong>
+                        <p class="disclaimer">Despite our attempts to provide you with the most accurate information possible, the actual packaging, ingredients and colour of the product may sometimes vary. Please read the label, directions and warnings carefully before use.</p>
+                    </li>
+                    <li>Loved by both kids and adults</li>
+                    <li>Packaged for freshness</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let quantity = 1;
+        const quantityDisplay = document.querySelector('.quantity-display');
+        const minusBtn = document.querySelector('.minus-btn');
+        const plusBtn = document.querySelector('.plus-btn');
+
+        // Quantity control functionality
+        minusBtn.addEventListener('click', function() {
+            if (quantity > 1) {
+                quantity--;
+                quantityDisplay.textContent = quantity;
+            }
+        });
+
+        plusBtn.addEventListener('click', function() {
+            quantity++;
+            quantityDisplay.textContent = quantity;
+        });
+
+        // Add to cart functionality
+        document.querySelector('.add-to-cart').addEventListener('click', function() {
+            alert(`${quantity} item(s) added to cart!`);
+        });
+
+        // Wishlist functionality
+        document.querySelector('.heart-icon').addEventListener('click', function() {
+            this.style.fill = this.style.fill === 'red' ? 'none' : 'red';
+        });
+    </script>
+</body>
+</html>

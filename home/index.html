@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fretio - Student Marketplace</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="kh2ZWeP.png" alt="Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="medi.html">Medicine</a></li>
+                <li><a href="food.html">Food Items</a></li>
+                <li><a href="clothes.html">Clothes</a></li>
+                
+            </ul>
+        </nav>
+
+        <!-- Header Icons (Search, Cart, Profile Menu) -->
+        <div class="header-icons">
+            <button class="search-btn" onclick="toggleSearch()">
+                <i class="fas fa-search"></i>
+            </button>
+            <button class="cart-btn" onclick="viewCart()">
+                <i class="fas fa-shopping-cart"></i>
+            </button>
+            <!-- Profile Menu -->
+            <div class="profile-menu">
+                <button class="profile-btn">&#x1F464;</button>
+                <div class="dropdown">
+                    <a href="signup.html">Sign up</a>
+                    <a href="login.html">Login</a>
+                    <a href="#">Wallet</a>
+                    <a href="#">Buy/Sell</a>
+                    <a href="#">History</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Search Bar -->
+    <div id="search-bar" class="search-bar">
+        <input type="text" placeholder="Search for products...">
+        <button onclick="searchProducts()">Search</button>
+    </div>
+
+    <!-- Hero Section -->
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <p>HERE IT IS ........</p>
+                <h1>FRETIO</h1>
+                <p>"FROM STUDENTS, FOR STUDENTS - RENT OR BUY !"</p>
+                <p>NEEDED IT AT NIGHT, RENT IT RIGHT !!</p>
+            </div>
+            <img src="votykTC.png" alt="Character" class="hero-image">
+        </section>
+
+        <!-- Featured Products Section -->
+        <div class="container">
+            <div class="header">
+                <span class="star-left">✨</span>
+                <h1>FEATURED PRODUCTS</h1>
+                <span class="star-right">✨</span>
+                <div class="top-seller">TOP SELLER!</div>
+            </div>
+
+            <div class="products-grid">
+                <div class="product-card">
+                    <img src="product1.png" alt="Adidas Shoes" class="product-image">
+                    <div class="product-info">
+                        <div class="product-title">Adidas Shoes</div>
+                        <span class="arrow">→</span>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <a href="food.html"><img src="product2.png" alt="Snacks" class="product-image"></a>
+                    <div class="product-info">
+                        <div class="product-title">Snacks</div>
+                        <span class="arrow">→</span>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <img src="product3.png" alt="Medicines" class="product-image">
+                    <div class="product-info">
+                        <div class="product-title">Medicines</div>
+                        <span class="arrow">→</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <button class="follow-button">
+                Follow @reallygreatssite For more tips
+            </button> -->
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-02-08%20173759-8BOnvYmsrqmJf9rHyne7hG4EQSdo4j.png" alt="Fretio Logo" class="footer-logo">
+            </div>
+            <div class="footer-links">
+                <a href="contact.html">Contact us</a>
+                <a href="#">About us</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="#">Return Policy</a>
+            </div>
+
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            </div>
+
+            <div class="copyright">
+                Copyright © 2024 Fretio. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Correct profile dropdown functionality
+        document.querySelector('.profile-btn').addEventListener('click', () => {
+            const dropdown = document.querySelector('.dropdown');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Follow button click handler
+        document.querySelector('.follow-button').addEventListener('click', () => {
+            alert('Following @reallygreatssite!');
+        });
+
+        // Add hover effect to product cards
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-5px)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
