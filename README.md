@@ -1,6 +1,6 @@
 # Fretio
 
-Fretio is a platform designed to help hostlers share rent and buy/sell goods, making hostel life more convenient and organized.If you want to trade essentials, Fretio connects you with fellow hostlers easily.
+Fretio is a platform designed to help hostelers share rent and buy/sell goods, making hostel life more convenient and organized.If you want to trade essentials, Fretio connects you with fellow hostlers easily.
 
 ## 🚀 Project Overview
 
@@ -29,30 +29,29 @@ https://tinyurl.com/fretio-design
 ## 📁 Folder Structure
 
 ```bash
-SCM-Project/
-├── .git/                              # Git repository
-├── README.md                         # Project documentation
-├── aboutus.html                      # About Us page
-├── contact.html                      # Contact page
-├── login.html                        # Login page
-├── privacy.html                      # Privacy policy page
-├── product.html                      # Main product page
-├── signup.html                       # Signup page
-├── votykTC.png                       # Hero image
-│
-├── home/                             # Home directory (main content)
-│   ├── index.html                    # Main index page
-│   ├── styles.css                    # CSS styles
-│   ├── script.js                     # JavaScript functions
-│   ├── votykTC.png                   # Hero image
-│   ├── kh2ZWeP.png                   # Background image
-│   ├── product1.png                  # Product image
-│   ├── product2.png                  # Product image
-│   └── product3.png                  # Product image
-│
-├── clothes/                          # Clothes category│
-├── food/                             # Food category
-└── medicien/                         # Medicine category (note: typo in folder name)
+
+Fretio/
+├── index.html                    # Main entry point (Home Page)
+├── pages/                        # All other HTML pages
+│   ├── roommate-finder.html
+│   ├── marketplace.html
+│   ├── profile.html
+│   ├── chat.html
+│   └── about.html
+├── assets/
+│   ├── images/                   # Store all images here
+│   │   ├── logo.png
+│   │   ├── product1.jpg
+│   │   └── user-avatar.png
+│   ├── css/                      # CSS for styling
+│   │   ├── style.css
+│   │   └── marketplace.css
+│   └── js/                       # JavaScript for interactivity
+│       ├── main.js
+│       └── chat.js
+├── README.md                     # Project overview and setup
+└── .gitignore                    # Ignore unnecessary files during git push
+
 ```
 
 ## 📅 Project Roadmap
@@ -79,10 +78,10 @@ git clone https://github.com/Coder-MayankSaini/SCM-Project.git
 Team Members:
 ```bash
 [Mayank Saini : 2410991418]
-[Mayank Rana  : 2410991417]
-[Piyush Garg  : 2410991455]
+[Mayank Rana : 2410991417]
+[Piyush Garg : 2410991455]
 [Misha Bansal : 2410991423]
-[Mannat       : 2410991402]
+[Mannat : 2410991402]
 ```
 
 

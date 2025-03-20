@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medicine - Fretio</title>
+    <title>Clothes - Fretio</title>
     <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <style>
@@ -20,91 +20,185 @@
             overflow-x: hidden;
         }
 
-        /* Navbar Styling */
-        .navbar {
+        /* Header Styling */
+        header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 2rem;
-            background-color: #1a1a24;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
-            opacity: 0;
-            transform: translateY(-20px);
-            animation: fadeIn 1s ease-in-out forwards;
-        }
-
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            padding: 15px 40px;
+            background-color: rgba(26, 38, 52, 0.9);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
         .logo img {
-            width: 100px;
-            height: auto;
-            margin-right: 10px;
+            height: 50px;
         }
-
-        .nav-links {
+        
+        /* Navigation */
+        nav ul {
             display: flex;
-            gap: 1.5rem;
+            list-style: none;
+            gap: 40px;
         }
 
-        .nav-links a {
+        nav ul li a {
             text-decoration: none;
-            color: #fff;
-            font-size: 1rem;
+            color: white;
+            font-size: 20px;
             font-weight: 600;
-            transition: color 0.3s ease-in-out;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
         }
 
-        .nav-links a:hover {
-            color: #FFD700;
-            transform: scale(1.1);
+        nav ul li a:hover {
+            color: #FFD700; /* Hover effect with golden color */
         }
 
-        .nav-icons {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
+        /* Profile Menu Styling */
+        .profile-menu {
+            position: relative;
+            display: inline-block;
         }
 
-        .nav-icons i {
-            font-size: 1.2rem;
+        .profile-btn {
+            background: none;
+            border: none;
+            font-size: 28px;
             cursor: pointer;
-            color: #fff;
-            transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
-        }
-
-        .nav-icons i:hover {
-            color: #FFD700;
-            transform: rotate(10deg) scale(1.1);
-        }
-
-        .profile-icon {
-            background-color: #ffa500;
+            color: white;
+            transition: transform 0.3s ease, color 0.3s ease;
+            padding: 10px;
             border-radius: 50%;
-            padding: 5px 10px;
-            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .profile-btn:hover {
+            transform: rotate(360deg); /* Full rotation on hover */
+            color: #FFD700; /* Golden color on hover */
+        }
+
+        /* Profile Dropdown */
+        .dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            background: #2a2a2a;
+            padding: 12px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            min-width: 200px; /* Set a minimum width */
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+        }
+
+        /* Show dropdown on button hover */
+        .profile-menu:hover .dropdown {
+            display: block;
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown a {
+            display: block;
+            color: #FFD700;
+            padding: 12px 20px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            transition: color 0.3s ease, background 0.3s ease;
+            border-radius: 5px;
+            margin: 5px 0;
+        }
+
+        .dropdown a:hover {
+            background: #FFD700;
             color: #000;
-            transition: transform 0.3s ease-in-out;
         }
 
-        .profile-icon:hover {
-            transform: scale(1.1);
+        /* Header Icons */
+        .header-icons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
         }
 
-        /* Responsive Navbar */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            .nav-icons {
-                gap: 1rem;
-            }
+        .search-btn, .cart-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 10px;
+            transition: color 0.3s ease;
         }
 
+        .search-btn:hover, .cart-btn:hover {
+            color: #FFD700;
+        }
+
+        /* Search Bar */
+        .search-bar {
+            display: none;
+            position: fixed;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 80%;
+            max-width: 600px;
+            z-index: 1001;
+        }
+
+        .search-bar input {
+            width: 80%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .search-bar button {
+            padding: 10px;
+            background-color: #FFD700;
+            color: #000;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-bar button:hover {
+            background-color: #e6b800;
+        }
+
+        /* Cart Icon Hover */
+        .cart-btn {
+            position: relative;
+        }
+
+        .cart-btn::after {
+            content: '0'; /* Default cart item count */
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 5px;
+            font-size: 14px;
+        }
+
+        /* Title Section */
         .title-section {
             text-align: center;
             padding: 2rem 0;
@@ -124,6 +218,7 @@
             font-size: 0.9rem;
         }
 
+        /* Products Grid */
         .products-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -177,7 +272,20 @@
         .product-price::before {
             content: '₹';
         }
+        
+        /* Add animation keyframes */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
+        /* Responsive Design */
         @media (max-width: 1200px) {
             .products-grid {
                 grid-template-columns: repeat(3, 1fr);
@@ -199,54 +307,105 @@
 </head>
 <body>
     
-    <nav class="navbar">
+    <header>
         <div class="logo">
-            <img src="kh2ZWeP.png" alt="Logo">
+            <img src="../home/logo.png" alt="Logo">
         </div>
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="medi.html">Medicine</a>
-            <a href="#">Food Items</a>
-            <a href="#">Clothes</a>
-            <a href="#">More</a>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../medicine/medi.html">Medicine</a></li>
+                <li><a href="../food/food.html">Food Items</a></li>
+                <li><a href="clothes.html">Clothes</a></li>
+            </ul>
+        </nav>
+
+        <!-- Header Icons (Search, Cart, Profile Menu) -->
+        <div class="header-icons">
+            <button class="search-btn" onclick="toggleSearch()">
+                <i class="fas fa-search"></i>
+            </button>
+            <button class="cart-btn" onclick="viewCart()">
+                <i class="fas fa-shopping-cart"></i>
+            </button>
+            <!-- Profile Menu -->
+            <div class="profile-menu">
+                <button class="profile-btn">&#x1F464;</button>
+                <div class="dropdown">
+                    <a href="../otherpages/signup.html">Sign up</a>
+                    <a href="../otherpages/login.html">Login</a>
+                    <a href="#">Wallet</a>
+                    <a href="#">Buy/Sell</a>
+                    <a href="#">History</a>
+                </div>
+            </div>
         </div>
-        <div class="nav-icons">
-            <i class="fas fa-search"></i>
-            <i class="fas fa-shopping-cart"></i>
-            <div class="profile-icon">MS</div>
-        </div>
-    </nav>
+    </header>
+
+    <!-- Search bar div that appears when search button is clicked -->
+    <div class="search-bar" id="searchBar">
+        <input type="text" placeholder="Search for products...">
+        <button>Search</button>
+    </div>
 
     <section class="title-section">
         <h1 class="title">Clothes</h1>
-        <div class="breadcrumb">Home / Collections / Medicine</div>
+        <div class="breadcrumb">Home / Collections / Clothes</div>
     </section>
 
     <div class="products-grid">
         <div class="product-card">
-            <img src="../food/food1.jpeg" alt="Paracetamol" class="product-image">
-            <h3 class="product-name">Paracetamol ( Strip of 15 Tablets )</h3>
-            <div class="product-price">29</div>
+            <img src="black_tshirt.png" alt="T-Shirt" class="product-image">
+            <h3 class="product-name">Men Black T-Shirt (M)</h3>
+            <div class="product-price">699</div>
         </div>
 
         <div class="product-card">
-            <img src="../food/food2.jpeg" alt="Crocin" class="product-image">
-            <h3 class="product-name">Crocin Pain Relief Tablet</h3>
-            <div class="product-price">67</div>
+            <img src="woman_top.png" alt="women Top" class="product-image">
+            <h3 class="product-name">Women Top (S)</h3>
+            <div class="product-price">699</div>
         </div>
 
         <div class="product-card">
-            <img src="../food/food3.png" alt="Augmentin" class="product-image">
-            <h3 class="product-name">Augmentin 625 Duo Tablet</h3>
-            <div class="product-price">161</div>
+            <img src="brown_jacket_men.png" alt="Jacket" class="product-image">
+            <h3 class="product-name">Men Jacket</h3>
+            <div class="product-price">5550</div>
         </div>
 
         <div class="product-card">
-            <img src="../food/food4.jpeg" alt="Sporlac" class="product-image">
-            <h3 class="product-name">Sporlac DS Tablet</h3>
-            <div class="product-price">151</div>
+            <img src="mannat_crush_sweatshirt.png" alt="sweetshirt" class="product-image">
+            <h3 class="product-name">Men Sweetshirt (XL)</h3>
+            <div class="product-price">1599</div>
+        </div>
+
+        <div class="product-card">
+            <img src="mannat_crush_kurta.png" alt="Kurta" class="product-image">
+            <h3 class="product-name">Men Black Kurta</h3>
+            <div class="product-price">1499</div>
+        </div>
+
+        <div class="product-card">
+            <img src="mannat_crush_pakistani_blazer.png" alt="Blazer" class="product-image">
+            <h3 class="product-name">Men White Blazer</h3>
+            <div class="product-price">1799</div>
         </div>
     </div>
 
+    <script>
+        // Function to toggle search bar visibility
+        function toggleSearch() {
+            const searchBar = document.getElementById('searchBar');
+            if (searchBar.style.display === 'flex') {
+                searchBar.style.display = 'none';
+            } else {
+                searchBar.style.display = 'flex';
+            }
+        }
+
+        // Function to view cart (placeholder)
+        function viewCart() {
+            alert('Cart functionality will be implemented here');
+        }
+    </script>
 </body>
 </html>
