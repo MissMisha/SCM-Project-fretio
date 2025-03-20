@@ -20,80 +20,167 @@
             overflow-x: hidden;
         }
 
-        /* Navbar Styling */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-            background-color: #1a1a24;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
-            opacity: 0;
-            transform: translateY(-20px);
-            animation: fadeIn 1s ease-in-out forwards;
-        }
+        
+        /* Navigation */
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 40px;
+}
 
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+}
 
-        .logo img {
-            width: 100px;
-            height: auto;
-            margin-right: 10px;
-        }
+nav ul li a:hover {
+    color: #FFD700; /* Hover effect with golden color */
+}
 
-        .nav-links {
-            display: flex;
-            gap: 1.5rem;
-        }
+/* Profile Menu Styling */
+.profile-menu {
+    position: relative;
+    display: inline-block;
+}
 
-        .nav-links a {
-            text-decoration: none;
-            color: #fff;
-            font-size: 1rem;
-            font-weight: 600;
-            transition: color 0.3s ease-in-out;
-        }
+.profile-btn {
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: white;
+    transition: transform 0.3s ease, color 0.3s ease;
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
 
-        .nav-links a:hover {
-            color: #FFD700;
-            transform: scale(1.1);
-        }
+.profile-btn:hover {
+    transform: rotate(360deg); /* Full rotation on hover */
+    color: #FFD700; /* Golden color on hover */
+}
 
-        .nav-icons {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-        }
+/* Profile Dropdown */
+.dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    background: #2a2a2a;
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    min-width: 200px; /* Set a minimum width */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+}
 
-        .nav-icons i {
-            font-size: 1.2rem;
-            cursor: pointer;
-            color: #fff;
-            transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
-        }
+/* Show dropdown on button hover */
+.profile-menu:hover .dropdown {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
 
-        .nav-icons i:hover {
-            color: #FFD700;
-            transform: rotate(10deg) scale(1.1);
-        }
+.dropdown a {
+    display: block;
+    color: #FFD700;
+    padding: 12px 20px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    transition: color 0.3s ease, background 0.3s ease;
+    border-radius: 5px;
+    margin: 5px 0;
+}
 
-        .profile-icon {
-            background-color: #ffa500;
-            border-radius: 50%;
-            padding: 5px 10px;
-            font-weight: bold;
-            color: #000;
-            transition: transform 0.3s ease-in-out;
-        }
+.dropdown a:hover {
+    background: #FFD700;
+    color: #000;
+}
 
-        .profile-icon:hover {
-            transform: scale(1.1);
-        }
+/* Header Icons */
+.header-icons {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.search-btn, .cart-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 10px;
+    transition: color 0.3s ease;
+}
+
+.search-btn:hover, .cart-btn:hover {
+    color: #FFD700;
+}
+
+/* Search Bar */
+.search-bar {
+    display: none;
+    position: fixed;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    max-width: 600px;
+    z-index: 1001;
+}
+
+.search-bar input {
+    width: 80%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.search-bar button {
+    padding: 10px;
+    background-color: #FFD700;
+    color: #000;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-bar button:hover {
+    background-color: #e6b800;
+}
+
+/* Cart Icon Hover */
+.cart-btn {
+    position: relative;
+}
+
+.cart-btn::after {
+    content: '0'; /* Default cart item count */
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 5px;
+    font-size: 14px;
+}
 
         /* Responsive Navbar */
         @media (max-width: 768px) {
@@ -199,23 +286,41 @@
 </head>
 <body>
     
-    <nav class="navbar">
+    <header>
         <div class="logo">
             <img src="./home/logo.png" alt="Logo">
         </div>
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="./medicine/medi.html">Medicine</a>
-            <a href="#">Food Items</a>
-            <a href="#">Clothes</a>
-            <a href="#">More</a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="./medicine/medi.html">Medicine</a></li>
+                <li><a href="./food/food.html">Food Items</a></li>
+                <li><a href="./clothes/clothes.html">Clothes</a></li>
+                
+            </ul>
+        </nav>
+
+        <!-- Header Icons (Search, Cart, Profile Menu) -->
+        <div class="header-icons">
+            <button class="search-btn" onclick="toggleSearch()">
+                <i class="fas fa-search"></i>
+            </button>
+            <button class="cart-btn" onclick="viewCart()">
+                <i class="fas fa-shopping-cart"></i>
+            </button>
+            <!-- Profile Menu -->
+            <div class="profile-menu">
+                <button class="profile-btn">&#x1F464;</button>
+                <div class="dropdown">
+                    <a href="./otherpages/signup.html">Sign up</a>
+                    <a href="./otherpages/login.html">Login</a>
+                    <a href="#">Wallet</a>
+                    <a href="#">Buy/Sell</a>
+                    <a href="#">History</a>
+                </div>
+            </div>
         </div>
-        <div class="nav-icons">
-            <i class="fas fa-search"></i>
-            <i class="fas fa-shopping-cart"></i>
-            <div class="profile-icon">MS</div>
-        </div>
-    </nav>
+    </header>
 
     <section class="title-section">
         <h1 class="title">Medicine</h1>
