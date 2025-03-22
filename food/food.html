@@ -4,121 +4,86 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Food Items - Fretio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;700&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* General Reset */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
         }
 
+        /* Background with Gradient & Modern Colors */
         body {
-            background-color: #1a2634;
-            color: white;
+            background: linear-gradient(to bottom, #1a1a1a, #2c2c2c, #333333);
+            color: #fff;
             min-height: 100vh;
             overflow-x: hidden;
         }
 
         /* Header Styling */
         header {
+            background-color: rgba(0, 0, 0, 0.9);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            padding: 20px 50px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 40px;
-            background-color: rgba(26, 38, 52, 0.9);
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
             z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
         }
 
         .logo img {
-            height: 50px;
+            height: 40px;
+            margin-right: 10px;
         }
-        
-        /* Navigation */
+
         nav ul {
             display: flex;
+            gap: 25px;
+        }
+
+        nav ul li {
             list-style: none;
-            gap: 40px;
         }
 
         nav ul li a {
+            color: #fff;
             text-decoration: none;
-            color: white;
-            font-size: 20px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            transition: color 0.3s ease;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            position: relative;
         }
 
         nav ul li a:hover {
-            color: #FFD700; /* Hover effect with golden color */
-        }
-
-        /* Profile Menu Styling */
-        .profile-menu {
-            position: relative;
-            display: inline-block;
-        }
-
-        .profile-btn {
-            background: none;
-            border: none;
-            font-size: 28px;
-            cursor: pointer;
-            color: white;
-            transition: transform 0.3s ease, color 0.3s ease;
-            padding: 10px;
-            border-radius: 50%;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        }
-
-        .profile-btn:hover {
-            transform: rotate(360deg); /* Full rotation on hover */
-            color: #FFD700; /* Golden color on hover */
-        }
-
-        /* Profile Dropdown */
-        .dropdown {
-            display: none;
-            position: absolute;
-            right: 0;
-            background: #2a2a2a;
-            padding: 12px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            min-width: 200px; /* Set a minimum width */
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(10px);
-            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
-        }
-
-        /* Show dropdown on button hover */
-        .profile-menu:hover .dropdown {
-            display: block;
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .dropdown a {
-            display: block;
             color: #FFD700;
-            padding: 12px 20px;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: 600;
-            transition: color 0.3s ease, background 0.3s ease;
-            border-radius: 5px;
-            margin: 5px 0;
         }
 
-        .dropdown a:hover {
-            background: #FFD700;
-            color: #000;
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: #FFD700;
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
         }
 
         /* Header Icons */
@@ -128,152 +93,123 @@
             align-items: center;
         }
 
-        .search-btn, .cart-btn {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 24px;
+        .header-icons i {
+            color: #fff;
+            font-size: 20px;
             cursor: pointer;
-            padding: 10px;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
         }
 
-        .search-btn:hover, .cart-btn:hover {
+        .header-icons i:hover {
             color: #FFD700;
+            transform: scale(1.1);
         }
 
         /* Search Bar */
         .search-bar {
             display: none;
-            position: fixed;
+            position: absolute;
             top: 80px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #fff;
-            padding: 10px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            width: 80%;
-            max-width: 600px;
-            z-index: 1001;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 999;
+            justify-content: center;
+            gap: 10px;
         }
 
         .search-bar input {
-            width: 80%;
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ccc;
+            padding: 10px 15px;
+            width: 50%;
+            max-width: 600px;
+            border: none;
             border-radius: 4px;
+            font-size: 16px;
         }
 
         .search-bar button {
-            padding: 10px;
+            padding: 10px 20px;
             background-color: #FFD700;
             color: #000;
-            font-size: 16px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            font-weight: 600;
+            transition: all 0.3s ease;
         }
 
         .search-bar button:hover {
             background-color: #e6b800;
         }
 
-        /* Cart Icon Hover */
-        .cart-btn {
+        /* Profile Dropdown */
+        .profile-container {
             position: relative;
         }
 
-        .cart-btn::after {
-            content: '0'; /* Default cart item count */
+        .dropdown {
+            display: none;
             position: absolute;
-            top: -5px;
-            right: -5px;
-            background-color: red;
-            color: white;
-            border-radius: 50%;
-            padding: 2px 5px;
-            font-size: 14px;
+            top: 30px;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            border-radius: 4px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            min-width: 150px;
         }
 
-        /* Title Section */
+        .dropdown a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 15px;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown a:hover {
+            background-color: rgba(255, 215, 0, 0.2);
+            color: #FFD700;
+        }
+
+        /* Responsive Navbar */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            .header-icons {
+                gap: 15px;
+            }
+        }
+
+        /* Page Content */
+        .page-content {
+            padding-top: 120px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
         .title-section {
             text-align: center;
             padding: 2rem 0;
-            opacity: 0;
             animation: fadeIn 1s ease-in-out 0.5s forwards;
         }
 
         .title {
-            font-family: 'Bodoni Moda', serif;
+            font-family: 'Poppins', sans-serif;
             color: #FFD700;
             font-size: 3rem;
+            font-weight: 700;
             margin-bottom: 0.5rem;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.6);
         }
 
         .breadcrumb {
-            color: #ccc;
-            font-size: 0.9rem;
-        }
-
-        /* Products Grid */
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            padding: 0 2rem;
-            margin-top: 2rem;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeIn 1s ease-in-out 0.8s forwards;
-        }
-
-        .product-card {
-            background: #fff;
-            border-radius: 8px;
-            overflow: hidden;
-            padding: 1rem;
-            text-align: center;
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-        }
-
-        .product-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0px 8px 20px rgba(255, 215, 0, 0.3);
-        }
-
-        .product-image {
-            width: 100%;
-            height: 200px;
-            object-fit: contain;
-            background: #fff;
-            margin-bottom: 1rem;
-            transition: transform 0.3s ease-in-out;
-        }
-
-        .product-card:hover .product-image {
-            transform: scale(1.1);
-        }
-
-        .product-name {
-            color: #000;
+            color: #fff;
             font-size: 1rem;
-            margin-bottom: 0.5rem;
         }
 
-        .product-price {
-            color: #FFD700;
-            font-size: 1.2rem;
-            font-weight: bold;
-        }
-
-        .product-price::before {
-            content: '₹';
-        }
-        
-        /* Add animation keyframes */
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -285,7 +221,137 @@
             }
         }
 
-        /* Responsive Design */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            padding: 0 2rem;
+            margin: 2rem auto;
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out 0.8s forwards;
+        }
+
+        .product-card {
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 8px;
+            overflow: hidden;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(255, 215, 0, 0.3);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            margin-bottom: 1rem;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        .product-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #FFD700;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            display: block;
+            margin: 0.5rem 0;
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        .product-availability {
+            font-size: 0.9rem;
+            color: #4CAF50;
+            margin: 0.5rem 0;
+        }
+
+        .btn-add-cart {
+            background-color: #FFD700;
+            color: #000;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin-top: 0.5rem;
+            display: inline-block;
+        }
+
+        .btn-add-cart:hover {
+            background-color: #e6b800;
+            transform: translateY(-3px);
+        }
+
+        /* Footer Section */
+        .footer {
+            background: #000;
+            padding: 40px 10px;
+            margin-top: 30px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            gap: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-links a {
+            color: #FFD700;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            color: #FFD700;
+            font-size: 24px;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.2);
+            color: #fff;
+        }
+
+        .copyright {
+            color: #999;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        /* Responsive Grid */
         @media (max-width: 1200px) {
             .products-grid {
                 grid-template-columns: repeat(3, 1fr);
@@ -306,93 +372,156 @@
     </style>
 </head>
 <body>
-    
     <header>
         <div class="logo">
-            <img src="../home/logo.png" alt="Logo">
+            <img src="../home/logo.png" alt="Fretio Logo">
         </div>
+        
         <nav>
             <ul>
                 <li><a href="../index.html">Home</a></li>
                 <li><a href="../medicine/medi.html">Medicine</a></li>
-                <li><a href="food.html">Food Items</a></li>
+                <li><a href="food.html" class="active">Food Items</a></li>
                 <li><a href="../clothes/clothes.html">Clothes</a></li>
             </ul>
         </nav>
-
-        <!-- Header Icons (Search, Cart, Profile Menu) -->
+        
         <div class="header-icons">
-            <button class="search-btn" onclick="toggleSearch()">
-                <i class="fas fa-search"></i>
-            </button>
-            <button class="cart-btn" onclick="viewCart()">
-                <i class="fas fa-shopping-cart"></i>
-            </button>
-            <!-- Profile Menu -->
-            <div class="profile-menu">
-                <button class="profile-btn">&#x1F464;</button>
+            <i class="fas fa-search" onclick="toggleSearch()"></i>
+            <i class="fas fa-shopping-cart" onclick="viewCart()"></i>
+            <div class="profile-container">
+                <i class="fas fa-user profile-btn"></i>
                 <div class="dropdown">
-                    <a href="../otherpages/signup.html">Sign up</a>
-                    <a href="../otherpages/login.html">Login</a>
-                    <a href="#">Wallet</a>
-                    <a href="#">Buy/Sell</a>
-                    <a href="#">History</a>
+                    <a href="#"><i class="fas fa-user-circle"></i> Profile</a>
+                    <a href="#"><i class="fas fa-cog"></i> Settings</a>
+                    <a href="#"><i class="fas fa-list"></i> Orders</a>
+                    <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
                 </div>
             </div>
         </div>
     </header>
 
     <!-- Search bar div that appears when search button is clicked -->
-    <div class="search-bar" id="searchBar">
-        <input type="text" placeholder="Search for products...">
-        <button>Search</button>
+    <div id="search-bar" class="search-bar">
+        <input type="text" placeholder="Search for food items...">
+        <button onclick="searchProducts()">Search</button>
     </div>
 
-    <section class="title-section">
-        <h1 class="title">Food Items</h1>
-        <div class="breadcrumb">Home / Collections / Food Items</div>
-    </section>
-
-    <div class="products-grid">
-        <div class="product-card">
-            <img src="food1.jpeg" alt="Yellow Lays" class="product-image">
-            <h3 class="product-name">Yellow Lays</h3>
-            <div class="product-price">20</div>
+    <div class="page-content">
+        <div class="title-section">
+            <h1 class="title">Food Items</h1>
+            <div class="breadcrumb">Home > Food Items</div>
         </div>
 
-        <div class="product-card">
-            <img src="food2.jpeg" alt="Red Lays" class="product-image">
-            <h3 class="product-name">Red Lays</h3>
-            <div class="product-price">20</div>
-        </div>
+        <div class="products-grid">
+            <div class="product-card">
+                <img src="https://cdn.pixabay.com/photo/2016/03/05/19/02/hamburger-1238246_1280.jpg" alt="Burger" class="product-image">
+                <div class="product-title">Classic Burger</div>
+                <span class="product-price">₹149.00</span>
+                <div class="product-availability">In Stock</div>
+                <button class="btn-add-cart">Add to Cart</button>
+            </div>
 
-        <div class="product-card">
-            <img src="food3.png" alt="Oreo" class="product-image">
-            <h3 class="product-name">Oreo Biscuit</h3>
-            <div class="product-price">30</div>
-        </div>
+            <div class="product-card">
+                <img src="https://cdn.pixabay.com/photo/2017/12/09/08/18/pizza-3007395_1280.jpg" alt="Pizza" class="product-image">
+                <div class="product-title">Margherita Pizza</div>
+                <span class="product-price">₹299.00</span>
+                <div class="product-availability">In Stock</div>
+                <button class="btn-add-cart">Add to Cart</button>
+            </div>
 
-        <div class="product-card">
-            <img src="food4.jpeg" alt="Bingo" class="product-image">
-            <h3 class="product-name">Bingo Tedhe Medhe</h3>
-            <div class="product-price">20</div>
+            <div class="product-card">
+                <img src="https://cdn.pixabay.com/photo/2018/08/16/22/59/pasta-3611545_1280.jpg" alt="Pasta" class="product-image">
+                <div class="product-title">Creamy Pasta</div>
+                <span class="product-price">₹199.00</span>
+                <div class="product-availability">In Stock</div>
+                <button class="btn-add-cart">Add to Cart</button>
+            </div>
+
+            <div class="product-card">
+                <img src="https://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863_1280.jpg" alt="French Fries" class="product-image">
+                <div class="product-title">French Fries</div>
+                <span class="product-price">₹99.00</span>
+                <div class="product-availability">In Stock</div>
+                <button class="btn-add-cart">Add to Cart</button>
+            </div>
+
+            <div class="product-card">
+                <img src="https://cdn.pixabay.com/photo/2017/01/11/11/33/cake-1971552_1280.jpg" alt="Chocolate Cake" class="product-image">
+                <div class="product-title">Chocolate Cake</div>
+                <span class="product-price">₹349.00</span>
+                <div class="product-availability">Limited Stock</div>
+                <button class="btn-add-cart">Add to Cart</button>
+            </div>
+
+            <div class="product-card">
+                <img src="https://cdn.pixabay.com/photo/2017/05/07/08/56/pancakes-2291908_1280.jpg" alt="Pancakes" class="product-image">
+                <div class="product-title">Pancake Stack</div>
+                <span class="product-price">₹179.00</span>
+                <div class="product-availability">In Stock</div>
+                <button class="btn-add-cart">Add to Cart</button>
+            </div>
+
+            <div class="product-card">
+                <img src="https://cdn.pixabay.com/photo/2019/11/09/17/02/burger-4614022_1280.jpg" alt="Chicken Burger" class="product-image">
+                <div class="product-title">Chicken Burger</div>
+                <span class="product-price">₹199.00</span>
+                <div class="product-availability">In Stock</div>
+                <button class="btn-add-cart">Add to Cart</button>
+            </div>
+
+            <div class="product-card">
+                <img src="https://cdn.pixabay.com/photo/2017/09/30/15/10/plate-2802332_1280.jpg" alt="Sandwich" class="product-image">
+                <div class="product-title">Club Sandwich</div>
+                <span class="product-price">₹159.00</span>
+                <div class="product-availability">In Stock</div>
+                <button class="btn-add-cart">Add to Cart</button>
+            </div>
         </div>
     </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="../otherpages/contact.html">Contact us</a>
+                <a href="../otherpages/aboutus.html">About us</a>
+                <a href="../otherpages/privacy.html">Privacy Policy</a>
+                <a href="../otherpages/return-policy.html">Return Policy</a>
+            </div>
+
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            </div>
+
+            <div class="copyright">
+                Copyright © 2025 Fretio. All rights reserved.
+            </div>
+        </div>
+    </footer>
 
     <script>
-        // Function to toggle search bar visibility
+        // Profile dropdown functionality
+        document.querySelector('.profile-btn').addEventListener('click', () => {
+            const dropdown = document.querySelector('.dropdown');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Search functionality
         function toggleSearch() {
-            const searchBar = document.getElementById('searchBar');
-            if (searchBar.style.display === 'flex') {
-                searchBar.style.display = 'none';
-            } else {
-                searchBar.style.display = 'flex';
-            }
+            const searchBar = document.getElementById('search-bar');
+            searchBar.style.display = searchBar.style.display === 'block' ? 'none' : 'block';
         }
 
-        // Function to view cart (placeholder)
+        function searchProducts() {
+            const searchInput = document.querySelector('.search-bar input').value;
+            alert(`Searching for: ${searchInput}`);
+        }
+
+        // View cart functionality
         function viewCart() {
-            alert('Cart functionality will be implemented here');
+            alert('Shopping cart will be implemented soon!');
         }
     </script>
 </body>
