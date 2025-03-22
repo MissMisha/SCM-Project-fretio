@@ -4,47 +4,474 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fretio - Student Marketplace</title>
-    <link rel="stylesheet" href="./home/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Background with Gradient & Modern Colors */
+        body {
+            background: linear-gradient(to bottom, #1a1a1a, #2c2c2c, #333333);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Header Styling */
+        header {
+            background-color: rgba(0, 0, 0, 0.9);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 25px;
+        }
+
+        nav ul li {
+            list-style: none;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            color: #FFD700;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: #FFD700;
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Header Icons */
+        .header-icons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .header-icons i {
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .header-icons i:hover {
+            color: #FFD700;
+            transform: scale(1.1);
+        }
+
+        /* Search Bar */
+        .search-bar {
+            display: none;
+            position: absolute;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 999;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .search-bar input {
+            padding: 10px 15px;
+            width: 50%;
+            max-width: 600px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .search-bar button {
+            padding: 10px 20px;
+            background-color: #FFD700;
+            color: #000;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar button:hover {
+            background-color: #e6b800;
+        }
+
+        /* Profile Dropdown */
+        .profile-container {
+            position: relative;
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            top: 30px;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            border-radius: 4px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            min-width: 150px;
+        }
+
+        .dropdown a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 15px;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown a:hover {
+            background-color: rgba(255, 215, 0, 0.2);
+            color: #FFD700;
+        }
+
+        /* Responsive Navbar */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            .header-icons {
+                gap: 15px;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px 5%;
+            margin-top: 100px;
+            gap: 30px;
+            flex-direction: row;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            animation: fadeIn 1s ease-in-out 0.5s forwards;
+        }
+
+        .hero-content {
+            max-width: 500px;
+        }
+
+        .hero-content h1 {
+            font-size: 60px;
+            color: #FFD700;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.6);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .hero-content p {
+            font-size: 22px;
+            color: #fff;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .hero-image {
+            width: 380px;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            transition: transform 0.5s ease;
+        }
+
+        .hero-image:hover {
+            transform: scale(1.05);
+        }
+
+        /* Featured Products Section */
+        .container {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: #FFD700;
+            margin: 0 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            display: inline-block;
+        }
+
+        .star-left, .star-right {
+            font-size: 2rem;
+            color: #FFD700;
+            animation: twinkle 1.5s infinite alternate;
+        }
+
+        @keyframes twinkle {
+            from { opacity: 0.5; }
+            to { opacity: 1; }
+        }
+
+        .top-seller {
+            background-color: #FFD700;
+            color: #000;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 14px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 30px;
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out 0.8s forwards;
+        }
+
+        .product-card {
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.3);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.1);
+        }
+
+        .product-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #FFD700;
+        }
+
+        .arrow {
+            font-size: 1.5rem;
+            color: #FFD700;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .arrow {
+            transform: translateX(5px);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Footer Section */
+        .footer {
+            background: #000;
+            padding: 40px 10px;
+            margin-top: 30px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            gap: 20px;
+        }
+
+        .footer-logo {
+            height: 50px;
+            margin-bottom: 10px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-links a {
+            color: #FFD700;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            color: #FFD700;
+            font-size: 24px;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.2);
+            color: #fff;
+        }
+
+        .copyright {
+            color: #999;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                padding: 30px 5%;
+            }
+            
+            .hero-content h1 {
+                font-size: 40px;
+            }
+            
+            .hero-content p {
+                font-size: 18px;
+            }
+            
+            .hero-image {
+                width: 280px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
         <div class="logo">
-            <img src="./home/logo.png" alt="Logo">
+            <img src="./home/logo.png" alt="Fretio Logo">
         </div>
+        
         <nav>
             <ul>
-                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html" class="active">Home</a></li>
                 <li><a href="./medicine/medi.html">Medicine</a></li>
                 <li><a href="./food/food.html">Food Items</a></li>
                 <li><a href="./clothes/clothes.html">Clothes</a></li>
-                
             </ul>
         </nav>
-
-        <!-- Header Icons (Search, Cart, Profile Menu) -->
+        
         <div class="header-icons">
-            <button class="search-btn" onclick="toggleSearch()">
-                <i class="fas fa-search"></i>
-            </button>
-            <button class="cart-btn" onclick="viewCart()">
-                <i class="fas fa-shopping-cart"></i>
-            </button>
-            <!-- Profile Menu -->
-            <div class="profile-menu">
-                <button class="profile-btn">&#x1F464;</button>
+            <i class="fas fa-search" onclick="toggleSearch()"></i>
+            <i class="fas fa-shopping-cart" onclick="viewCart()"></i>
+            <div class="profile-container">
+                <i class="fas fa-user profile-btn"></i>
                 <div class="dropdown">
-                    <a href="./otherpages/signup.html">Sign up</a>
-                    <a href="./otherpages/login.html">Login</a>
-                    <a href="#">Wallet</a>
-                    <a href="#">Buy/Sell</a>
-                    <a href="#">History</a>
+                    <a href="./otherpages/signup.html"><i class="fas fa-user-plus"></i> Sign up</a>
+                    <a href="./otherpages/login.html"><i class="fas fa-sign-in-alt"></i> Login</a>
+                    <a href="#"><i class="fas fa-wallet"></i> Wallet</a>
+                    <a href="#"><i class="fas fa-exchange-alt"></i> Buy/Sell</a>
+                    <a href="#"><i class="fas fa-history"></i> History</a>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Search Bar -->
+    <!-- Search bar div that appears when search button is clicked -->
     <div id="search-bar" class="search-bar">
         <input type="text" placeholder="Search for products...">
         <button onclick="searchProducts()">Search</button>
@@ -89,18 +516,13 @@
                 </div>
 
                 <div class="product-card">
-                    <a href="./medicine/medi.html"></a><img src="./home/product3.png" alt="Medicines" class="product-image"></a>
-    
+                    <a href="./medicine/medi.html"><img src="./home/product3.png" alt="Medicines" class="product-image"></a>
                     <div class="product-info">
                         <div class="product-title">Medicines</div>
                         <span class="arrow">→</span>
                     </div>
                 </div>
             </div>
-
-            <!-- <button class="follow-button">
-                Follow @reallygreatssite For more tips
-            </button> -->
         </div>
     </main>
 
@@ -108,7 +530,7 @@
     <footer class="footer">
         <div class="footer-content">
             <div>
-                <img src="./home/logo.png" alt="Fretio Logo" class="   footer-logo">
+                <img src="./home/logo.png" alt="Fretio Logo" class="footer-logo">
             </div>
             <div class="footer-links">
                 <a href="./otherpages/contact.html">Contact us</a>
@@ -130,21 +552,32 @@
     </footer>
 
     <script>
-        // Correct profile dropdown functionality
+        // Profile dropdown functionality
         document.querySelector('.profile-btn').addEventListener('click', () => {
             const dropdown = document.querySelector('.dropdown');
             dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
         });
 
-        // Follow button click handler
-        document.querySelector('.follow-button').addEventListener('click', () => {
-            alert('Following @reallygreatssite!');
-        });
+        // Search functionality
+        function toggleSearch() {
+            const searchBar = document.getElementById('search-bar');
+            searchBar.style.display = searchBar.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function searchProducts() {
+            const searchInput = document.querySelector('.search-bar input').value;
+            alert(`Searching for: ${searchInput}`);
+        }
+
+        // View cart functionality
+        function viewCart() {
+            alert('Shopping cart will be implemented soon!');
+        }
 
         // Add hover effect to product cards
         document.querySelectorAll('.product-card').forEach(card => {
             card.addEventListener('mouseenter', () => {
-                card.style.transform = 'translateY(-5px)';
+                card.style.transform = 'translateY(-10px)';
             });
             
             card.addEventListener('mouseleave', () => {
@@ -152,6 +585,5 @@
             });
         });
     </script>
-    <script src="script.js"></script>
 </body>
 </html>
