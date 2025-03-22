@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us - Fretio</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         /* General Reset */
         * {
@@ -17,68 +19,71 @@
 
         /* Background with Gradient & Modern Colors */
         body {
-            background: linear-gradient(to right, #3a3a3a, #c78000); /* Darker tones with a golden touch */
-            color: #f5f5f5;
+            background: linear-gradient(to bottom, #1a1a1a, #2c2c2c, #333333);
+            color: #fff;
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
         /* Header Styling */
         header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 10%;
-            background: #000;
+            background-color: rgba(0, 0, 0, 0.9);
             position: fixed;
             width: 100%;
             top: 0;
+            left: 0;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             z-index: 1000;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: background-color 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
 
-        header:hover {
-            background: #1a1a1a; /* Darker shade on hover */
-        }
-
-        /* Logo */
         .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: white;
+            display: flex;
+            align-items: center;
         }
-        
+
         .logo img {
-            width: 150px;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 40px;
+            margin-right: 10px;
         }
 
-        .logo img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
-        }
-
-        /* Navigation */
         nav ul {
             display: flex;
+            gap: 25px;
+        }
+
+        nav ul li {
             list-style: none;
-            gap: 40px;
         }
 
         nav ul li a {
+            color: #fff;
             text-decoration: none;
-            color: white;
-            font-size: 20px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            transition: color 0.3s ease;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            position: relative;
         }
 
         nav ul li a:hover {
-            color: #FFD700; /* Hover effect with golden color */
+            color: #FFD700;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: #FFD700;
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
         }
 
         /* Header Icons */
@@ -88,102 +93,131 @@
             align-items: center;
         }
 
-        .search-btn, .cart-btn {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 24px;
+        .header-icons i {
+            color: #fff;
+            font-size: 20px;
             cursor: pointer;
-            padding: 10px;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
         }
 
-        .search-btn:hover, .cart-btn:hover {
+        .header-icons i:hover {
             color: #FFD700;
+            transform: scale(1.1);
         }
 
-        /* Profile Menu Styling */
-        .profile-menu {
-            position: relative;
-            display: inline-block;
+        /* Search Bar */
+        .search-bar {
+            display: none;
+            position: absolute;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 999;
+            justify-content: center;
+            gap: 10px;
         }
 
-        .profile-btn {
-            background: none;
+        .search-bar input {
+            padding: 10px 15px;
+            width: 50%;
+            max-width: 600px;
             border: none;
-            font-size: 28px;
-            cursor: pointer;
-            color: white;
-            transition: transform 0.3s ease, color 0.3s ease;
-            padding: 10px;
-            border-radius: 50%;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+            font-size: 16px;
         }
 
-        .profile-btn:hover {
-            transform: rotate(360deg); /* Full rotation on hover */
-            color: #FFD700; /* Golden color on hover */
+        .search-bar button {
+            padding: 10px 20px;
+            background-color: #FFD700;
+            color: #000;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar button:hover {
+            background-color: #e6b800;
         }
 
         /* Profile Dropdown */
+        .profile-container {
+            position: relative;
+        }
+
         .dropdown {
             display: none;
             position: absolute;
+            top: 30px;
             right: 0;
-            background: #2a2a2a;
-            padding: 12px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            min-width: 200px; /* Set a minimum width */
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(10px);
-            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
-        }
-
-        /* Show dropdown on button hover */
-        .profile-menu:hover .dropdown {
-            display: block;
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
+            background-color: rgba(0, 0, 0, 0.9);
+            border-radius: 4px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            min-width: 150px;
         }
 
         .dropdown a {
-            display: block;
-            color: #FFD700;
-            padding: 12px 20px;
+            color: #fff;
             text-decoration: none;
-            font-size: 16px;
-            font-weight: 600;
-            transition: color 0.3s ease, background 0.3s ease;
-            border-radius: 5px;
-            margin: 5px 0;
+            padding: 10px 15px;
+            display: block;
+            transition: all 0.3s ease;
         }
 
         .dropdown a:hover {
-            background: #FFD700;
-            color: #000;
+            background-color: rgba(255, 215, 0, 0.2);
+            color: #FFD700;
+        }
+
+        /* Responsive Navbar */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            .header-icons {
+                gap: 15px;
+            }
+            header {
+                padding: 15px 20px;
+            }
         }
 
         /* Page Content */
         .page-title {
             text-align: center;
-            padding: 40px 0 20px;
+            padding: 20px 0;
             margin-top: 100px;
             color: #FFD700;
-            font-size: 3rem;
+            font-size: 2.5rem;
             font-weight: 700;
-            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.6);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         main {
             max-width: 1200px;
             margin: 20px auto 40px;
-            padding: 40px;
-            background: rgba(0, 0, 0, 0.6);
-            border-radius: 10px;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            animation: fadeIn 1s ease-in-out 0.3s forwards;
         }
 
         .main-content {
@@ -196,6 +230,14 @@
         .contact-form {
             flex: 1;
             min-width: 300px;
+        }
+
+        .form-title {
+            color: #FFD700;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            border-bottom: 2px solid #444;
+            padding-bottom: 10px;
         }
 
         .form-group {
@@ -226,7 +268,7 @@
             padding: 12px;
             border-radius: 8px;
             border: 1px solid #444;
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.1);
             font-size: 1rem;
             color: #fff;
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
@@ -248,24 +290,20 @@
             background: #FFD700;
             color: black;
             border: none;
-            padding: 12px 30px;
-            border-radius: 8px;
-            font-size: 1.1rem;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            display: inline-block;
         }
 
         .submit-btn:hover {
-            background: #e6c200;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
-        }
-
-        .submit-btn:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            background: #e6b800;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
         }
 
         .contact-info {
@@ -273,70 +311,80 @@
             min-width: 300px;
         }
 
-        .contact-title {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            position: relative;
+        .info-title {
             color: #FFD700;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            border-bottom: 2px solid #444;
+            padding-bottom: 10px;
         }
 
-        .contact-title span {
-            color: #fff;
+        .info-block {
+            margin-bottom: 25px;
         }
 
-        .star {
-            position: absolute;
+        .info-block h3 {
             color: #FFD700;
-            font-size: 1.5rem;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
         }
 
-        .star-1 {
-            top: -10px;
-            right: 100px;
-        }
-
-        .star-2 {
-            top: -20px;
-            right: 60px;
-        }
-
-        .contact-description {
-            color: #fff;
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-            line-height: 1.6;
-        }
-
-        .contact-details {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .contact-item {
+        .info-item {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            margin-bottom: 15px;
         }
 
-        .contact-icon {
-            background: #FFD700;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+        .info-icon {
+            color: #FFD700;
+            font-size: 20px;
+            width: 30px;
+            margin-right: 15px;
+        }
+
+        .info-text {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: transform 0.3s ease;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: #FFD700;
+            font-size: 20px;
+            transition: all 0.3s ease;
         }
 
-        .contact-icon:hover {
-            transform: scale(1.1);
+        .social-links a:hover {
+            background: #FFD700;
+            color: #000;
+            transform: translateY(-5px);
         }
 
-        .contact-text {
-            font-size: 1.1rem;
-            color: #fff;
+        /* Map Section */
+        .map-container {
+            margin-top: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 3px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
         }
 
         /* Footer Section */
@@ -354,6 +402,11 @@
             margin: 0 auto;
             text-align: center;
             gap: 20px;
+        }
+
+        .footer-logo {
+            height: 50px;
+            margin-bottom: 10px;
         }
 
         .footer-links {
@@ -396,9 +449,35 @@
             margin-top: 20px;
         }
 
-        @media (max-width: 768px) {
+        /* Responsive Design */
+        @media (max-width: 992px) {
             .main-content {
                 flex-direction: column;
+            }
+            .contact-form, .contact-info {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            main {
+                padding: 20px;
+            }
+            .page-title {
+                font-size: 2rem;
+            }
+            .form-title, .info-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            .submit-btn {
+                width: 100%;
             }
         }
     </style>
@@ -408,6 +487,7 @@
         <div class="logo">
             <img src="../home/logo.png" alt="Fretio Logo">
         </div>
+        
         <nav>
             <ul>
                 <li><a href="../index.html">Home</a></li>
@@ -416,98 +496,106 @@
                 <li><a href="../clothes/clothes.html">Clothes</a></li>
             </ul>
         </nav>
-
-        <!-- Header Icons (Search, Cart, Profile Menu) -->
+        
         <div class="header-icons">
-            <button class="search-btn" onclick="toggleSearch()">
-                <i class="fas fa-search"></i>
-            </button>
-            <button class="cart-btn" onclick="viewCart()">
-                <i class="fas fa-shopping-cart"></i>
-            </button>
-            <!-- Profile Menu -->
-            <div class="profile-menu">
-                <button class="profile-btn">&#x1F464;</button>
+            <i class="fas fa-search" onclick="toggleSearch()"></i>
+            <i class="fas fa-shopping-cart" onclick="viewCart()"></i>
+            <div class="profile-container">
+                <i class="fas fa-user profile-btn"></i>
                 <div class="dropdown">
-                    <a href="signup.html">Sign up</a>
-                    <a href="login.html">Login</a>
-                    <a href="#">Wallet</a>
-                    <a href="#">Buy/Sell</a>
-                    <a href="#">History</a>
+                    <a href="signup.html"><i class="fas fa-user-plus"></i> Sign up</a>
+                    <a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a>
+                    <a href="#"><i class="fas fa-wallet"></i> Wallet</a>
+                    <a href="#"><i class="fas fa-exchange-alt"></i> Buy/Sell</a>
+                    <a href="#"><i class="fas fa-history"></i> History</a>
                 </div>
             </div>
         </div>
     </header>
+
+    <!-- Search bar div that appears when search button is clicked -->
+    <div id="search-bar" class="search-bar">
+        <input type="text" placeholder="Search for products...">
+        <button onclick="searchProducts()">Search</button>
+    </div>
 
     <h1 class="page-title">Contact Us</h1>
 
     <main>
         <div class="main-content">
             <div class="contact-form">
+                <h2 class="form-title">Send Us a Message</h2>
                 <form id="contactForm">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" required>
-                    </div>
-                    
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" required>
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" name="name" required>
                         </div>
                         <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" required>
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required>
                         </div>
                     </div>
-
                     <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" required></textarea>
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" required>
                     </div>
-
-                    <button type="submit" class="submit-btn">Submit</button>
+                    <div class="form-group">
+                        <label for="message">Your Message</label>
+                        <textarea id="message" name="message" rows="6" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message</button>
                 </form>
             </div>
-
+            
             <div class="contact-info">
-                <h2 class="contact-title">
-                    Get In <span>Touch</span>
-                    <span class="star star-1">✦</span>
-                    <span class="star star-2">✧</span>
-                </h2>
-                <p class="contact-description">
-                    For questions, technical assistance, or collaboration opportunities, 
-                    reach out to us via the contact information provided below.
-                </p>
-                <div class="contact-details">
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-phone" style="color: #000;"></i>
-                        </div>
-                        <span class="contact-text">+91-930654512</span>
+                <h2 class="info-title">Contact Information</h2>
+                <div class="info-block">
+                    <h3>Reach Us At</h3>
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt info-icon"></i>
+                        <div class="info-text">125 University Road, Bangalore, Karnataka - 560064</div>
                     </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-envelope" style="color: #000;"></i>
-                        </div>
-                        <span class="contact-text">vedic.coders@gmail.com</span>
+                    <div class="info-item">
+                        <i class="fas fa-phone-alt info-icon"></i>
+                        <div class="info-text">+91 98765 43210</div>
                     </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-map-marker-alt" style="color: #000;"></i>
-                        </div>
-                        <span class="contact-text">Rajpura, Punjab (140401)</span>
+                    <div class="info-item">
+                        <i class="fas fa-envelope info-icon"></i>
+                        <div class="info-text">support@fretio.com</div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-clock info-icon"></i>
+                        <div class="info-text">Monday - Saturday, 9:00 AM - 6:00 PM</div>
+                    </div>
+                </div>
+                
+                <div class="info-block">
+                    <h3>Connect With Us</h3>
+                    <p>Follow us on social media for updates, offers, and more!</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
             </div>
         </div>
+        
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31108.30823040341!2d77.58158644646333!3d12.97100456567053!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1670c9b44e6d%3A0xf8dfc3e8517e4fe0!2sBengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1689242344741!5m2!1sen!2sin" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
     </main>
 
+    <!-- Footer Section -->
     <footer class="footer">
         <div class="footer-content">
+            <div>
+                <img src="../home/logo.png" alt="Fretio Logo" class="footer-logo">
+            </div>
             <div class="footer-links">
-                <a href="contact.html">Contact us</a>
+                <a href="contact.html" class="active">Contact us</a>
                 <a href="aboutus.html">About us</a>
                 <a href="privacy.html">Privacy Policy</a>
                 <a href="return-policy.html">Return Policy</a>
@@ -534,7 +622,13 @@
 
         // Search functionality
         function toggleSearch() {
-            alert('Search functionality will be implemented soon!');
+            const searchBar = document.getElementById('search-bar');
+            searchBar.style.display = searchBar.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function searchProducts() {
+            const searchInput = document.querySelector('.search-bar input').value;
+            alert(`Searching for: ${searchInput}`);
         }
 
         // View cart functionality
@@ -542,11 +636,40 @@
             alert('Shopping cart will be implemented soon!');
         }
 
-        // Form submission
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
+        // Handle form submission
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
             e.preventDefault();
-            alert('Thank you for contacting us! We will get back to you soon.');
+            // Add your form submission logic here
+            alert('Thank you for your message! We will get back to you soon.');
+            // Optional: Clear form after submission
+            document.getElementById('contactForm').reset();
         });
+
+        // Animation for elements when they come into view
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.info-block, .form-title, .info-title, .map-container');
+            
+            elements.forEach(element => {
+                const rect = element.getBoundingClientRect();
+                const isVisible = (rect.top >= 0 && rect.top <= window.innerHeight);
+                
+                if (isVisible) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
+
+        // Add animation styles
+        document.querySelectorAll('.info-block, .form-title, .info-title, .map-container').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        });
+
+        // Listen for scroll events
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
     </script>
 </body>
 </html>
