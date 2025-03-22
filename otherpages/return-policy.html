@@ -4,12 +4,312 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Return Policy - Fretio</title>
-    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Background with Gradient & Modern Colors */
+        body {
+            background: linear-gradient(to right, #3a3a3a, #c78000); /* Darker tones with a golden touch */
+            color: #f5f5f5;
+            min-height: 100vh;
+        }
+
+        /* Header Styling */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 10%;
+            background: #000;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s ease;
+        }
+
+        header:hover {
+            background: #1a1a1a; /* Darker shade on hover */
+        }
+
+        /* Logo */
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .logo img {
+            width: 150px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .logo img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Navigation */
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #FFD700; /* Hover effect with golden color */
+        }
+
+        /* Header Icons */
+        .header-icons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .search-btn, .cart-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .search-btn:hover, .cart-btn:hover {
+            color: #FFD700;
+        }
+
+        /* Profile Menu Styling */
+        .profile-menu {
+            position: relative;
+            display: inline-block;
+        }
+
+        .profile-btn {
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: white;
+            transition: transform 0.3s ease, color 0.3s ease;
+            padding: 10px;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .profile-btn:hover {
+            transform: rotate(360deg); /* Full rotation on hover */
+            color: #FFD700; /* Golden color on hover */
+        }
+
+        /* Profile Dropdown */
+        .dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            background: #2a2a2a;
+            padding: 12px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            min-width: 200px; /* Set a minimum width */
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+        }
+
+        /* Show dropdown on button hover */
+        .profile-menu:hover .dropdown {
+            display: block;
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown a {
+            display: block;
+            color: #FFD700;
+            padding: 12px 20px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            transition: color 0.3s ease, background 0.3s ease;
+            border-radius: 5px;
+            margin: 5px 0;
+        }
+
+        .dropdown a:hover {
+            background: #FFD700;
+            color: #000;
+        }
+
+        /* Page Content */
+        .page-title {
+            text-align: center;
+            padding: 40px 0 20px;
+            margin-top: 100px;
+            color: #FFD700;
+            font-size: 3rem;
+            font-weight: 700;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.6);
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 20px auto 40px;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        section {
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: #FFD700;
+            border-bottom: 2px solid #444;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        /* Footer Section */
+        .footer {
+            background: #000;
+            padding: 40px 10px;
+            margin-top: 30px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            gap: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-links a {
+            color: #FFD700;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            color: #FFD700;
+            font-size: 24px;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.2);
+            color: #fff;
+        }
+
+        .copyright {
+            color: #999;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Return Policy</h1>
+        <div class="logo">
+            <img src="../home/logo.png" alt="Fretio Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../medicine/medi.html">Medicine</a></li>
+                <li><a href="../food/food.html">Food Items</a></li>
+                <li><a href="../clothes/clothes.html">Clothes</a></li>
+            </ul>
+        </nav>
+
+        <!-- Header Icons (Search, Cart, Profile Menu) -->
+        <div class="header-icons">
+            <button class="search-btn" onclick="toggleSearch()">
+                <i class="fas fa-search"></i>
+            </button>
+            <button class="cart-btn" onclick="viewCart()">
+                <i class="fas fa-shopping-cart"></i>
+            </button>
+            <!-- Profile Menu -->
+            <div class="profile-menu">
+                <button class="profile-btn">&#x1F464;</button>
+                <div class="dropdown">
+                    <a href="signup.html">Sign up</a>
+                    <a href="login.html">Login</a>
+                    <a href="#">Wallet</a>
+                    <a href="#">Buy/Sell</a>
+                    <a href="#">History</a>
+                </div>
+            </div>
+        </div>
     </header>
+
+    <h1 class="page-title">Return Policy</h1>
 
     <main>
         <section>
@@ -23,9 +323,43 @@
         </section>
     </main>
 
-    <footer>
-        <p>&copy; 2023 Fretio. All rights reserved.</p>
-        <a href="../contact.html">Contact Us</a>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="contact.html">Contact us</a>
+                <a href="aboutus.html">About us</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="return-policy.html">Return Policy</a>
+            </div>
+
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            </div>
+
+            <div class="copyright">
+                Copyright © 2025 Fretio. All rights reserved.
+            </div>
+        </div>
     </footer>
+
+    <script>
+        // Profile dropdown functionality
+        document.querySelector('.profile-btn').addEventListener('click', () => {
+            const dropdown = document.querySelector('.dropdown');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Search functionality
+        function toggleSearch() {
+            alert('Search functionality will be implemented soon!');
+        }
+
+        // View cart functionality
+        function viewCart() {
+            alert('Shopping cart will be implemented soon!');
+        }
+    </script>
 </body>
-</html> 
+</html>
