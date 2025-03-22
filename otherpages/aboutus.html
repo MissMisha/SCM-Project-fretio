@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us - Fretio</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         /* General Reset */
         * {
@@ -17,68 +19,71 @@
 
         /* Background with Gradient & Modern Colors */
         body {
-            background: linear-gradient(to right, #3a3a3a, #c78000); /* Darker tones with a golden touch */
-            color: #f5f5f5;
+            background: linear-gradient(to bottom, #1a1a1a, #2c2c2c, #333333);
+            color: #fff;
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
         /* Header Styling */
         header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 10%;
-            background: #000;
+            background-color: rgba(0, 0, 0, 0.9);
             position: fixed;
             width: 100%;
             top: 0;
+            left: 0;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             z-index: 1000;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: background-color 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
 
-        header:hover {
-            background: #1a1a1a; /* Darker shade on hover */
-        }
-
-        /* Logo */
         .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: white;
+            display: flex;
+            align-items: center;
         }
-        
+
         .logo img {
-            width: 150px;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 40px;
+            margin-right: 10px;
         }
 
-        .logo img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
-        }
-
-        /* Navigation */
         nav ul {
             display: flex;
+            gap: 25px;
+        }
+
+        nav ul li {
             list-style: none;
-            gap: 40px;
         }
 
         nav ul li a {
+            color: #fff;
             text-decoration: none;
-            color: white;
-            font-size: 20px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            transition: color 0.3s ease;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            position: relative;
         }
 
         nav ul li a:hover {
-            color: #FFD700; /* Hover effect with golden color */
+            color: #FFD700;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: #FFD700;
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
         }
 
         /* Header Icons */
@@ -88,183 +93,300 @@
             align-items: center;
         }
 
-        .search-btn, .cart-btn {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 24px;
+        .header-icons i {
+            color: #fff;
+            font-size: 20px;
             cursor: pointer;
-            padding: 10px;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
         }
 
-        .search-btn:hover, .cart-btn:hover {
+        .header-icons i:hover {
             color: #FFD700;
+            transform: scale(1.1);
         }
 
-        /* Profile Menu Styling */
-        .profile-menu {
-            position: relative;
-            display: inline-block;
+        /* Search Bar */
+        .search-bar {
+            display: none;
+            position: absolute;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 999;
+            justify-content: center;
+            gap: 10px;
         }
 
-        .profile-btn {
-            background: none;
+        .search-bar input {
+            padding: 10px 15px;
+            width: 50%;
+            max-width: 600px;
             border: none;
-            font-size: 28px;
-            cursor: pointer;
-            color: white;
-            transition: transform 0.3s ease, color 0.3s ease;
-            padding: 10px;
-            border-radius: 50%;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+            font-size: 16px;
         }
 
-        .profile-btn:hover {
-            transform: rotate(360deg); /* Full rotation on hover */
-            color: #FFD700; /* Golden color on hover */
+        .search-bar button {
+            padding: 10px 20px;
+            background-color: #FFD700;
+            color: #000;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar button:hover {
+            background-color: #e6b800;
         }
 
         /* Profile Dropdown */
+        .profile-container {
+            position: relative;
+        }
+
         .dropdown {
             display: none;
             position: absolute;
+            top: 30px;
             right: 0;
-            background: #2a2a2a;
-            padding: 12px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            min-width: 200px; /* Set a minimum width */
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(10px);
-            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
-        }
-
-        /* Show dropdown on button hover */
-        .profile-menu:hover .dropdown {
-            display: block;
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
+            background-color: rgba(0, 0, 0, 0.9);
+            border-radius: 4px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            min-width: 150px;
         }
 
         .dropdown a {
-            display: block;
-            color: #FFD700;
-            padding: 12px 20px;
+            color: #fff;
             text-decoration: none;
-            font-size: 16px;
-            font-weight: 600;
-            transition: color 0.3s ease, background 0.3s ease;
-            border-radius: 5px;
-            margin: 5px 0;
+            padding: 10px 15px;
+            display: block;
+            transition: all 0.3s ease;
         }
 
         .dropdown a:hover {
-            background: #FFD700;
-            color: #000;
+            background-color: rgba(255, 215, 0, 0.2);
+            color: #FFD700;
+        }
+
+        /* Responsive Navbar */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            .header-icons {
+                gap: 15px;
+            }
+            header {
+                padding: 15px 20px;
+            }
         }
 
         /* Page Content */
         .page-title {
             text-align: center;
-            padding: 40px 0 20px;
+            padding: 20px 0;
             margin-top: 100px;
             color: #FFD700;
-            font-size: 3rem;
+            font-size: 2.5rem;
             font-weight: 700;
-            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.6);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         main {
             max-width: 1200px;
             margin: 20px auto 40px;
-            padding: 40px;
-            background: rgba(0, 0, 0, 0.6);
-            border-radius: 10px;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            animation: fadeIn 1s ease-in-out 0.3s forwards;
         }
 
-        .main-content {
-            display: flex;
-            gap: 40px;
-            flex-wrap: wrap;
+        /* About Us Content */
+        .about-section {
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
         }
 
-        .contact-form {
-            flex: 1;
-            min-width: 300px;
+        .about-section.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        .form-group {
+        .about-title {
+            color: #FFD700;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #444;
+            padding-bottom: 10px;
+        }
+
+        .about-content {
+            line-height: 1.7;
+            font-size: 16px;
             margin-bottom: 20px;
         }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 1.1rem;
+        /* Team Section */
+        .team-section {
+            margin-top: 50px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        .team-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .team-title {
             color: #FFD700;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            text-align: center;
         }
 
-        .form-row {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
         }
 
-        .form-row .form-group {
-            flex: 1;
-            min-width: 200px;
+        .team-member {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
-        .form-group input, 
-        .form-group textarea {
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.2);
+        }
+
+        .member-img {
             width: 100%;
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid #444;
-            background: rgba(0, 0, 0, 0.3);
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .member-info {
+            padding: 20px;
+        }
+
+        .member-name {
+            color: #FFD700;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .member-role {
+            font-size: 0.9rem;
+            color: #ccc;
+            margin-bottom: 10px;
+        }
+
+        .member-desc {
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: #FFD700;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: #FFD700;
+            color: #000;
+            transform: translateY(-3px);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            margin: 50px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        .stats-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stats-title {
+            color: #FFD700;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .stat-item {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #FFD700;
+            margin-bottom: 10px;
+        }
+
+        .stat-desc {
             font-size: 1rem;
             color: #fff;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .form-group input:focus, 
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #FFD700;
-            box-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
-        }
-
-        .form-group textarea {
-            height: 150px;
-            resize: vertical;
-        }
-
-        .submit-btn {
-            background: #FFD700;
-            color: black;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        }
-
-        .submit-btn:hover {
-            background: #e6c200;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
-        }
-
-        .submit-btn:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         /* Footer Section */
@@ -282,6 +404,11 @@
             margin: 0 auto;
             text-align: center;
             gap: 20px;
+        }
+
+        .footer-logo {
+            height: 50px;
+            margin-bottom: 10px;
         }
 
         .footer-links {
@@ -323,6 +450,34 @@
             font-size: 16px;
             margin-top: 20px;
         }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2rem;
+            }
+            .about-title, .team-title, .stats-title {
+                font-size: 1.5rem;
+            }
+            main {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
@@ -330,6 +485,7 @@
         <div class="logo">
             <img src="../home/logo.png" alt="Fretio Logo">
         </div>
+        
         <nav>
             <ul>
                 <li><a href="../index.html">Home</a></li>
@@ -338,67 +494,164 @@
                 <li><a href="../clothes/clothes.html">Clothes</a></li>
             </ul>
         </nav>
-
-        <!-- Header Icons (Search, Cart, Profile Menu) -->
+        
         <div class="header-icons">
-            <button class="search-btn" onclick="toggleSearch()">
-                <i class="fas fa-search"></i>
-            </button>
-            <button class="cart-btn" onclick="viewCart()">
-                <i class="fas fa-shopping-cart"></i>
-            </button>
-            <!-- Profile Menu -->
-            <div class="profile-menu">
-                <button class="profile-btn">&#x1F464;</button>
+            <i class="fas fa-search" onclick="toggleSearch()"></i>
+            <i class="fas fa-shopping-cart" onclick="viewCart()"></i>
+            <div class="profile-container">
+                <i class="fas fa-user profile-btn"></i>
                 <div class="dropdown">
-                    <a href="signup.html">Sign up</a>
-                    <a href="login.html">Login</a>
-                    <a href="#">Wallet</a>
-                    <a href="#">Buy/Sell</a>
-                    <a href="#">History</a>
+                    <a href="signup.html"><i class="fas fa-user-plus"></i> Sign up</a>
+                    <a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a>
+                    <a href="#"><i class="fas fa-wallet"></i> Wallet</a>
+                    <a href="#"><i class="fas fa-exchange-alt"></i> Buy/Sell</a>
+                    <a href="#"><i class="fas fa-history"></i> History</a>
                 </div>
             </div>
         </div>
     </header>
 
+    <!-- Search bar div that appears when search button is clicked -->
+    <div id="search-bar" class="search-bar">
+        <input type="text" placeholder="Search for products...">
+        <button onclick="searchProducts()">Search</button>
+    </div>
+
     <h1 class="page-title">About Us</h1>
 
     <main>
-        <div class="main-content">
-            <div class="contact-form">
-                <form id="contactForm">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" required>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" required>
-                        </div>
-                    </div>
+        <div class="about-section">
+            <h2 class="about-title">Our Story</h2>
+            <p class="about-content">
+                Fretio was born from a simple idea: to create a platform where students can easily buy, sell, or rent essential items from each other. As university students ourselves, we experienced the challenges of finding affordable supplies, especially during late-night study sessions or when immediate needs arose.
+            </p>
+            <p class="about-content">
+                Founded in 2023, our mission is to build a community-focused marketplace that addresses the unique needs of student life. We understand that student budgets are tight, and sometimes you just need to borrow something for a short time rather than purchasing it outright.
+            </p>
+            <p class="about-content">
+                Our platform connects students who have items to sell or rent with those who need them. From textbooks and calculators to medicines, food items, and clothing, Fretio provides a safe, convenient, and affordable way to access essentials right within your campus community.
+            </p>
+        </div>
 
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" required></textarea>
-                    </div>
+        <div class="about-section">
+            <h2 class="about-title">What Makes Us Different</h2>
+            <p class="about-content">
+                <strong>For Students, By Students:</strong> Fretio was created by students who understand the challenges of campus life, making our platform truly tailored to student needs.
+            </p>
+            <p class="about-content">
+                <strong>Local Campus Communities:</strong> We focus on building micro-communities within each campus, ensuring quick access to items when you need them most.
+            </p>
+            <p class="about-content">
+                <strong>Flexible Options:</strong> Whether you need to buy an item permanently or just rent it for a few days, Fretio gives you options that fit your needs and budget.
+            </p>
+            <p class="about-content">
+                <strong>Responsible Consumption:</strong> By encouraging rental and second-hand purchases, we're helping reduce waste and promoting sustainable consumption among students.
+            </p>
+        </div>
 
-                    <button type="submit" class="submit-btn">Submit</button>
-                </form>
+        <div class="stats-section">
+            <h2 class="stats-title">Fretio in Numbers</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">5,000+</div>
+                    <div class="stat-desc">Active Users</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">20+</div>
+                    <div class="stat-desc">Campus Networks</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">10,000+</div>
+                    <div class="stat-desc">Items Exchanged</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-desc">Satisfied Users</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="team-section">
+            <h2 class="team-title">Meet Our Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Team Member" class="member-img">
+                    <div class="member-info">
+                        <h3 class="member-name">Rahul Sharma</h3>
+                        <div class="member-role">Co-Founder & CEO</div>
+                        <p class="member-desc">Computer Science student with a passion for creating practical solutions to everyday problems.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Team Member" class="member-img">
+                    <div class="member-info">
+                        <h3 class="member-name">Priya Patel</h3>
+                        <div class="member-role">Co-Founder & COO</div>
+                        <p class="member-desc">MBA student with expertise in operations and user experience design.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="Team Member" class="member-img">
+                    <div class="member-info">
+                        <h3 class="member-name">Amit Kumar</h3>
+                        <div class="member-role">CTO</div>
+                        <p class="member-desc">Full-stack developer specializing in secure, scalable marketplace platforms.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-github"></i></a>
+                            <a href="#"><i class="fab fa-stack-overflow"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <img src="https://randomuser.me/api/portraits/women/90.jpg" alt="Team Member" class="member-img">
+                    <div class="member-info">
+                        <h3 class="member-name">Neha Gupta</h3>
+                        <div class="member-role">Marketing Lead</div>
+                        <p class="member-desc">Communications major with a talent for building community and engagement strategies.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Team Member" class="member-img">
+                    <div class="member-info">
+                        <h3 class="member-name">Vikram Singh</h3>
+                        <div class="member-role">Product Manager</div>
+                        <p class="member-desc">Design thinking enthusiast focused on creating intuitive user experiences for campus communities.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-dribbble"></i></a>
+                            <a href="#"><i class="fab fa-behance"></i></a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
 
+    <!-- Footer Section -->
     <footer class="footer">
         <div class="footer-content">
+            <div>
+                <img src="../home/logo.png" alt="Fretio Logo" class="footer-logo">
+            </div>
             <div class="footer-links">
                 <a href="contact.html">Contact us</a>
-                <a href="aboutus.html">About us</a>
+                <a href="aboutus.html" class="active">About us</a>
                 <a href="privacy.html">Privacy Policy</a>
                 <a href="return-policy.html">Return Policy</a>
             </div>
@@ -424,7 +677,13 @@
 
         // Search functionality
         function toggleSearch() {
-            alert('Search functionality will be implemented soon!');
+            const searchBar = document.getElementById('search-bar');
+            searchBar.style.display = searchBar.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function searchProducts() {
+            const searchInput = document.querySelector('.search-bar input').value;
+            alert(`Searching for: ${searchInput}`);
         }
 
         // View cart functionality
@@ -432,11 +691,23 @@
             alert('Shopping cart will be implemented soon!');
         }
 
-        // Form submission
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Thank you for contacting us! We will get back to you soon.');
-        });
+        // Animation for elements when they come into view
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.about-section, .team-section, .stats-section');
+            
+            elements.forEach(element => {
+                const rect = element.getBoundingClientRect();
+                const isVisible = (rect.top >= 0 && rect.top <= window.innerHeight);
+                
+                if (isVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        // Listen for scroll events
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
     </script>
 </body>
 </html>

@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Return Policy - Fretio</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         /* General Reset */
         * {
@@ -17,68 +19,71 @@
 
         /* Background with Gradient & Modern Colors */
         body {
-            background: linear-gradient(to right, #3a3a3a, #c78000); /* Darker tones with a golden touch */
-            color: #f5f5f5;
+            background: linear-gradient(to bottom, #1a1a1a, #2c2c2c, #333333);
+            color: #fff;
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
         /* Header Styling */
         header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 10%;
-            background: #000;
+            background-color: rgba(0, 0, 0, 0.9);
             position: fixed;
             width: 100%;
             top: 0;
+            left: 0;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             z-index: 1000;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: background-color 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
 
-        header:hover {
-            background: #1a1a1a; /* Darker shade on hover */
-        }
-
-        /* Logo */
         .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: white;
+            display: flex;
+            align-items: center;
         }
-        
+
         .logo img {
-            width: 150px;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 40px;
+            margin-right: 10px;
         }
 
-        .logo img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
-        }
-
-        /* Navigation */
         nav ul {
             display: flex;
+            gap: 25px;
+        }
+
+        nav ul li {
             list-style: none;
-            gap: 40px;
         }
 
         nav ul li a {
+            color: #fff;
             text-decoration: none;
-            color: white;
-            font-size: 20px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            transition: color 0.3s ease;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            position: relative;
         }
 
         nav ul li a:hover {
-            color: #FFD700; /* Hover effect with golden color */
+            color: #FFD700;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: #FFD700;
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
         }
 
         /* Header Icons */
@@ -88,119 +93,144 @@
             align-items: center;
         }
 
-        .search-btn, .cart-btn {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 24px;
+        .header-icons i {
+            color: #fff;
+            font-size: 20px;
             cursor: pointer;
-            padding: 10px;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
         }
 
-        .search-btn:hover, .cart-btn:hover {
+        .header-icons i:hover {
             color: #FFD700;
+            transform: scale(1.1);
         }
 
-        /* Profile Menu Styling */
-        .profile-menu {
-            position: relative;
-            display: inline-block;
+        /* Search Bar */
+        .search-bar {
+            display: none;
+            position: absolute;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 999;
+            justify-content: center;
+            gap: 10px;
         }
 
-        .profile-btn {
-            background: none;
+        .search-bar input {
+            padding: 10px 15px;
+            width: 50%;
+            max-width: 600px;
             border: none;
-            font-size: 28px;
-            cursor: pointer;
-            color: white;
-            transition: transform 0.3s ease, color 0.3s ease;
-            padding: 10px;
-            border-radius: 50%;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+            font-size: 16px;
         }
 
-        .profile-btn:hover {
-            transform: rotate(360deg); /* Full rotation on hover */
-            color: #FFD700; /* Golden color on hover */
+        .search-bar button {
+            padding: 10px 20px;
+            background-color: #FFD700;
+            color: #000;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar button:hover {
+            background-color: #e6b800;
         }
 
         /* Profile Dropdown */
+        .profile-container {
+            position: relative;
+        }
+
         .dropdown {
             display: none;
             position: absolute;
+            top: 30px;
             right: 0;
-            background: #2a2a2a;
-            padding: 12px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            min-width: 200px; /* Set a minimum width */
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(10px);
-            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
-        }
-
-        /* Show dropdown on button hover */
-        .profile-menu:hover .dropdown {
-            display: block;
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
+            background-color: rgba(0, 0, 0, 0.9);
+            border-radius: 4px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            min-width: 150px;
         }
 
         .dropdown a {
-            display: block;
-            color: #FFD700;
-            padding: 12px 20px;
+            color: #fff;
             text-decoration: none;
-            font-size: 16px;
-            font-weight: 600;
-            transition: color 0.3s ease, background 0.3s ease;
-            border-radius: 5px;
-            margin: 5px 0;
+            padding: 10px 15px;
+            display: block;
+            transition: all 0.3s ease;
         }
 
         .dropdown a:hover {
-            background: #FFD700;
-            color: #000;
+            background-color: rgba(255, 215, 0, 0.2);
+            color: #FFD700;
         }
 
         /* Page Content */
         .page-title {
             text-align: center;
-            padding: 40px 0 20px;
+            padding: 20px 0;
             margin-top: 100px;
             color: #FFD700;
-            font-size: 3rem;
+            font-size: 2.5rem;
             font-weight: 700;
-            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.6);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         main {
             max-width: 1200px;
             margin: 20px auto 40px;
-            padding: 40px;
-            background: rgba(0, 0, 0, 0.6);
-            border-radius: 10px;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            animation: fadeIn 1s ease-in-out 0.3s forwards;
         }
 
-        section {
-            margin-bottom: 30px;
+        /* Return Policy Content Styling */
+        .policy-section {
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .policy-section.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         h2 {
             color: #FFD700;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
             border-bottom: 2px solid #444;
             padding-bottom: 10px;
-            margin-bottom: 20px;
-            font-size: 1.8rem;
         }
 
         p {
             font-size: 1.1rem;
-            line-height: 1.6;
+            line-height: 1.7;
             margin-bottom: 20px;
         }
 
@@ -211,8 +241,49 @@
 
         li {
             margin-bottom: 15px;
-            line-height: 1.6;
+            line-height: 1.7;
             font-size: 1.1rem;
+            position: relative;
+            padding-left: 10px;
+        }
+
+        li::before {
+            content: '';
+            display: none;
+        }
+
+        /* Specific styling for policy section list items */
+        .policy-section ul li {
+            margin-bottom: 15px;
+            line-height: 1.7;
+            font-size: 1.1rem;
+            position: relative;
+            padding-left: 10px;
+        }
+
+        .policy-section ul li::before {
+            content: '•';
+            color: #FFD700;
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+
+        /* Update to make bullet points only appear in main content lists, not in navigation */
+        nav ul {
+            padding-left: 0;
+            margin-bottom: 0;
+        }
+
+        nav ul li {
+            padding-left: 0;
+            margin-bottom: 0;
+        }
+
+        .highlight {
+            color: #FFD700;
+            font-weight: 600;
         }
 
         /* Footer Section */
@@ -230,6 +301,11 @@
             margin: 0 auto;
             text-align: center;
             gap: 20px;
+        }
+
+        .footer-logo {
+            height: 50px;
+            margin-bottom: 10px;
         }
 
         .footer-links {
@@ -271,6 +347,28 @@
             font-size: 16px;
             margin-top: 20px;
         }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            .header-icons {
+                gap: 15px;
+            }
+            header {
+                padding: 15px 20px;
+            }
+            .page-title {
+                font-size: 2rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+            main {
+                padding: 20px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -278,6 +376,7 @@
         <div class="logo">
             <img src="../home/logo.png" alt="Fretio Logo">
         </div>
+        
         <nav>
             <ul>
                 <li><a href="../index.html">Home</a></li>
@@ -286,50 +385,113 @@
                 <li><a href="../clothes/clothes.html">Clothes</a></li>
             </ul>
         </nav>
-
-        <!-- Header Icons (Search, Cart, Profile Menu) -->
+        
         <div class="header-icons">
-            <button class="search-btn" onclick="toggleSearch()">
-                <i class="fas fa-search"></i>
-            </button>
-            <button class="cart-btn" onclick="viewCart()">
-                <i class="fas fa-shopping-cart"></i>
-            </button>
-            <!-- Profile Menu -->
-            <div class="profile-menu">
-                <button class="profile-btn">&#x1F464;</button>
+            <i class="fas fa-search" onclick="toggleSearch()"></i>
+            <i class="fas fa-shopping-cart" onclick="viewCart()"></i>
+            <div class="profile-container">
+                <i class="fas fa-user profile-btn"></i>
                 <div class="dropdown">
-                    <a href="signup.html">Sign up</a>
-                    <a href="login.html">Login</a>
-                    <a href="#">Wallet</a>
-                    <a href="#">Buy/Sell</a>
-                    <a href="#">History</a>
+                    <a href="signup.html"><i class="fas fa-user-plus"></i> Sign up</a>
+                    <a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a>
+                    <a href="#"><i class="fas fa-wallet"></i> Wallet</a>
+                    <a href="#"><i class="fas fa-exchange-alt"></i> Buy/Sell</a>
+                    <a href="#"><i class="fas fa-history"></i> History</a>
                 </div>
             </div>
         </div>
     </header>
 
+    <!-- Search bar div that appears when search button is clicked -->
+    <div id="search-bar" class="search-bar">
+        <input type="text" placeholder="Search for products...">
+        <button onclick="searchProducts()">Search</button>
+    </div>
+
     <h1 class="page-title">Return Policy</h1>
 
     <main>
-        <section>
+        <div class="policy-section">
             <h2>Our Commitment to You</h2>
-            <p>At Fretio, we are dedicated to providing a seamless and satisfactory experience for our users. Please review our return policy below:</p>
+            <p>At <span class="highlight">Fretio</span>, we are dedicated to providing a seamless and satisfactory experience for our users. Please review our return policy below:</p>
             <ul>
                 <li>Once an order has been collected by the customer, returns are not permissible.</li>
                 <li>For any inquiries or concerns regarding a product, we encourage you to reach out directly to the seller.</li>
                 <li>Fretio serves as a platform facilitating connections between buyers and sellers and does not assume responsibility for any disputes or issues that may arise from transactions.</li>
             </ul>
-        </section>
+        </div>
+
+        <div class="policy-section">
+            <h2>Platform Role</h2>
+            <p>
+                As a peer-to-peer marketplace, Fretio acts solely as an intermediary platform that connects campus community members for buying and selling goods. We do not:
+            </p>
+            <ul>
+                <li>Take possession of items listed on our platform</li>
+                <li>Verify the condition of items exchanged</li>
+                <li>Guarantee the quality or authenticity of products</li>
+                <li>Process returns between users</li>
+            </ul>
+            <p>
+                All transactions are conducted directly between users, and any arrangements regarding returns should be negotiated between the involved parties.
+            </p>
+        </div>
+
+        <div class="policy-section">
+            <h2>Recommendations for Buyers</h2>
+            <p>
+                To ensure a satisfactory transaction experience, we recommend the following practices:
+            </p>
+            <ul>
+                <li>Thoroughly examine product descriptions, images, and details before completing a purchase</li>
+                <li>Communicate clearly with sellers about your expectations and any questions you may have</li>
+                <li>Inspect items at the time of collection before finalizing the transaction</li>
+                <li>Consider arranging to meet in public places for item exchanges</li>
+                <li>Use the Fretio chat feature to keep all communications on the platform for reference</li>
+            </ul>
+        </div>
+
+        <div class="policy-section">
+            <h2>Reporting Issues</h2>
+            <p>
+                While Fretio does not process returns, we take the safety and satisfaction of our community seriously. If you encounter any of the following situations, please report them to our support team:
+            </p>
+            <ul>
+                <li>Fraudulent activity or misrepresentation of items</li>
+                <li>Safety concerns during transactions</li>
+                <li>Harassment or inappropriate behavior from other users</li>
+                <li>Technical issues with the platform affecting your transaction</li>
+            </ul>
+            <p>
+                Our team will review each report and take appropriate action according to our community guidelines and terms of service.
+            </p>
+        </div>
+
+        <div class="policy-section">
+            <h2>Contact Information</h2>
+            <p>
+                For any questions or concerns regarding our Return Policy, please contact our support team at:
+            </p>
+            <p>
+                <span class="highlight">Email:</span> support@fretio.com
+            </p>
+            <p>
+                <span class="highlight">Support Hours:</span> Monday to Friday, 9 AM to 6 PM IST
+            </p>
+        </div>
     </main>
 
+    <!-- Footer Section -->
     <footer class="footer">
         <div class="footer-content">
+            <div>
+                <img src="../home/logo.png" alt="Fretio Logo" class="footer-logo">
+            </div>
             <div class="footer-links">
                 <a href="contact.html">Contact us</a>
                 <a href="aboutus.html">About us</a>
                 <a href="privacy.html">Privacy Policy</a>
-                <a href="return-policy.html">Return Policy</a>
+                <a href="return-policy.html" class="active">Return Policy</a>
             </div>
 
             <div class="social-icons">
@@ -353,13 +515,37 @@
 
         // Search functionality
         function toggleSearch() {
-            alert('Search functionality will be implemented soon!');
+            const searchBar = document.getElementById('search-bar');
+            searchBar.style.display = searchBar.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function searchProducts() {
+            const searchInput = document.querySelector('.search-bar input').value;
+            alert(`Searching for: ${searchInput}`);
         }
 
         // View cart functionality
         function viewCart() {
             alert('Shopping cart will be implemented soon!');
         }
+
+        // Animation for elements when they come into view
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.policy-section');
+            
+            elements.forEach(element => {
+                const rect = element.getBoundingClientRect();
+                const isVisible = (rect.top >= 0 && rect.top <= window.innerHeight);
+                
+                if (isVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        // Listen for scroll events
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
     </script>
 </body>
 </html>
