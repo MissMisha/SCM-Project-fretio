@@ -4,338 +4,393 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy - Fretio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        body {
+        /* General Reset */
+        * {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #121212;
-            color: #ffffff;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
         }
 
+        /* Background with Gradient & Modern Colors */
+        body {
+            background: linear-gradient(to right, #3a3a3a, #c78000); /* Darker tones with a golden touch */
+            color: #f5f5f5;
+            min-height: 100vh;
+        }
+
+        /* Header Styling */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 40px;
-            background-color: #000000;
+            padding: 20px 10%;
+            background: #000;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s ease;
         }
 
-        header img {
-            width: 60px;
+        header:hover {
+            background: #1a1a1a; /* Darker shade on hover */
         }
 
-        header nav {
-            display: flex;
-            gap: 20px;
-        }
-
-        header nav a {
-            text-decoration: none;
-            color: #f8c51c;
+        /* Logo */
+        .logo {
+            font-size: 24px;
             font-weight: bold;
-            font-size: 16px;
+            color: white;
+        }
+        
+        .logo img {
+            width: 150px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        header nav a:hover {
-            text-decoration: underline;
+        .logo img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
         }
 
-        header div {
+        /* Navigation */
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #FFD700; /* Hover effect with golden color */
+        }
+
+        /* Header Icons */
+        .header-icons {
             display: flex;
             gap: 20px;
+            align-items: center;
         }
 
-        header div img {
-            width: 24px;
+        .search-btn, .cart-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
             cursor: pointer;
+            padding: 10px;
+            transition: color 0.3s ease;
         }
 
-        .content {
-            padding: 60px 40px;
-            max-width: 800px;
-            margin-top: 3%;
-            margin-left: 18%;
+        .search-btn:hover, .cart-btn:hover {
+            color: #FFD700;
         }
 
-        h1 {
-            color: #f8c51c;
-            font-size: 36px;
-            text-transform: uppercase;
-            margin-bottom: 20px;
+        /* Profile Menu Styling */
+        .profile-menu {
+            position: relative;
+            display: inline-block;
+        }
+
+        .profile-btn {
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: white;
+            transition: transform 0.3s ease, color 0.3s ease;
+            padding: 10px;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .profile-btn:hover {
+            transform: rotate(360deg); /* Full rotation on hover */
+            color: #FFD700; /* Golden color on hover */
+        }
+
+        /* Profile Dropdown */
+        .dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            background: #2a2a2a;
+            padding: 12px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            min-width: 200px; /* Set a minimum width */
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+        }
+
+        /* Show dropdown on button hover */
+        .profile-menu:hover .dropdown {
+            display: block;
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown a {
+            display: block;
+            color: #FFD700;
+            padding: 12px 20px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            transition: color 0.3s ease, background 0.3s ease;
+            border-radius: 5px;
+            margin: 5px 0;
+        }
+
+        .dropdown a:hover {
+            background: #FFD700;
+            color: #000;
+        }
+
+        /* Page Content */
+        .page-title {
+            text-align: center;
+            padding: 40px 0 20px;
+            margin-top: 100px;
+            color: #FFD700;
+            font-size: 3rem;
+            font-weight: 700;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.6);
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 20px auto 40px;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        section {
+            margin-bottom: 30px;
         }
 
         h2 {
-            color: #f8c51c;
-            font-size: 24px;
-            margin-top: 40px;
+            color: #FFD700;
+            border-bottom: 2px solid #444;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
         }
 
         p {
-            font-size: 16px;
-            line-height: 1.8;
-            margin: 15px 0;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
         }
 
         .highlight {
-            color: #f8c51c;
+            color: #FFD700;
+            font-weight: 600;
         }
 
-        footer {
+        /* Footer Section */
+        .footer {
+            background: #000;
+            padding: 40px 10px;
+            margin-top: 30px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
             text-align: center;
-            padding: 20px;
-            background-color: #000000;
-            color: #888888;
-            margin-top: 40px;
-            border-top: 2px solid #444444;
+            gap: 20px;
         }
-        header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 10%;
-    background: #000;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    transition: background-color 0.3s ease;
-}
 
-header:hover {
-    background: #1a1a1a; /* Darker shade on hover */
-}
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
 
-/* Logo */
-.logo img {
-    width: 150px;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+        .footer-links a {
+            color: #FFD700;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
 
-.logo img:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
-}
+        .footer-links a:hover {
+            color: #fff;
+        }
 
-/* Navigation */
-nav ul {
-    display: flex;
-    list-style: none;
-    gap: 40px;
-}
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
 
-nav ul li a {
-    text-decoration: none;
-    color: white;
-    font-size: 20px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    transition: color 0.3s ease;
-}
+        .social-icons a {
+            color: #FFD700;
+            font-size: 24px;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
 
-nav ul li a:hover {
-    color: #FFD700; /* Hover effect with golden color */
-}
+        .social-icons a:hover {
+            transform: scale(1.2);
+            color: #fff;
+        }
 
-/* Profile Menu Styling */
-.profile-menu {
-    position: relative;
-    display: inline-block;
-}
-
-.profile-btn {
-    background: none;
-    border: none;
-    font-size: 28px;
-    cursor: pointer;
-    color: white;
-    transition: transform 0.3s ease, color 0.3s ease;
-    padding: 10px;
-    border-radius: 50%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-
-.profile-btn:hover {
-    transform: rotate(360deg); /* Full rotation on hover */
-    color: #FFD700; /* Golden color on hover */
-}
-
-/* Profile Dropdown */
-.dropdown {
-    display: none;
-    position: absolute;
-    right: 0;
-    background: #2a2a2a;
-    padding: 12px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    min-width: 200px; /* Set a minimum width */
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(10px);
-    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
-}
-
-/* Show dropdown on button hover */
-.profile-menu:hover .dropdown {
-    display: block;
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-.dropdown a {
-    display: block;
-    color: #FFD700;
-    padding: 12px 20px;
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: 600;
-    transition: color 0.3s ease, background 0.3s ease;
-    border-radius: 5px;
-    margin: 5px 0;
-}
-
-.dropdown a:hover {
-    background: #FFD700;
-    color: #000;
-}
-
-/* Header Icons */
-.header-icons {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-}
-
-.search-btn, .cart-btn {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 24px;
-    cursor: pointer;
-    padding: 10px;
-    transition: color 0.3s ease;
-}
-
-.search-btn:hover, .cart-btn:hover {
-    color: #FFD700;
-}
-
-/* Search Bar */
-.search-bar {
-    display: none;
-    position: fixed;
-    top: 80px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #fff;
-    padding: 10px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 80%;
-    max-width: 600px;
-    z-index: 1001;
-}
-
-.search-bar input {
-    width: 80%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.search-bar button {
-    padding: 10px;
-    background-color: #FFD700;
-    color: #000;
-    font-size: 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.search-bar button:hover {
-    background-color: #e6b800;
-}
-
-/* Cart Icon Hover */
-.cart-btn {
-    position: relative;
-}
-
-.cart-btn::after {
-    content: '0'; /* Default cart item count */
-    position: absolute;
-    top: -5px;
-    right: -5px;
-    background-color: red;
-    color: white;
-    border-radius: 50%;
-    padding: 2px 5px;
-    font-size: 14px;
-}
+        .copyright {
+            color: #999;
+            font-size: 16px;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
+    <header>
+        <div class="logo">
+            <img src="../home/logo.png" alt="Fretio Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../medicine/medi.html">Medicine</a></li>
+                <li><a href="../food/food.html">Food Items</a></li>
+                <li><a href="../clothes/clothes.html">Clothes</a></li>
+            </ul>
+        </nav>
 
-<header>
-    <div class="logo">
-        <img src="kh2ZWeP.png" alt="Logo">
-    </div>
-    <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="medi.html">Medicine</a></li>
-            <li><a href="#">Food Items</a></li>
-            <li><a href="#">Clothes</a></li>
-            <li><a href="#">More</a></li>
-        </ul>
-    </nav>
-
-    <!-- Header Icons (Search, Cart, Profile Menu) -->
-    <div class="header-icons">
-        <button class="search-btn" onclick="toggleSearch()">
-            <i class="fas fa-search"></i>
-        </button>
-        <button class="cart-btn" onclick="viewCart()">
-            <i class="fas fa-shopping-cart"></i>
-        </button>
-        <!-- Profile Menu -->
-        <div class="profile-menu">
-            <button class="profile-btn">&#x1F464;</button>
-            <div class="dropdown">
-                <a href="signup.html">Sign up</a>
-                <a href="login.html">Login</a>
-                <a href="#">Wallet</a>
-                <a href="#">Buy/Sell</a>
-                <a href="#">History</a>
+        <!-- Header Icons (Search, Cart, Profile Menu) -->
+        <div class="header-icons">
+            <button class="search-btn" onclick="toggleSearch()">
+                <i class="fas fa-search"></i>
+            </button>
+            <button class="cart-btn" onclick="viewCart()">
+                <i class="fas fa-shopping-cart"></i>
+            </button>
+            <!-- Profile Menu -->
+            <div class="profile-menu">
+                <button class="profile-btn">&#x1F464;</button>
+                <div class="dropdown">
+                    <a href="signup.html">Sign up</a>
+                    <a href="login.html">Login</a>
+                    <a href="#">Wallet</a>
+                    <a href="#">Buy/Sell</a>
+                    <a href="#">History</a>
+                </div>
             </div>
         </div>
-    </div>
-</header>
-<div class="content">
-    <h1>Privacy Policy</h1>
-    <p><span class="highlight">Effective Date:</span> 8/02/2025</p>
+    </header>
 
-    <h2>1. Introduction</h2>
-    <p>Welcome to Fretio, a student-to-student marketplace exclusively for Chitkara campus. This Privacy Policy explains how we handle user data and our role as a platform connecting buyers and sellers within the university.</p>
+    <h1 class="page-title">Privacy Policy</h1>
 
-    <h2>2. Our Role as a Platform</h2>
-    <p>We do not sell products ourselves; all listings are posted by students. Our platform acts as a facilitator to connect students who want to rent, sell, or buy items. We do not take responsibility for product quality, transactions, or user interactions beyond providing a secure listing space.</p>
+    <main>
+        <section>
+            <h2>Introduction</h2>
+            <p>At <span class="highlight">Fretio</span>, we are committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you visit our website or use our services.</p>
+            <p>We use your data to provide and improve our services. By using our platform, you agree to the collection and use of information in accordance with this policy.</p>
+        </section>
 
-    <h2>3. No Return Policy</h2>
-    <p>All transactions are final. We do not offer refunds or returns. If you have an issue with a product, you must contact the seller directly to resolve disputes. For any concerns or disputes, you can reach out to us at <span class="highlight">[Your Support Email]</span> or through the Help & Support section of the website.</p>
-</div>
+        <section>
+            <h2>Information We Collect</h2>
+            <p>We collect several different types of information for various purposes to provide and improve our service to you:</p>
+            <p><span class="highlight">Personal Data:</span> While using our Service, we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you. This may include, but is not limited to:</p>
+            <ul>
+                <li>Email address</li>
+                <li>First name and last name</li>
+                <li>Phone number</li>
+                <li>Address</li>
+                <li>College ID</li>
+            </ul>
+        </section>
 
-<footer>
-    &copy; 2025 Fretio. All rights reserved.
-</footer>
+        <section>
+            <h2>How We Use Your Information</h2>
+            <p>We use the collected data for various purposes:</p>
+            <ul>
+                <li>To provide and maintain our service</li>
+                <li>To notify you about changes to our service</li>
+                <li>To provide customer support</li>
+                <li>To gather analysis or valuable information so that we can improve our service</li>
+                <li>To detect, prevent and address technical issues</li>
+            </ul>
+        </section>
 
+        <section>
+            <h2>Security</h2>
+            <p>The security of your data is important to us, but remember that no method of transmission over the Internet, or method of electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your Personal Data, we cannot guarantee its absolute security.</p>
+        </section>
+
+        <section>
+            <h2>Changes to This Privacy Policy</h2>
+            <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "effective date" at the top of this Privacy Policy.</p>
+            <p>You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.</p>
+        </section>
+
+        <section>
+            <h2>Contact Us</h2>
+            <p>If you have any questions about this Privacy Policy, please contact us at <span class="highlight">vedic.coders@gmail.com</span>.</p>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="contact.html">Contact us</a>
+                <a href="aboutus.html">About us</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="return-policy.html">Return Policy</a>
+            </div>
+
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            </div>
+
+            <div class="copyright">
+                Copyright © 2025 Fretio. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Profile dropdown functionality
+        document.querySelector('.profile-btn').addEventListener('click', () => {
+            const dropdown = document.querySelector('.dropdown');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Search functionality
+        function toggleSearch() {
+            alert('Search functionality will be implemented soon!');
+        }
+
+        // View cart functionality
+        function viewCart() {
+            alert('Shopping cart will be implemented soon!');
+        }
+    </script>
 </body>
 </html>
