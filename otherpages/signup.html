@@ -3,147 +3,481 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Fretio</title>
+    <title>Sign Up - Fretio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* General Reset */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
 
+        /* Background with Gradient & Modern Colors */
         body {
+            background: linear-gradient(to bottom, #1a1a1a, #2c2c2c, #333333);
+            color: #fff;
             min-height: 100vh;
-            background: linear-gradient(45deg, #1a1a1a, #2d2d2d);
+            overflow-x: hidden;
+        }
+
+        /* Header Styling */
+        header {
+            background-color: rgba(0, 0, 0, 0.9);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            padding: 20px 50px;
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
 
         .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 25px;
+        }
+
+        nav ul li {
+            list-style: none;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            color: #FFD700;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: #FFD700;
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Header Icons */
+        .header-icons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .header-icons i {
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .header-icons i:hover {
+            color: #FFD700;
+            transform: scale(1.1);
+        }
+
+        /* Search Bar */
+        .search-bar {
+            display: none;
+            position: absolute;
+            top: 80px;
+            left: 0;
+            width: 100%;
             padding: 20px;
-            width: 300px;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 999;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .search-bar input {
+            padding: 10px 15px;
+            width: 50%;
+            max-width: 600px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .search-bar button {
+            padding: 10px 20px;
+            background-color: #FFD700;
+            color: #000;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar button:hover {
+            background-color: #e6b800;
+        }
+
+        /* Profile Dropdown */
+        .profile-container {
+            position: relative;
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            top: 30px;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            border-radius: 4px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            min-width: 150px;
+        }
+
+        .dropdown a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 15px;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown a:hover {
+            background-color: rgba(255, 215, 0, 0.2);
+            color: #FFD700;
+        }
+
+        /* Responsive Navbar */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            .header-icons {
+                gap: 15px;
+            }
+            header {
+                padding: 15px 20px;
+            }
+        }
+
+        /* Sign Up Container Styles */
+        .page-title {
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 100px;
+            color: #FFD700;
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .container {
             display: flex;
-            flex-direction: row;
-            gap: 50px;
-            align-items: flex-start;  /* Align children to the top */
+            flex-direction: column;
+            align-items: center;
             justify-content: center;
             padding: 20px;
-            margin-top: 20px;         /* Reduced top margin to shift container upward */
-        }
-
-        h1 {
-            position: absolute;
-            top: 80px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: #ffa500;
-            font-size: 2.5rem;
+            margin: 20px auto;
+            max-width: 1200px;
+            animation: fadeIn 1s ease-in-out 0.3s forwards;
         }
 
         .form-container {
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.7);
             padding: 40px;
             border-radius: 15px;
-            width: 400px;
+            width: 450px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 215, 0, 0.2);
         }
 
         .form-title {
-            color: #ffa500;
+            color: #FFD700;
             margin-bottom: 10px;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
+            text-align: center;
         }
 
         .subtitle {
             color: white;
             margin-bottom: 30px;
             font-size: 1.2rem;
+            text-align: center;
+            letter-spacing: 1px;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             position: relative;
         }
 
-        input {
+        .form-group input {
             width: 100%;
-            padding: 10px 0;
-            background: transparent;
+            padding: 12px 10px;
+            background: rgba(255, 255, 255, 0.1);
             border: none;
-            border-bottom: 1px solid #555;
+            border-bottom: 2px solid #555;
             color: white;
             outline: none;
+            font-size: 16px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
         }
 
-        input::placeholder {
-            color: #666;
+        .form-group input:focus {
+            border-bottom: 2px solid #FFD700;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .form-group input::placeholder {
+            color: #aaa;
         }
 
         .toggle-password {
             position: absolute;
-            right: 0;
+            right: 10px;
             top: 50%;
             transform: translateY(-50%);
             cursor: pointer;
-            color: #666;
+            color: #aaa;
+            transition: color 0.3s ease;
+        }
+
+        .toggle-password:hover {
+            color: #FFD700;
         }
 
         .sign-up-btn {
             width: 100%;
             padding: 15px;
-            background: #ffa500;
+            background: #FFD700;
             border: none;
             border-radius: 25px;
-            color: white;
+            color: #000;
             font-size: 1rem;
+            font-weight: 600;
             cursor: pointer;
             margin-top: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
 
         .sign-up-btn:hover {
-            background: #ff8c00;
+            background: #e6b800;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
         }
 
         .login-link {
             text-align: center;
-            margin-top: 20px;
-            color: #666;
+            margin-top: 25px;
+            color: #ccc;
+            font-size: 15px;
         }
 
         .login-link a {
-            color: #ffa500;
+            color: #FFD700;
             text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .login-link a:hover {
+            color: #fff;
+            text-decoration: underline;
         }
 
         .character-image {
-            max-width: 300px;
-            margin-left: 50px;  /* Remove or adjust if you need further alignment changes */
-            margin-top: 0;      
+            max-width: 350px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+            transition: transform 0.5s ease;
+        }
+
+        .character-image:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        /* Footer Section */
+        .footer {
+            background: #000;
+            padding: 40px 10px;
+            margin-top: 30px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            gap: 20px;
+        }
+
+        .footer-logo {
+            height: 50px;
+            margin-bottom: 10px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-links a {
+            color: #FFD700;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            color: #FFD700;
+            font-size: 24px;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.2);
+            color: #fff;
+        }
+
+        .copyright {
+            color: #999;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .container {
+                padding: 15px;
+            }
         }
 
         @media (max-width: 768px) {
             .container {
                 flex-direction: column;
+                gap: 30px;
             }
             
-            .character-image {
-                display: none;
+            .form-container {
+                width: 100%;
+                max-width: 450px;
+                padding: 30px;
             }
+            
+            .page-title {
+                font-size: 2rem;
+                margin-top: 80px;
+            }
+        }
 
-            h1 {
-                font-size: 1.8rem;
-                text-align: center;
-                width: 90%;
+        @media (max-width: 576px) {
+            .form-title {
+                font-size: 1.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
             }
         }
     </style>
 </head>
 <body>
-    
-    <img src="kh2ZWeP.png" alt="Fretio Logo" class="logo">
-    <h1>WELCOME TO FRETIO !</h1>
+    <header>
+        <div class="logo">
+            <img src="../home/logo.png" alt="Fretio Logo">
+        </div>
+        
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../medicine/medi.html">Medicine</a></li>
+                <li><a href="../food/food.html">Food Items</a></li>
+                <li><a href="../clothes/clothes.html">Clothes</a></li>
+            </ul>
+        </nav>
+        
+        <div class="header-icons">
+            <i class="fas fa-search" onclick="toggleSearch()"></i>
+            <i class="fas fa-shopping-cart" onclick="viewCart()"></i>
+            <div class="profile-container">
+                <i class="fas fa-user profile-btn"></i>
+                <div class="dropdown">
+                    <a href="signup.html" class="active"><i class="fas fa-user-plus"></i> Sign up</a>
+                    <a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a>
+                    <a href="#"><i class="fas fa-wallet"></i> Wallet</a>
+                    <a href="#"><i class="fas fa-exchange-alt"></i> Buy/Sell</a>
+                    <a href="#"><i class="fas fa-history"></i> History</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Search bar div that appears when search button is clicked -->
+    <div id="search-bar" class="search-bar">
+        <input type="text" placeholder="Search for products...">
+        <button onclick="searchProducts()">Search</button>
+    </div>
+
+    <h1 class="page-title">WELCOME TO FRETIO !</h1>
 
     <div class="container">
         <div class="form-container">
@@ -159,11 +493,11 @@
                 </div>
                 <div class="form-group">
                     <input type="password" placeholder="Password" required>
-                    <span class="toggle-password">👁️</span>
+                    <span class="toggle-password"><i class="far fa-eye"></i></span>
                 </div>
                 <div class="form-group">
                     <input type="password" placeholder="Confirm Password" required>
-                    <span class="toggle-password">👁️</span>
+                    <span class="toggle-password"><i class="far fa-eye"></i></span>
                 </div>
                 
                 <button type="submit" class="sign-up-btn">Sign Up</button>
@@ -173,28 +507,81 @@
                 Already have an account? <a href="login.html">Log In</a>
             </div>
         </div>
-        
-        <img src="votyKTC.png" alt="Character" class="character-image">
     </div>
 
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <img src="../home/logo.png" alt="Fretio Logo" class="footer-logo">
+            </div>
+            <div class="footer-links">
+                <a href="contact.html">Contact us</a>
+                <a href="aboutus.html">About us</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="return-policy.html">Return Policy</a>
+            </div>
+
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            </div>
+
+            <div class="copyright">
+                Copyright © 2025 Fretio. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
     <script>
+        // Profile dropdown functionality
+        document.querySelector('.profile-btn').addEventListener('click', () => {
+            const dropdown = document.querySelector('.dropdown');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Search functionality
+        function toggleSearch() {
+            const searchBar = document.getElementById('search-bar');
+            searchBar.style.display = searchBar.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function searchProducts() {
+            const searchInput = document.querySelector('.search-bar input').value;
+            alert(`Searching for: ${searchInput}`);
+        }
+
+        // View cart functionality
+        function viewCart() {
+            alert('Shopping cart will be implemented soon!');
+        }
+
+        // Toggle password visibility
         document.querySelectorAll('.toggle-password').forEach(button => {
             button.addEventListener('click', () => {
                 const input = button.previousElementSibling;
+                const icon = button.querySelector('i');
+                
                 if (input.type === 'password') {
                     input.type = 'text';
-                    button.textContent = '👁️‍🗨️';
+                    icon.classList.remove('fa-eye');
+                    icon.classList.add('fa-eye-slash');
                 } else {
                     input.type = 'password';
-                    button.textContent = '👁️';
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
                 }
             });
         });
 
+        // Handle form submission
         document.getElementById('signupForm').addEventListener('submit', (e) => {
             e.preventDefault();
             // Add your form submission logic here
-            alert('Sign up functionality would be implemented here!');
+            alert('Sign up successful! Welcome to Fretio!');
+            // Redirect to home page after successful signup
+            // window.location.href = '../index.html';
         });
     </script>
 </body>
