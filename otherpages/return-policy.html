@@ -173,6 +173,234 @@
             color: #FFD700;
         }
 
+        /* Shopping Cart Modal */
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1001;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cart-container {
+            background-color: #1a1a1a;
+            width: 80%;
+            max-width: 800px;
+            max-height: 80vh;
+            border-radius: 10px;
+            padding: 25px;
+            position: relative;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .cart-title {
+            color: #FFD700;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-cart:hover {
+            color: #FFD700;
+            transform: scale(1.1);
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding-right: 10px;
+            margin-bottom: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            object-fit: cover;
+            margin-right: 15px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+
+        .cart-item-price {
+            color: #FFD700;
+            font-weight: 500;
+        }
+
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            padding: 5px;
+        }
+
+        .quantity-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 16px;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .quantity-btn:hover {
+            color: #FFD700;
+        }
+
+        .quantity-input {
+            width: 35px;
+            text-align: center;
+            font-size: 16px;
+            border: none;
+            background: none;
+            color: #fff;
+        }
+
+        .remove-item {
+            background: none;
+            border: none;
+            color: #ff6b6b;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .remove-item:hover {
+            color: #ff0000;
+            transform: scale(1.1);
+        }
+
+        .cart-summary {
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .subtotal {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .total {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .total-amount {
+            color: #FFD700;
+        }
+
+        .checkout-btn {
+            background-color: #FFD700;
+            color: #000;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .checkout-btn:hover {
+            background-color: #e6b800;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .empty-cart-message {
+            text-align: center;
+            padding: 40px 0;
+            color: #999;
+            font-size: 1.1rem;
+        }
+        
+        .empty-cart-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+            color: #666;
+        }
+
+        /* Cart badge */
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: #FF0000;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .cart-icon-container {
+            position: relative;
+        }
+
         /* Page Content */
         .page-title {
             text-align: center;
@@ -388,7 +616,10 @@
         
         <div class="header-icons">
             <i class="fas fa-search" onclick="toggleSearch()"></i>
-            <i class="fas fa-shopping-cart" onclick="viewCart()"></i>
+            <div class="cart-icon-container">
+                <i class="fas fa-shopping-cart" onclick="toggleCart()"></i>
+                <span class="cart-badge" id="cart-badge">0</span>
+            </div>
             <div class="profile-container">
                 <i class="fas fa-user profile-btn"></i>
                 <div class="dropdown">
@@ -406,6 +637,32 @@
     <div id="search-bar" class="search-bar">
         <input type="text" placeholder="Search for products...">
         <button onclick="searchProducts()">Search</button>
+    </div>
+
+    <!-- Shopping Cart Modal -->
+    <div id="cart-modal" class="cart-modal">
+        <div class="cart-container">
+            <div class="cart-header">
+                <h2 class="cart-title">Your Shopping Cart</h2>
+                <button class="close-cart" onclick="toggleCart()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="cart-items" id="cart-items">
+                <!-- Cart items will be added here dynamically -->
+            </div>
+            <div class="cart-summary">
+                <div class="subtotal">
+                    <span>Subtotal:</span>
+                    <span id="subtotal-amount">₹0.00</span>
+                </div>
+                <div class="total">
+                    <span>Total:</span>
+                    <span class="total-amount" id="total-amount">₹0.00</span>
+                </div>
+                <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+            </div>
+        </div>
     </div>
 
     <h1 class="page-title">Return Policy</h1>
@@ -507,6 +764,12 @@
     </footer>
 
     <script>
+        // Initialize cart from localStorage or create new cart
+        let cart = JSON.parse(localStorage.getItem('fretioCart')) || [];
+        
+        // Update cart badge on page load
+        updateCartBadge();
+
         // Profile dropdown functionality
         document.querySelector('.profile-btn').addEventListener('click', () => {
             const dropdown = document.querySelector('.dropdown');
@@ -524,9 +787,198 @@
             alert(`Searching for: ${searchInput}`);
         }
 
-        // View cart functionality
-        function viewCart() {
-            alert('Shopping cart will be implemented soon!');
+        // Cart functionality
+        function toggleCart() {
+            const cartModal = document.getElementById('cart-modal');
+            
+            if (cartModal.style.display === 'flex') {
+                cartModal.style.display = 'none';
+                document.body.style.overflow = 'auto'; // Enable scrolling
+            } else {
+                renderCartItems();
+                cartModal.style.display = 'flex';
+                document.body.style.overflow = 'hidden'; // Disable background scrolling
+            }
+        }
+
+        function renderCartItems() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = `
+                    <div class="empty-cart-message">
+                        <div class="empty-cart-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <p>Your cart is empty</p>
+                        <p>Browse our products and add items to your cart</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            let cartHTML = '';
+            
+            cart.forEach(item => {
+                cartHTML += `
+                    <div class="cart-item" data-id="${item.id}">
+                        <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                        <div class="cart-item-details">
+                            <div class="cart-item-title">${item.name}</div>
+                            <div class="cart-item-price">₹${item.price.toFixed(2)}</div>
+                        </div>
+                        <div class="cart-item-actions">
+                            <div class="quantity-control">
+                                <button class="quantity-btn" onclick="updateQuantity(${item.id}, ${item.quantity - 1})">-</button>
+                                <input type="number" class="quantity-input" value="${item.quantity}" min="1" max="10" 
+                                    onchange="updateQuantity(${item.id}, this.value)">
+                                <button class="quantity-btn" onclick="updateQuantity(${item.id}, ${item.quantity + 1})">+</button>
+                            </div>
+                            <button class="remove-item" onclick="removeItem(${item.id})">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            cartItemsContainer.innerHTML = cartHTML;
+            updateCartTotals();
+        }
+
+        function updateCartTotals() {
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            // You can add tax calculation, shipping, etc. here
+            const total = subtotal;
+            
+            document.getElementById('subtotal-amount').textContent = `₹${subtotal.toFixed(2)}`;
+            document.getElementById('total-amount').textContent = `₹${total.toFixed(2)}`;
+        }
+
+        function updateCartBadge() {
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const badge = document.getElementById('cart-badge');
+            
+            badge.textContent = totalItems;
+            
+            if (totalItems === 0) {
+                badge.style.display = 'none';
+            } else {
+                badge.style.display = 'flex';
+            }
+        }
+
+        function addToCart(id, name, price, image, quantity = 1) {
+            // Check if item already exists in cart
+            const existingItemIndex = cart.findIndex(item => item.id === id);
+            
+            if (existingItemIndex !== -1) {
+                // Update quantity if item exists
+                cart[existingItemIndex].quantity += quantity;
+            } else {
+                // Add new item if it doesn't exist
+                cart.push({
+                    id,
+                    name,
+                    price,
+                    image,
+                    quantity
+                });
+            }
+            
+            // Save cart to localStorage
+            saveCart();
+            
+            // Update UI
+            updateCartBadge();
+            
+            // Show confirmation
+            showToast(`${name} added to cart!`);
+        }
+
+        function updateQuantity(id, newQuantity) {
+            newQuantity = parseInt(newQuantity);
+            
+            if (isNaN(newQuantity) || newQuantity < 1) {
+                newQuantity = 1;
+            }
+            
+            const itemIndex = cart.findIndex(item => item.id === id);
+            
+            if (itemIndex !== -1) {
+                if (newQuantity === 0) {
+                    // Remove item if quantity is 0
+                    removeItem(id);
+                } else {
+                    // Update quantity
+                    cart[itemIndex].quantity = newQuantity;
+                    saveCart();
+                    renderCartItems();
+                    updateCartBadge();
+                }
+            }
+        }
+
+        function removeItem(id) {
+            cart = cart.filter(item => item.id !== id);
+            saveCart();
+            renderCartItems();
+            updateCartBadge();
+            
+            // Show confirmation
+            showToast('Item removed from cart');
+        }
+
+        function saveCart() {
+            localStorage.setItem('fretioCart', JSON.stringify(cart));
+        }
+
+        function clearCart() {
+            cart = [];
+            saveCart();
+            renderCartItems();
+            updateCartBadge();
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                showToast('Your cart is empty!');
+                return;
+            }
+            
+            alert('Proceeding to checkout...');
+            // In a real application, you would redirect to a checkout page
+        }
+
+        function showToast(message) {
+            // Create toast element if it doesn't exist
+            let toast = document.getElementById('toast');
+            
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.id = 'toast';
+                toast.style.position = 'fixed';
+                toast.style.bottom = '30px';
+                toast.style.left = '50%';
+                toast.style.transform = 'translateX(-50%)';
+                toast.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+                toast.style.color = '#fff';
+                toast.style.padding = '12px 20px';
+                toast.style.borderRadius = '5px';
+                toast.style.zIndex = '2000';
+                toast.style.opacity = '0';
+                toast.style.transition = 'opacity 0.3s ease';
+                document.body.appendChild(toast);
+            }
+            
+            // Set message and display toast
+            toast.textContent = message;
+            toast.style.opacity = '1';
+            
+            // Hide toast after 3 seconds
+            setTimeout(() => {
+                toast.style.opacity = '0';
+            }, 3000);
         }
 
         // Animation for elements when they come into view
@@ -546,6 +998,18 @@
         // Listen for scroll events
         window.addEventListener('scroll', animateOnScroll);
         window.addEventListener('load', animateOnScroll);
+
+        // Example function to add product to cart (for demonstration purposes)
+        function addProductExample() {
+            // This would normally be called from product pages when clicking "Add to Cart" buttons
+            addToCart(
+                101, // Product ID
+                'Paracetamol 500mg', // Product name
+                199.99, // Product price
+                '../medicine/img/para.jpg', // Product image
+                1 // Quantity
+            );
+        }
     </script>
 </body>
 </html>

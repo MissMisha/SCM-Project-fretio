@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../otherpages/cart.css">
     <style>
         /* General Reset */
         * {
@@ -388,7 +389,10 @@
         
         <div class="header-icons">
             <i class="fas fa-search" onclick="toggleSearch()"></i>
-            <i class="fas fa-shopping-cart" onclick="viewCart()"></i>
+            <div class="cart-icon-container">
+                <i class="fas fa-shopping-cart" onclick="toggleCart()"></i>
+                <span class="cart-badge" id="cart-badge">0</span>
+            </div>
             <div class="profile-container">
                 <i class="fas fa-user profile-btn"></i>
                 <div class="dropdown">
@@ -419,7 +423,7 @@
                 <div class="product-title">Classic T-Shirt</div>
                 <span class="product-price">₹299.00</span>
                 <div class="product-availability">In Stock</div>
-                <button class="btn-add-cart">Add to Cart</button>
+                <button class="btn-add-cart" onclick="addToCart('cloth1', 'Classic T-Shirt', 299.00, 'https://cdn.pixabay.com/photo/2017/08/01/11/48/blue-2564660_1280.jpg')">Add to Cart</button>
             </div>
 
             <div class="product-card">
@@ -427,7 +431,7 @@
                 <div class="product-title">Blue Denim Jeans</div>
                 <span class="product-price">₹899.00</span>
                 <div class="product-availability">In Stock</div>
-                <button class="btn-add-cart">Add to Cart</button>
+                <button class="btn-add-cart" onclick="addToCart('cloth2', 'Blue Denim Jeans', 899.00, 'https://cdn.pixabay.com/photo/2015/03/26/10/28/blue-691655_1280.jpg')">Add to Cart</button>
             </div>
 
             <div class="product-card">
@@ -435,7 +439,7 @@
                 <div class="product-title">Grey Hoodie</div>
                 <span class="product-price">₹749.00</span>
                 <div class="product-availability">In Stock</div>
-                <button class="btn-add-cart">Add to Cart</button>
+                <button class="btn-add-cart" onclick="addToCart('cloth3', 'Grey Hoodie', 749.00, 'https://cdn.pixabay.com/photo/2016/11/29/01/34/man-1866574_1280.jpg')">Add to Cart</button>
             </div>
 
             <div class="product-card">
@@ -443,7 +447,7 @@
                 <div class="product-title">Red Polo Shirt</div>
                 <span class="product-price">₹449.00</span>
                 <div class="product-availability">In Stock</div>
-                <button class="btn-add-cart">Add to Cart</button>
+                <button class="btn-add-cart" onclick="addToCart('cloth4', 'Red Polo Shirt', 449.00, 'https://cdn.pixabay.com/photo/2016/12/06/09/30/blank-1886001_1280.png')">Add to Cart</button>
             </div>
 
             <div class="product-card">
@@ -451,7 +455,7 @@
                 <div class="product-title">Winter Jacket</div>
                 <span class="product-price">₹1299.00</span>
                 <div class="product-availability">Limited Stock</div>
-                <button class="btn-add-cart">Add to Cart</button>
+                <button class="btn-add-cart" onclick="addToCart('cloth5', 'Winter Jacket', 1299.00, 'https://cdn.pixabay.com/photo/2016/11/23/06/57/isolated-jacket-1852896_1280.png')">Add to Cart</button>
             </div>
 
             <div class="product-card">
@@ -459,7 +463,7 @@
                 <div class="product-title">Athletic Shoes</div>
                 <span class="product-price">₹1199.00</span>
                 <div class="product-availability">In Stock</div>
-                <button class="btn-add-cart">Add to Cart</button>
+                <button class="btn-add-cart" onclick="addToCart('cloth6', 'Athletic Shoes', 1199.00, 'https://cdn.pixabay.com/photo/2017/02/08/02/56/booties-2047596_1280.jpg')">Add to Cart</button>
             </div>
 
             <div class="product-card">
@@ -467,7 +471,7 @@
                 <div class="product-title">Summer Dress</div>
                 <span class="product-price">₹799.00</span>
                 <div class="product-availability">In Stock</div>
-                <button class="btn-add-cart">Add to Cart</button>
+                <button class="btn-add-cart" onclick="addToCart('cloth7', 'Summer Dress', 799.00, 'https://cdn.pixabay.com/photo/2018/01/25/19/48/fashion-3106197_1280.jpg')">Add to Cart</button>
             </div>
 
             <div class="product-card">
@@ -475,9 +479,40 @@
                 <div class="product-title">Stylish Scarf</div>
                 <span class="product-price">₹349.00</span>
                 <div class="product-availability">In Stock</div>
-                <button class="btn-add-cart">Add to Cart</button>
+                <button class="btn-add-cart" onclick="addToCart('cloth8', 'Stylish Scarf', 349.00, 'https://cdn.pixabay.com/photo/2017/05/13/12/40/fashion-2309519_1280.jpg')">Add to Cart</button>
             </div>
         </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="cart-modal">
+        <div class="cart-container">
+            <div class="cart-header">
+                <h2 class="cart-title">Your Shopping Cart</h2>
+                <button class="close-cart" onclick="toggleCart()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="cart-items" id="cart-items">
+                <!-- Cart items will be added here dynamically -->
+            </div>
+            <div class="cart-summary">
+                <div class="subtotal">
+                    <span>Subtotal:</span>
+                    <span id="subtotal-amount">₹0.00</span>
+                </div>
+                <div class="total">
+                    <span>Total:</span>
+                    <span class="total-amount" id="total-amount">₹0.00</span>
+                </div>
+                <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" style="display: none; position: fixed; bottom: 20px; right: 20px; background-color: rgba(0, 0, 0, 0.8); color: white; padding: 15px 25px; border-radius: 5px; z-index: 1002; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); border-left: 4px solid #FFD700;">
+        <span id="toastMessage"></span>
     </div>
 
     <footer class="footer">
@@ -518,11 +553,7 @@
             const searchInput = document.querySelector('.search-bar input').value;
             alert(`Searching for: ${searchInput}`);
         }
-
-        // View cart functionality
-        function viewCart() {
-            alert('Shopping cart will be implemented soon!');
-        }
     </script>
+    <script src="../otherpages/cart.js"></script>
 </body>
 </html>

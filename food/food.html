@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../otherpages/cart.css">
     <style>
         /* General Reset */
         * {
@@ -388,7 +389,10 @@
         
         <div class="header-icons">
             <i class="fas fa-search" onclick="toggleSearch()"></i>
-            <i class="fas fa-shopping-cart" onclick="viewCart()"></i>
+            <div class="cart-icon-container">
+                <i class="fas fa-shopping-cart" onclick="toggleCart()"></i>
+                <span class="cart-badge" id="cart-badge">0</span>
+            </div>
             <div class="profile-container">
                 <i class="fas fa-user profile-btn"></i>
                 <div class="dropdown">
@@ -419,7 +423,7 @@
                 <div class="product-title">Classic Burger</div>
                 <span class="product-price">₹149.00</span>
                 <div class="product-availability">In Stock</div>
-                <button class="btn-add-cart">Add to Cart</button>
+                <button class="btn-add-cart" onclick="addToCart('food1', 'Classic Burger', 149.00, 'https://cdn.pixabay.com/photo/2016/03/05/19/02/hamburger-1238246_1280.jpg')">Add to Cart</button>
             </div>
 
             <div class="product-card">
@@ -427,7 +431,7 @@
                 <div class="product-title">Margherita Pizza</div>
                 <span class="product-price">₹299.00</span>
                 <div class="product-availability">In Stock</div>
-                <button class="btn-add-cart">Add to Cart</button>
+                <button class="btn-add-cart" onclick="addToCart('food2', 'Margherita Pizza', 299.00, 'https://cdn.pixabay.com/photo/2017/12/09/08/18/pizza-3007395_1280.jpg')">Add to Cart</button>
             </div>
 
             <div class="product-card">
@@ -435,7 +439,7 @@
                 <div class="product-title">Creamy Pasta</div>
                 <span class="product-price">₹199.00</span>
                 <div class="product-availability">In Stock</div>
-                <button class="btn-add-cart">Add to Cart</button>
+                <button class="btn-add-cart" onclick="addToCart('food3', 'Creamy Pasta', 199.00, 'https://cdn.pixabay.com/photo/2018/08/16/22/59/pasta-3611545_1280.jpg')">Add to Cart</button>
             </div>
 
             <div class="product-card">
@@ -443,7 +447,7 @@
                 <div class="product-title">French Fries</div>
                 <span class="product-price">₹99.00</span>
                 <div class="product-availability">In Stock</div>
-                <button class="btn-add-cart">Add to Cart</button>
+                <button class="btn-add-cart" onclick="addToCart('food4', 'French Fries', 99.00, 'https://cdn.pixabay.com/photo/2017/03/10/13/49/fast-food-2132863_1280.jpg')">Add to Cart</button>
             </div>
 
             <div class="product-card">
@@ -451,7 +455,7 @@
                 <div class="product-title">Chocolate Cake</div>
                 <span class="product-price">₹349.00</span>
                 <div class="product-availability">Limited Stock</div>
-                <button class="btn-add-cart">Add to Cart</button>
+                <button class="btn-add-cart" onclick="addToCart('food5', 'Chocolate Cake', 349.00, 'https://cdn.pixabay.com/photo/2017/01/11/11/33/cake-1971552_1280.jpg')">Add to Cart</button>
             </div>
 
             <div class="product-card">
@@ -459,7 +463,7 @@
                 <div class="product-title">Pancake Stack</div>
                 <span class="product-price">₹179.00</span>
                 <div class="product-availability">In Stock</div>
-                <button class="btn-add-cart">Add to Cart</button>
+                <button class="btn-add-cart" onclick="addToCart('food6', 'Pancake Stack', 179.00, 'https://cdn.pixabay.com/photo/2017/05/07/08/56/pancakes-2291908_1280.jpg')">Add to Cart</button>
             </div>
 
             <div class="product-card">
@@ -467,7 +471,7 @@
                 <div class="product-title">Chicken Burger</div>
                 <span class="product-price">₹199.00</span>
                 <div class="product-availability">In Stock</div>
-                <button class="btn-add-cart">Add to Cart</button>
+                <button class="btn-add-cart" onclick="addToCart('food7', 'Chicken Burger', 199.00, 'https://cdn.pixabay.com/photo/2019/11/09/17/02/burger-4614022_1280.jpg')">Add to Cart</button>
             </div>
 
             <div class="product-card">
@@ -475,9 +479,40 @@
                 <div class="product-title">Club Sandwich</div>
                 <span class="product-price">₹159.00</span>
                 <div class="product-availability">In Stock</div>
-                <button class="btn-add-cart">Add to Cart</button>
+                <button class="btn-add-cart" onclick="addToCart('food8', 'Club Sandwich', 159.00, 'https://cdn.pixabay.com/photo/2017/09/30/15/10/plate-2802332_1280.jpg')">Add to Cart</button>
             </div>
         </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="cart-modal">
+        <div class="cart-container">
+            <div class="cart-header">
+                <h2 class="cart-title">Your Shopping Cart</h2>
+                <button class="close-cart" onclick="toggleCart()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="cart-items" id="cart-items">
+                <!-- Cart items will be added here dynamically -->
+            </div>
+            <div class="cart-summary">
+                <div class="subtotal">
+                    <span>Subtotal:</span>
+                    <span id="subtotal-amount">₹0.00</span>
+                </div>
+                <div class="total">
+                    <span>Total:</span>
+                    <span class="total-amount" id="total-amount">₹0.00</span>
+                </div>
+                <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" style="display: none; position: fixed; bottom: 20px; right: 20px; background-color: rgba(0, 0, 0, 0.8); color: white; padding: 15px 25px; border-radius: 5px; z-index: 1002; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); border-left: 4px solid #FFD700;">
+        <span id="toastMessage"></span>
     </div>
 
     <footer class="footer">
@@ -518,11 +553,7 @@
             const searchInput = document.querySelector('.search-bar input').value;
             alert(`Searching for: ${searchInput}`);
         }
-
-        // View cart functionality
-        function viewCart() {
-            alert('Shopping cart will be implemented soon!');
-        }
     </script>
+    <script src="../otherpages/cart.js"></script>
 </body>
 </html>

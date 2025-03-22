@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./otherpages/cart.css">
     <style>
         /* General Reset */
         * {
@@ -457,7 +458,10 @@
         
         <div class="header-icons">
             <i class="fas fa-search" onclick="toggleSearch()"></i>
-            <i class="fas fa-shopping-cart" onclick="viewCart()"></i>
+            <div class="cart-icon-container">
+                <i class="fas fa-shopping-cart" onclick="toggleCart()"></i>
+                <span class="cart-badge" id="cart-badge">0</span>
+            </div>
             <div class="profile-container">
                 <i class="fas fa-user profile-btn"></i>
                 <div class="dropdown">
@@ -524,6 +528,48 @@
                 </div>
             </div>
         </div>
+
+        <!-- Shop Now Section with Cart Functionality -->
+        <div class="container">
+            <div class="header">
+                <span class="star-left">✨</span>
+                <h1>SHOP NOW</h1>
+                <span class="star-right">✨</span>
+                <div class="top-seller">NEW ARRIVALS!</div>
+            </div>
+            
+            <div style="display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; margin-top: 30px;">
+                <!-- Demo Product 1 -->
+                <div class="product-card" style="width: 280px; padding: 20px; text-align: center;">
+                    <img src="./medicine/med1.png" alt="Paracetamol" class="product-image" style="height: 180px; object-fit: contain;">
+                    <h3 style="color: #fff; margin: 15px 0 5px;">Paracetamol 500mg</h3>
+                    <p style="color: #FFD700; font-weight: 600; font-size: 18px; margin-bottom: 15px;">$5.99</p>
+                    <button class="add-to-cart-btn" onclick="addToCart('med1', 'Paracetamol 500mg', 5.99, './medicine/med1.png')">
+                        Add to Cart <i class="fas fa-shopping-cart"></i>
+                    </button>
+                </div>
+                
+                <!-- Demo Product 2 -->
+                <div class="product-card" style="width: 280px; padding: 20px; text-align: center;">
+                    <img src="./food/food1.jpg" alt="Organic Snack Box" class="product-image" style="height: 180px; object-fit: contain;">
+                    <h3 style="color: #fff; margin: 15px 0 5px;">Organic Snack Box</h3>
+                    <p style="color: #FFD700; font-weight: 600; font-size: 18px; margin-bottom: 15px;">$12.99</p>
+                    <button class="add-to-cart-btn" onclick="addToCart('food1', 'Organic Snack Box', 12.99, './food/food1.jpg')">
+                        Add to Cart <i class="fas fa-shopping-cart"></i>
+                    </button>
+                </div>
+                
+                <!-- Demo Product 3 -->
+                <div class="product-card" style="width: 280px; padding: 20px; text-align: center;">
+                    <img src="./clothes/cloth1.jpg" alt="Casual T-Shirt" class="product-image" style="height: 180px; object-fit: contain;">
+                    <h3 style="color: #fff; margin: 15px 0 5px;">Casual T-Shirt</h3>
+                    <p style="color: #FFD700; font-weight: 600; font-size: 18px; margin-bottom: 15px;">$19.99</p>
+                    <button class="add-to-cart-btn" onclick="addToCart('cloth1', 'Casual T-Shirt', 19.99, './clothes/cloth1.jpg')">
+                        Add to Cart <i class="fas fa-shopping-cart"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
     </main>
 
     <!-- Footer Section -->
@@ -551,6 +597,35 @@
         </div>
     </footer>
 
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="cart-modal">
+        <div class="cart-container">
+            <div class="cart-header">
+                <h2 class="cart-title">Your Cart</h2>
+                <button class="close-cart" onclick="toggleCart()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="cart-items" id="cart-items">
+                <!-- Cart items will be dynamically generated here -->
+            </div>
+            <div class="cart-summary">
+                <div class="subtotal">
+                    <span>Subtotal:</span>
+                    <span id="subtotal-amount">₹0.00</span>
+                </div>
+                <div class="total">
+                    <span>Total:</span>
+                    <span class="total-amount" id="total-amount">₹0.00</span>
+                </div>
+                <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" style="display: none; position: fixed; bottom: 20px; right: 20px; background-color: rgba(0, 0, 0, 0.8); color: white; padding: 15px 25px; border-radius: 5px; z-index: 1002; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); border-left: 4px solid #FFD700;">
+        <span id="toastMessage"></span>
+    </div>
+
     <script>
         // Profile dropdown functionality
         document.querySelector('.profile-btn').addEventListener('click', () => {
@@ -569,11 +644,6 @@
             alert(`Searching for: ${searchInput}`);
         }
 
-        // View cart functionality
-        function viewCart() {
-            alert('Shopping cart will be implemented soon!');
-        }
-
         // Add hover effect to product cards
         document.querySelectorAll('.product-card').forEach(card => {
             card.addEventListener('mouseenter', () => {
@@ -585,5 +655,6 @@
             });
         });
     </script>
+    <script src="./otherpages/cart.js"></script>
 </body>
 </html>
