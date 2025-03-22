@@ -4,91 +4,238 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us - Fretio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+        /* General Reset */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
 
+        /* Background with Gradient & Modern Colors */
         body {
-            background-color: #000;
-            color: #d4af37;
+            background: linear-gradient(to right, #3a3a3a, #c78000); /* Darker tones with a golden touch */
+            color: #f5f5f5;
             min-height: 100vh;
         }
 
-        .navbar {
+        /* Header Styling */
+        header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 4rem;
-            background-color: #000;
+            padding: 20px 10%;
+            background: #000;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s ease;
         }
 
+        header:hover {
+            background: #1a1a1a; /* Darker shade on hover */
+        }
+
+        /* Logo */
         .logo {
-            width: 220px;
-            height: auto;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: #d4af37;
-            text-decoration: none;
+            font-size: 24px;
             font-weight: bold;
+            color: white;
+        }
+        
+        .logo img {
+            width: 150px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .nav-icons {
+        .logo img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Navigation */
+        nav ul {
             display: flex;
-            gap: 1.5rem;
+            list-style: none;
+            gap: 40px;
         }
 
-        .nav-icons img {
-            width: 24px;
-            height: 24px;
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #FFD700; /* Hover effect with golden color */
+        }
+
+        /* Header Icons */
+        .header-icons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .search-btn, .cart-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
             cursor: pointer;
-            filter: invert(64%) sepia(48%) saturate(531%) hue-rotate(3deg) brightness(90%) contrast(90%);
+            padding: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .search-btn:hover, .cart-btn:hover {
+            color: #FFD700;
+        }
+
+        /* Profile Menu Styling */
+        .profile-menu {
+            position: relative;
+            display: inline-block;
+        }
+
+        .profile-btn {
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: white;
+            transition: transform 0.3s ease, color 0.3s ease;
+            padding: 10px;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .profile-btn:hover {
+            transform: rotate(360deg); /* Full rotation on hover */
+            color: #FFD700; /* Golden color on hover */
+        }
+
+        /* Profile Dropdown */
+        .dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            background: #2a2a2a;
+            padding: 12px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            min-width: 200px; /* Set a minimum width */
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+        }
+
+        /* Show dropdown on button hover */
+        .profile-menu:hover .dropdown {
+            display: block;
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown a {
+            display: block;
+            color: #FFD700;
+            padding: 12px 20px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            transition: color 0.3s ease, background 0.3s ease;
+            border-radius: 5px;
+            margin: 5px 0;
+        }
+
+        .dropdown a:hover {
+            background: #FFD700;
+            color: #000;
+        }
+
+        /* Page Content */
+        .page-title {
+            text-align: center;
+            padding: 40px 0 20px;
+            margin-top: 100px;
+            color: #FFD700;
+            font-size: 3rem;
+            font-weight: 700;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.6);
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 20px auto 40px;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
         }
 
         .main-content {
             display: flex;
-            padding: 2rem 4rem;
-            gap: 4rem;
-            align-items: flex-start;
+            gap: 40px;
+            flex-wrap: wrap;
         }
 
         .contact-form {
             flex: 1;
+            min-width: 300px;
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 20px;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 0.5rem;
+            margin-bottom: 8px;
             font-size: 1.1rem;
+            color: #FFD700;
         }
 
         .form-row {
             display: flex;
-            gap: 1rem;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+            min-width: 200px;
         }
 
         .form-group input, 
         .form-group textarea {
             width: 100%;
-            padding: 0.8rem;
-            border-radius: 4px;
-            border: none;
-            background: #222;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #444;
+            background: rgba(0, 0, 0, 0.3);
             font-size: 1rem;
-            color: #d4af37;
+            color: #fff;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-group input:focus, 
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #FFD700;
+            box-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
         }
 
         .form-group textarea {
@@ -97,120 +244,198 @@
         }
 
         .submit-btn {
-            background: #d4af37;
+            background: #FFD700;
             color: black;
             border: none;
-            padding: 1rem 3rem;
-            border-radius: 4px;
+            padding: 12px 30px;
+            border-radius: 8px;
             font-size: 1.1rem;
+            font-weight: 600;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
         .submit-btn:hover {
-            background: #b8860b;
+            background: #e6c200;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
         }
 
-        .contact-info {
-            flex: 1;
+        .submit-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
-        .contact-title {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            position: relative;
+        /* Footer Section */
+        .footer {
+            background: #000;
+            padding: 40px 10px;
+            margin-top: 30px;
         }
 
-        .contact-title span {
-            color: #d4af37;
-        }
-
-        .star {
-            position: absolute;
-            color: #d4af37;
-            font-size: 1.5rem;
-        }
-
-        .contact-description {
-            color: #bbb;
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            line-height: 1.6;
-        }
-
-        .contact-details {
+        .footer-content {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            gap: 20px;
         }
 
-        .contact-item {
+        .footer-links {
             display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .contact-icon {
-            background: #d4af37;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
             justify-content: center;
         }
 
-        .contact-text {
-            font-size: 1.1rem;
-            color: #bbb;
+        .footer-links a {
+            color: #FFD700;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            color: #FFD700;
+            font-size: 24px;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.2);
+            color: #fff;
+        }
+
+        .copyright {
+            color: #999;
+            font-size: 16px;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <nav class="navbar">
-        <img src="kh2ZWeP.png" alt="Fretio Logo" class="logo">
-        <div class="nav-links">
-            <a href="index.html">HOME</a>
-            <a href="medi.html">MEDICINE</a>
-            <a href="#food">FOOD ITEMS</a>
-            <a href="#clothes">CLOTHES</a>
-            <a href="#more">MORE</a>
+    <header>
+        <div class="logo">
+            <img src="../home/logo.png" alt="Fretio Logo">
         </div>
-    </nav>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../medicine/medi.html">Medicine</a></li>
+                <li><a href="../food/food.html">Food Items</a></li>
+                <li><a href="../clothes/clothes.html">Clothes</a></li>
+            </ul>
+        </nav>
 
-    <main class="main-content">
-        <div class="contact-form">
-            <form id="contactForm">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" required>
+        <!-- Header Icons (Search, Cart, Profile Menu) -->
+        <div class="header-icons">
+            <button class="search-btn" onclick="toggleSearch()">
+                <i class="fas fa-search"></i>
+            </button>
+            <button class="cart-btn" onclick="viewCart()">
+                <i class="fas fa-shopping-cart"></i>
+            </button>
+            <!-- Profile Menu -->
+            <div class="profile-menu">
+                <button class="profile-btn">&#x1F464;</button>
+                <div class="dropdown">
+                    <a href="signup.html">Sign up</a>
+                    <a href="login.html">Login</a>
+                    <a href="#">Wallet</a>
+                    <a href="#">Buy/Sell</a>
+                    <a href="#">History</a>
                 </div>
-                
-                <div class="form-row">
+            </div>
+        </div>
+    </header>
+
+    <h1 class="page-title">About Us</h1>
+
+    <main>
+        <div class="main-content">
+            <div class="contact-form">
+                <form id="contactForm">
                     <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" required>
+                        <label for="name">Name</label>
+                        <input type="text" id="name" required>
                     </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" required>
+                        </div>
+                    </div>
+
                     <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <input type="tel" id="phone" required>
+                        <label for="message">Message</label>
+                        <textarea id="message" required></textarea>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" required></textarea>
-                </div>
-
-                <button type="submit" class="submit-btn">Submit</button>
-            </form>
+                    <button type="submit" class="submit-btn">Submit</button>
+                </form>
+            </div>
         </div>
     </main>
 
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="contact.html">Contact us</a>
+                <a href="aboutus.html">About us</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="return-policy.html">Return Policy</a>
+            </div>
+
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            </div>
+
+            <div class="copyright">
+                Copyright © 2025 Fretio. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
     <script>
+        // Profile dropdown functionality
+        document.querySelector('.profile-btn').addEventListener('click', () => {
+            const dropdown = document.querySelector('.dropdown');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Search functionality
+        function toggleSearch() {
+            alert('Search functionality will be implemented soon!');
+        }
+
+        // View cart functionality
+        function viewCart() {
+            alert('Shopping cart will be implemented soon!');
+        }
+
+        // Form submission
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            console.log('Form submitted');
+            alert('Thank you for contacting us! We will get back to you soon.');
         });
     </script>
 </body>
