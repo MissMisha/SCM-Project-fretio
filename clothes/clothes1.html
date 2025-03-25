@@ -4,75 +4,85 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Details - Fretio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../otherpages/cart.css">
+    <script src="../otherpages/cart.js"></script>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
 
+        /* Background with Gradient & Modern Colors - matching homepage */
         body {
-            background-color: #1a2634;
-            color: white;
+            background: linear-gradient(to bottom, #1a1a1a, #2c2c2c, #333333);
+            color: #fff;
             min-height: 100vh;
         }
 
         .navbar {
+            background-color: rgba(0, 0, 0, 0.9);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            padding: 20px 50px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 4rem;
-            background-color: #1a2634;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
 
         .logo {
-            width: 220px;
-            height: auto;
+            height: 40px;
+            margin-right: 10px;
         }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 25px;
         }
 
         .nav-links a {
-            color: white;
+            color: #fff;
             text-decoration: none;
-            font-weight: bold;
+            font-size: 18px;
+            transition: all 0.3s ease;
         }
 
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
+        .nav-links a:hover {
+            color: #FFD700;
         }
 
         .nav-icons {
             display: flex;
-            gap: 1.5rem;
+            gap: 20px;
         }
 
-        .nav-icons img {
-            width: 24px;
-            height: 24px;
+        .nav-icons i {
+            color: #fff;
+            font-size: 20px;
             cursor: pointer;
+            transition: all 0.3s ease;
         }
 
-        .ms-tag {
-            background: #00a650;
-            color: white;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            font-weight: bold;
+        .nav-icons i:hover {
+            color: #FFD700;
+            transform: scale(1.1);
         }
 
         .main-content {
             display: flex;
-            padding: 2rem 4rem;
+            padding: 7rem 4rem 2rem;
             gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .product-details {
@@ -80,17 +90,19 @@
         }
 
         .product-title {
-            color: #F5B041;
+            color: #FFD700;
             font-size: 2rem;
             margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         .product-card {
-            background: #000; /* Changed to black */
+            background: rgba(0, 0, 0, 0.6);
             border-radius: 12px;
             padding: 1.5rem;
             position: relative;
             margin-bottom: 1.5rem;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
         }
 
         .heart-icon {
@@ -98,32 +110,77 @@
             top: 1rem;
             left: 1rem;
             cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .heart-icon:hover {
+            color: red;
         }
 
         .product-image {
             width: 200px;
+            height: auto;
             display: block;
             margin: 0 auto;
-            background-color: #000; /* Changed to black */
+            background-color: #fff;
             padding: 10px;
-            border-radius: 12px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         .product-name {
-            color: #F5B041; /* Changed to match the theme */
+            color: #FFD700;
             margin-top: 1rem;
             font-size: 1.1rem;
         }
 
         .product-price {
             font-size: 1.5rem;
-            color: #F5B041; /* Changed to match the theme */
+            color: #fff;
             margin-top: 0.5rem;
         }
 
-        .add-to-cart {
-            background: #F5B041;
+        /* Rating System */
+        .rating-container {
+            margin: 20px 0;
+        }
+
+        .rating-stars {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .star {
+            color: #cccccc;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .star:hover, .star.active {
+            color: #FFD700;
+        }
+
+        .rating-submit {
+            background-color: #444;
+            border: none;
             color: white;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .rating-submit:hover {
+            background-color: #555;
+        }
+
+        .add-to-cart {
+            background: #FFD700;
+            color: #000;
             border: none;
             width: 100%;
             padding: 1rem;
@@ -131,6 +188,14 @@
             font-size: 1rem;
             cursor: pointer;
             margin-top: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .add-to-cart:hover {
+            background-color: #e6b800;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
         }
 
         .description {
@@ -138,9 +203,12 @@
         }
 
         .description-title {
-            color: #F5B041;
+            color: #FFD700;
             font-size: 2rem;
             margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            border-bottom: 2px solid #FFD700;
+            padding-bottom: 0.5rem;
         }
 
         .description-content {
@@ -161,76 +229,263 @@
             content: "•";
             position: absolute;
             left: 0;
-            color: #F5B041;
+            color: #FFD700;
         }
 
         .disclaimer {
             margin-top: 1.5rem;
             color: #ccc;
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+
+        /* Toast Notification */
+        #toast {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 5px;
+            z-index: 1002;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            border-left: 4px solid #FFD700;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+                padding: 7rem 2rem 2rem;
+            }
+            
+            .navbar {
+                padding: 15px 20px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
         }
     </style>
 </head>
 <body>
     <nav class="navbar">
-        <img src="kh2ZWeP.png" alt="Fretio Logo" class="logo">
+        <img src="../home/logo.png" alt="Fretio Logo" class="logo">
         <div class="nav-links">
-            <a href="index.html">HOME</a>
-            <a href="medi.html">MEDICINE</a>
-            <a href="#food">FOOD ITEMS</a>
-            <a href="#clothes">CLOTHES</a>
-            <a href="#more">MORE</a>
+            <a href="../index.html">HOME</a>
+            <a href="../medicine/medi.html">MEDICINE</a>
+            <a href="../food/food.html">FOOD ITEMS</a>
+            <a href="clothes.html">CLOTHES</a>
         </div>
-        <div class="nav-right">
-            <div class="nav-icons">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='white' viewBox='0 0 24 24'%3E%3Cpath d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'/%3E%3C/svg%3E" alt="Search">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='white' viewBox='0 0 24 24'%3E%3Cpath d='M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z'/%3E%3C/svg%3E" alt="Cart">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='white' viewBox='0 0 24 24'%3E%3Cpath d='M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z'/%3E%3C/svg%3E" alt="User">
-            </div>
-            
+        <div class="nav-icons">
+            <i class="fas fa-search" onclick="toggleSearch()"></i>
+            <i class="fas fa-shopping-cart" onclick="toggleCart()"></i>
+            <i class="fas fa-user profile-btn"></i>
         </div>
     </nav>
 
     <main class="main-content">
         <div class="product-details">
-            <h1 class="product-title">Product Details</h1>
+            <h1 class="product-title" id="productTitle">Product Details</h1>
             <div class="product-card">
                 <svg class="heart-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
                 </svg>
-                <img src="food2.jpeg" alt="Lay's Spanish Tomato Tango" class="product-image">
-                <h2 class="product-name">Lay's Spanish Tomato Tango Potato Chips 82 g</h2>
-                <div class="product-price">₹20</div>
-                <button class="add-to-cart">Add to Cart</button>
+                <img src="" alt="Product Image" class="product-image" id="productImage">
+                <h2 class="product-name" id="productName"></h2>
+                <div class="product-price" id="productPrice"></div>
+                
+                <!-- Rating System -->
+                <div class="rating-container">
+                    <p>Rate this product</p>
+                    <div class="rating-stars">
+                        <i class="fas fa-star star" data-value="1"></i>
+                        <i class="fas fa-star star" data-value="2"></i>
+                        <i class="fas fa-star star" data-value="3"></i>
+                        <i class="fas fa-star star" data-value="4"></i>
+                        <i class="fas fa-star star" data-value="5"></i>
+                    </div>
+                    <button class="rating-submit">Submit Rating</button>
+                </div>
+                
+                <button class="add-to-cart" id="addToCartBtn">Add to Cart</button>
             </div>
         </div>
 
         <div class="description">
-            <h2 class="description-title">Description</h2>
+            <h2 class="description-title" id="descriptionTitle">Description</h2>
             <div class="description-content">
                 <ul>
-                    <li>Made from high-quality ingredients</li>
-                    <li>Perfect for any occasion. Feel like having a tasty treat? Lay's Spanish Tomato Tango Potato Chips is for you. Enjoy it with your favourite beverage or drink! It's the perfect party snack for when your friends and family are over. So, what are you waiting for? Go ahead and buy this product online today!</li>
+                    <li>Made from high-quality materials</li>
+                    <li id="productUseDescription">Perfect for any occasion. This premium clothing item is designed for both comfort and style.</li>
                     <li>
                         <strong>Disclaimer:</strong>
-                        <p class="disclaimer">Despite our attempts to provide you with the most accurate information possible, the actual packaging, ingredients and colour of the product may sometimes vary. Please read the label, directions and warnings carefully before use.</p>
+                        <p class="disclaimer">Despite our attempts to provide you with the most accurate information possible, the actual product color and appearance may slightly vary due to screen resolution and lighting conditions. Please check size charts carefully before ordering.</p>
                     </li>
-                    <li>Loved by both kids and adults</li>
-                    <li>Packaged for freshness</li>
+                    <li>Easy to care for and maintain</li>
+                    <li>Durable construction for long-lasting wear</li>
                 </ul>
             </div>
         </div>
     </main>
 
-    <script>
-        // Add to cart functionality
-        document.querySelector('.add-to-cart').addEventListener('click', function() {
-            alert('Product added to cart!');
-        });
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="cart-modal">
+        <div class="cart-container">
+            <div class="cart-header">
+                <h2 class="cart-title">Your Shopping Cart</h2>
+                <button class="close-cart" onclick="toggleCart()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="cart-items" id="cart-items">
+                <!-- Cart items will be added here dynamically -->
+            </div>
+            <div class="cart-summary">
+                <div class="subtotal">
+                    <span>Subtotal:</span>
+                    <span id="subtotal-amount">₹0.00</span>
+                </div>
+                <div class="total">
+                    <span>Total:</span>
+                    <span class="total-amount" id="total-amount">₹0.00</span>
+                </div>
+                <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
 
+    <!-- Toast Notification -->
+    <div id="toast">
+        <span id="toastMessage"></span>
+    </div>
+
+    <script>
+        // Get URL parameters for product details
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('id');
+        const productName = urlParams.get('name');
+        const productPrice = urlParams.get('price');
+        const productImage = urlParams.get('img');
+        
+        // Set product details as soon as the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("DOM loaded");
+            console.log("Image URL:", productImage);
+            
+            // Set product details
+            document.getElementById('productTitle').textContent = productName;
+            document.getElementById('productName').textContent = productName;
+            document.getElementById('productPrice').textContent = `₹${productPrice}`;
+            
+            // Fix image display issue
+            const imageElement = document.getElementById('productImage');
+            imageElement.src = productImage;
+            imageElement.alt = productName;
+            
+            // Update the description title
+            document.getElementById('descriptionTitle').textContent = `${productName} Description`;
+            
+            // Product-specific descriptions
+            const descriptions = {
+                'cloth1': 'Classic T-Shirt made of 100% cotton, breathable and comfortable for everyday wear.',
+                'cloth2': 'Stylish Blue Denim Jeans with perfect fit and durability, great for casual occasions.',
+                'cloth3': 'Warm Grey Hoodie perfect for cold weather, featuring soft inner lining and kangaroo pocket.',
+                'cloth4': 'Red Polo Shirt made with premium cotton, ideal for casual and semi-formal settings.',
+                'cloth5': 'Winter Jacket with water-resistant outer shell and thermal insulation for maximum warmth.',
+                'cloth6': 'Athletic Shoes designed for support and comfort during workouts and running.',
+                'cloth7': 'Light Summer Dress in breathable fabric, perfect for warm weather and casual outings.',
+                'cloth8': 'Stylish Scarf that adds a touch of elegance to any outfit, made from premium materials.'
+            };
+            
+            // Set product-specific description if available
+            if (descriptions[productId]) {
+                document.getElementById('productUseDescription').textContent = descriptions[productId];
+            }
+            
+            // Initialize cart
+            initializeCart();
+            
+            // Initialize rating system
+            initRatingSystem();
+        });
+        
+        // Add to cart functionality
+        document.getElementById('addToCartBtn').addEventListener('click', function() {
+            addToCart(productId, productName, parseFloat(productPrice), productImage);
+            showToast(productName + ' added to cart!');
+        });
+        
         // Wishlist functionality
         document.querySelector('.heart-icon').addEventListener('click', function() {
             this.style.fill = this.style.fill === 'red' ? 'none' : 'red';
+            showToast(this.style.fill === 'red' ? 'Added to wishlist!' : 'Removed from wishlist');
         });
+        
+        // Rating system
+        function initRatingSystem() {
+            const stars = document.querySelectorAll('.star');
+            let selectedRating = 0;
+            
+            stars.forEach(star => {
+                star.addEventListener('click', function() {
+                    const value = parseInt(this.getAttribute('data-value'));
+                    selectedRating = value;
+                    
+                    // Update visual state of stars
+                    stars.forEach(s => {
+                        if (parseInt(s.getAttribute('data-value')) <= value) {
+                            s.classList.add('active');
+                        } else {
+                            s.classList.remove('active');
+                        }
+                    });
+                });
+            });
+            
+            document.querySelector('.rating-submit').addEventListener('click', function() {
+                if (selectedRating > 0) {
+                    showToast(`Thank you for rating ${productName} with ${selectedRating} stars!`);
+                } else {
+                    showToast('Please select a star rating before submitting');
+                }
+            });
+        }
+        
+        // Toggle search bar visibility
+        function toggleSearch() {
+            showToast('Search functionality will be implemented soon!');
+        }
+        
+        // Show toast message
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            
+            toastMessage.textContent = message;
+            toast.style.display = 'block';
+            
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => {
+                    toast.style.display = 'none';
+                    toast.style.opacity = '1';
+                }, 500);
+            }, 3000);
+        }
+
+        // Toggle cart
+        function toggleCart() {
+            const cartModal = document.getElementById('cart-modal');
+            cartModal.style.display = cartModal.style.display === 'block' ? 'none' : 'block';
+            if (cartModal.style.display === 'block') {
+                renderCartItems();
+                updateCartTotals();
+            }
+        }
     </script>
 </body>
 </html>
