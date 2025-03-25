@@ -46,6 +46,11 @@ function toggleCart() {
 function renderCartItems() {
     const cartItemsContainer = document.getElementById('cart-items');
     
+    if (!cartItemsContainer) {
+        console.error("Cart items container not found!");
+        return;
+    }
+    
     if (cart.length === 0) {
         cartItemsContainer.innerHTML = `
             <div class="empty-cart-message">
@@ -71,12 +76,12 @@ function renderCartItems() {
                 </div>
                 <div class="cart-item-actions">
                     <div class="quantity-control">
-                        <button class="quantity-btn" onclick="updateQuantity(${item.id}, ${item.quantity - 1})">-</button>
+                        <button class="quantity-btn" onclick="updateQuantity('${item.id}', ${item.quantity - 1})">-</button>
                         <input type="number" class="quantity-input" value="${item.quantity}" min="1" max="10" 
-                            onchange="updateQuantity(${item.id}, this.value)">
-                        <button class="quantity-btn" onclick="updateQuantity(${item.id}, ${item.quantity + 1})">+</button>
+                            onchange="updateQuantity('${item.id}', this.value)">
+                        <button class="quantity-btn" onclick="updateQuantity('${item.id}', ${item.quantity + 1})">+</button>
                     </div>
-                    <button class="remove-item" onclick="removeItem(${item.id})">
+                    <button class="remove-item" onclick="removeItem('${item.id}')">
                         <i class="fas fa-trash-alt"></i>
                     </button>
                 </div>
@@ -144,6 +149,7 @@ function addToCart(id, name, price, image, quantity = 1) {
 }
 
 function updateQuantity(id, newQuantity) {
+    console.log(`Updating quantity for item ${id} to ${newQuantity}`);
     newQuantity = parseInt(newQuantity);
     
     if (isNaN(newQuantity) || newQuantity < 1) {
@@ -167,6 +173,7 @@ function updateQuantity(id, newQuantity) {
 }
 
 function removeItem(id) {
+    console.log(`Removing item ${id} from cart`);
     cart = cart.filter(item => item.id !== id);
     saveCart();
     renderCartItems();
@@ -230,3 +237,6 @@ function showToast(message) {
 
 // Initialize cart when DOM is ready
 document.addEventListener('DOMContentLoaded', initializeCart);
+
+// Add to cart button
+document.querySelector('.add-to-cart-btn').setAttribute('onclick', "addToCart('med1', 'Paracetamol', 29.00, 'https://cdn01.pharmeasy.in/dam/products_otc/I05582/dolo-650-tablet-15s-2-1671741628.jpg')");
