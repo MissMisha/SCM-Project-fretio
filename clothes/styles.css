@@ -356,6 +356,14 @@ nav ul li a:hover {
     background-color: #e6b800;
 }
 
+// Update these product buttons in your products-grid section
+
+// Classic T-Shirt
+<button class="btn-add-cart" onclick="addToCart('cloth1', 'Classic T-Shirt', 150.00, 'https://cdn.pixabay.com/photo/2017/08/01/11/48/blue-2564660_1280.jpg')">Add to Cart</button>
+
+// Blue Denim Jeans
+<button class="btn-add-cart" onclick="addToCart('cloth2', 'Blue Denim Jeans', 299.00, 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRquqc13JGlxlSxOZMt8qB5ivrpmao9UVPXqOdHTsI4TUuP6MEftN9EoSRXFghF9iL_vaajpn9QxLZd5URrWRb_tphCGw9BAN9QceIUVkDGDkg9hPibEvQo')">Add to Cart</button>
+
 /* Footer */
 .footer {
     background-color: #1a1a1a;
