@@ -21,9 +21,19 @@ function setupEventListeners() {
 
 // Cart functionality
 function toggleCart() {
+    console.log("Toggle cart called");
     const cartModal = document.getElementById('cart-modal');
     
-    if (cartModal.style.display === 'flex') {
+    if (!cartModal) {
+        console.error("Cart modal element not found!");
+        return;
+    }
+    
+    // Check if the modal is currently visible
+    const isVisible = window.getComputedStyle(cartModal).display !== 'none';
+    console.log("Cart modal is currently:", isVisible ? "visible" : "hidden");
+    
+    if (isVisible) {
         cartModal.style.display = 'none';
         document.body.style.overflow = 'auto'; // Enable scrolling
     } else {
@@ -128,6 +138,9 @@ function addToCart(id, name, price, image, quantity = 1) {
     
     // Show confirmation
     showToast(`${name} added to cart!`);
+    
+    // Open cart modal automatically after adding item
+    toggleCart();
 }
 
 function updateQuantity(id, newQuantity) {
@@ -216,4 +229,4 @@ function showToast(message) {
 }
 
 // Initialize cart when DOM is ready
-document.addEventListener('DOMContentLoaded', initializeCart); 
+document.addEventListener('DOMContentLoaded', initializeCart);

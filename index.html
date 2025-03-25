@@ -779,5 +779,22 @@
         });
     </script>
     <script src="./otherpages/cart.js"></script>
+    <script>
+        // Add this to your existing script at the bottom of index.html:
+
+        // Debug the cart icon click
+        document.addEventListener('DOMContentLoaded', function() {
+            const cartIcon = document.querySelector('.fa-shopping-cart');
+            if (cartIcon) {
+                console.log('Cart icon found');
+                cartIcon.addEventListener('click', function() {
+                    console.log('Cart icon clicked');
+                    toggleCart();
+                });
+            } else {
+                console.error('Cart icon not found');
+            }
+        });
+    </script>
 </body>
 </html>
