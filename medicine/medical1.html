@@ -4,143 +4,247 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Details - Fretio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../otherpages/cart.css">
+    <script src="../otherpages/cart.js"></script>
     <style>
+        /* General Reset */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
 
+        /* Background with Gradient & Modern Colors */
         body {
-            background-color: #1a2634;
-            color: white;
+            background: linear-gradient(to bottom, #1a1a1a, #2c2c2c, #333333);
+            color: #fff;
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
+        /* Navbar */
         .navbar {
+            background-color: rgba(0, 0, 0, 0.9);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            padding: 20px 50px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 4rem;
-            background-color: #1a2634;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
 
         .logo {
-            width: 220px;
-            height: auto;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
         }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 25px;
         }
 
         .nav-links a {
-            color: white;
+            color: #fff;
             text-decoration: none;
-            font-weight: bold;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            position: relative;
         }
 
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
+        .nav-links a:hover {
+            color: #FFD700;
         }
 
         .nav-icons {
             display: flex;
-            gap: 1.5rem;
+            gap: 20px;
+            align-items: center;
         }
 
-        .nav-icons img {
-            width: 24px;
-            height: 24px;
+        .nav-icons i {
+            color: #fff;
+            font-size: 20px;
             cursor: pointer;
+            transition: all 0.3s ease;
         }
 
-        .ms-tag {
-            background: #00a650;
-            color: white;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            font-weight: bold;
+        .nav-icons i:hover {
+            color: #FFD700;
+            transform: scale(1.1);
         }
 
+        /* Main Content */
         .main-content {
-            display: flex;
-            padding: 2rem 4rem;
-            gap: 4rem;
+            padding-top: 120px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-bottom: 50px;
         }
 
+        /* Product Details Section */
         .product-details {
-            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 50px;
+            animation: fadeIn 1s ease-in-out 0.5s forwards;
         }
 
         .product-title {
-            color: #F5B041;
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
+            font-family: 'Poppins', sans-serif;
+            color: #FFD700;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            text-align: center;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.6);
         }
 
         .product-card {
-            background: #000; /* Changed to black */
+            background: rgba(0, 0, 0, 0.6);
             border-radius: 12px;
-            padding: 1.5rem;
+            overflow: hidden;
+            padding: 2rem;
+            text-align: center;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
             position: relative;
-            margin-bottom: 1.5rem;
+            margin-bottom: 30px;
         }
 
         .heart-icon {
             position: absolute;
-            top: 1rem;
-            left: 1rem;
+            top: 20px;
+            right: 20px;
             cursor: pointer;
+            width: 30px;
+            height: 30px;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .heart-icon:hover {
+            color: red;
+            transform: scale(1.2);
         }
 
         .product-image {
-            width: 200px;
-            display: block;
-            margin: 0 auto;
-            background-color: #000; /* Changed to black */
-            padding: 10px;
-            border-radius: 12px;
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            object-fit: contain;
+            margin: 0 auto 2rem;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         .product-name {
-            color: #F5B041; /* Changed to match the theme */
-            margin-top: 1rem;
-            font-size: 1.1rem;
+            font-weight: 600;
+            font-size: 1.8rem;
+            color: #FFD700;
+            margin-bottom: 1rem;
         }
 
         .product-price {
+            display: block;
+            margin: 1rem 0;
+            color: #fff;
             font-size: 1.5rem;
-            color: #F5B041; /* Changed to match the theme */
-            margin-top: 0.5rem;
+            font-weight: 500;
+        }
+
+        .rating-container {
+            margin: 20px 0;
+        }
+
+        .rating-stars {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .star {
+            color: #cccccc;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .star:hover, .star.active {
+            color: #FFD700;
+        }
+
+        .rating-submit {
+            background-color: #444;
+            border: none;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .rating-submit:hover {
+            background-color: #555;
         }
 
         .add-to-cart {
-            background: #F5B041;
-            color: white;
+            background-color: #FFD700;
+            color: #000;
             border: none;
-            width: 100%;
-            padding: 1rem;
+            padding: 0.8rem 1.5rem;
             border-radius: 6px;
-            font-size: 1rem;
             cursor: pointer;
-            margin-top: 1rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            margin-top: 1.5rem;
+            display: inline-block;
         }
 
+        .add-to-cart:hover {
+            background-color: #e6b800;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Description Section */
         .description {
-            flex: 2;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 12px;
+            padding: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease-in-out 0.8s forwards;
         }
 
         .description-title {
-            color: #F5B041;
-            font-size: 2rem;
+            color: #FFD700;
+            font-size: 1.8rem;
+            font-weight: 600;
             margin-bottom: 1.5rem;
+            border-bottom: 2px solid #FFD700;
+            padding-bottom: 0.5rem;
         }
 
         .description-content {
@@ -148,68 +252,138 @@
         }
 
         .description-content ul {
-            list-style: none;
-        }
-
-        .description-content ul li {
-            margin-bottom: 1rem;
-            position: relative;
             padding-left: 1.5rem;
         }
 
-        .description-content ul li::before {
-            content: "•";
-            position: absolute;
-            left: 0;
-            color: #F5B041;
+        .description-content li {
+            margin-bottom: 1rem;
         }
 
         .disclaimer {
-            margin-top: 1.5rem;
+            font-size: 0.9rem;
             color: #ccc;
+            font-style: italic;
+            margin-top: 0.5rem;
+        }
+
+        /* MS Tag Styling */
+        .ms-tag {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: #FFD700;
+            color: #000;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 20px;
+            }
+            
+            .product-title {
+                font-size: 2rem;
+            }
+            
+            .product-card, .description {
+                padding: 1.5rem;
+            }
+            
+            .product-name {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .product-title {
+                font-size: 1.8rem;
+            }
+            
+            .description-title {
+                font-size: 1.5rem;
+            }
+            
+            .add-to-cart {
+                padding: 0.7rem 1.2rem;
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
 <body>
     <nav class="navbar">
-        <img src="kh2ZWeP.png" alt="Fretio Logo" class="logo">
-        <div class="nav-links">
-            <a href="index.html">HOME</a>
-            <a href="medi.html">MEDICINE</a>
-            <a href="food.html">FOOD ITEMS</a>
-            <a href="clothes.html">CLOTHES</a>
-            <a href="#more">MORE</a>
+        <div class="logo">
+            <img src="../home/logo.png" alt="Fretio Logo">
         </div>
-        <div class="nav-right">
-            <div class="nav-icons">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='white' viewBox='0 0 24 24'%3E%3Cpath d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'/%3E%3C/svg%3E" alt="Search">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='white' viewBox='0 0 24 24'%3E%3Cpath d='M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z'/%3E%3C/svg%3E" alt="Cart">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='white' viewBox='0 0 24 24'%3E%3Cpath d='M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z'/%3E%3C/svg%3E" alt="User">
+        
+        <div class="nav-links">
+            <a href="../index.html">Home</a>
+            <a href="medi.html">Medicine</a>
+            <a href="../food/food.html">Food Items</a>
+            <a href="../clothes/clothes.html">Clothes</a>
+        </div>
+        
+        <div class="nav-icons">
+            <i class="fas fa-search" onclick="toggleSearch()"></i>
+            <div class="cart-icon-container">
+                <i class="fas fa-shopping-cart" onclick="toggleCart()"></i>
+                <span class="cart-badge" id="cart-badge">0</span>
             </div>
-            
+            <i class="fas fa-user profile-btn"></i>
         </div>
     </nav>
 
     <main class="main-content">
         <div class="product-details">
-            <h1 class="product-title">Product Details</h1>
+            <h1 class="product-title" id="productTitle">Product Details</h1>
             <div class="product-card">
                 <svg class="heart-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
                 </svg>
-                <img src="pil1.png" alt="Medicine" class="product-image">
-                <h2 class="product-name">Use this to improve health</h2>
-                <div class="product-price">₹40</div>
-                <button class="add-to-cart">Add to Cart</button>
+                <span class="ms-tag">MS</span>
+                <img src="" alt="Medicine" class="product-image" id="productImage">
+                <h2 class="product-name" id="productName"></h2>
+                <div class="product-price" id="productPrice"></div>
+                
+                <!-- Rating System -->
+                <div class="rating-container">
+                    <p>Rate this product</p>
+                    <div class="rating-stars">
+                        <i class="fas fa-star star" data-value="1"></i>
+                        <i class="fas fa-star star" data-value="2"></i>
+                        <i class="fas fa-star star" data-value="3"></i>
+                        <i class="fas fa-star star" data-value="4"></i>
+                        <i class="fas fa-star star" data-value="5"></i>
+                    </div>
+                    <button class="rating-submit">Submit Rating</button>
+                </div>
+                
+                <button class="add-to-cart" id="addToCartBtn">Add to Cart</button>
             </div>
         </div>
 
         <div class="description">
-            <h2 class="description-title">Description</h2>
+            <h2 class="description-title" id="descriptionTitle">Description</h2>
             <div class="description-content">
                 <ul>
                     <li>Made from high-quality pharmaceutical ingredients</li>
-                    <li>Effective for relieving pain, fever, and inflammation. Follow the prescribed dosage for best results.</li>
+                    <li id="productUseDescription">Effective for relieving pain, fever, and inflammation. Follow the prescribed dosage for best results.</li>
                     <li>
                         <strong>Disclaimer:</strong>
                         <p class="disclaimer">Despite our attempts to provide you with the most accurate information, the actual packaging, composition, and color of the medicine may sometimes vary. Please read the label, dosage instructions, and warnings carefully before use. Consult a doctor before taking any medication.</p>
@@ -221,16 +395,145 @@
         </div>
     </main>
 
-    <script>
-        // Add to cart functionality
-        document.querySelector('.add-to-cart').addEventListener('click', function() {
-            alert('Product added to cart!');
-        });
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="cart-modal">
+        <div class="cart-container">
+            <div class="cart-header">
+                <h2 class="cart-title">Your Shopping Cart</h2>
+                <button class="close-cart" onclick="toggleCart()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="cart-items" id="cart-items">
+                <!-- Cart items will be added here dynamically -->
+            </div>
+            <div class="cart-summary">
+                <div class="subtotal">
+                    <span>Subtotal:</span>
+                    <span id="subtotal-amount">₹0.00</span>
+                </div>
+                <div class="total">
+                    <span>Total:</span>
+                    <span class="total-amount" id="total-amount">₹0.00</span>
+                </div>
+                <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
 
+    <!-- Toast Notification -->
+    <div id="toast" style="display: none; position: fixed; bottom: 20px; right: 20px; background-color: rgba(0, 0, 0, 0.8); color: white; padding: 15px 25px; border-radius: 5px; z-index: 1002; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); border-left: 4px solid #FFD700;">
+        <span id="toastMessage"></span>
+    </div>
+
+    <script>
+        // Get URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('id');
+        const productName = urlParams.get('name');
+        const productPrice = urlParams.get('price');
+        const productImage = urlParams.get('img');
+        
+        // Set product details as soon as the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set product details
+            document.getElementById('productTitle').textContent = productName;
+            document.getElementById('productName').textContent = productName;
+            document.getElementById('productPrice').textContent = `₹${productPrice}`;
+            document.getElementById('productImage').src = productImage;
+            document.getElementById('productImage').alt = productName;
+            
+            // Update the description title
+            document.getElementById('descriptionTitle').textContent = `${productName} Description`;
+            
+            // Product-specific descriptions
+            const descriptions = {
+                'med1': 'Paracetamol is effective for relieving pain, fever, and mild inflammation. Take as directed.',
+                'med2': 'Crocin Pain Relief provides fast relief from headaches, body pain, and fevers.',
+                'med3': 'Sporlac DS Tablet helps maintain healthy digestive flora. Take after meals.',
+                'med4': 'Amoxycillin and Potassium is an antibiotic used to treat bacterial infections.',
+                'med5': 'Dolo 650 Tablet provides relief from fever and mild to moderate pain.',
+                'med6': 'Acidity Relief Tablets help relieve heartburn, acid indigestion, and sour stomach.',
+                'med7': 'Vitamin D3 Supplements support bone health and immune function.',
+                'med8': 'Antibacterial Cream helps prevent infection in minor cuts, scrapes, and burns.'
+            };
+            
+            // Set product-specific description if available
+            if (descriptions[productId]) {
+                document.getElementById('productUseDescription').textContent = descriptions[productId];
+            }
+            
+            // Initialize cart
+            initializeCart();
+            
+            // Initialize rating system
+            initRatingSystem();
+        });
+        
+        // Add to cart functionality
+        document.getElementById('addToCartBtn').addEventListener('click', function() {
+            addToCart(productId, productName, parseFloat(productPrice), productImage);
+            showToast(productName + ' added to cart!');
+        });
+        
         // Wishlist functionality
         document.querySelector('.heart-icon').addEventListener('click', function() {
             this.style.fill = this.style.fill === 'red' ? 'none' : 'red';
+            showToast(this.style.fill === 'red' ? 'Added to wishlist!' : 'Removed from wishlist');
         });
+        
+        // Rating system
+        function initRatingSystem() {
+            const stars = document.querySelectorAll('.star');
+            let selectedRating = 0;
+            
+            stars.forEach(star => {
+                star.addEventListener('click', function() {
+                    const value = parseInt(this.getAttribute('data-value'));
+                    selectedRating = value;
+                    
+                    // Update visual state of stars
+                    stars.forEach(s => {
+                        if (parseInt(s.getAttribute('data-value')) <= value) {
+                            s.classList.add('active');
+                        } else {
+                            s.classList.remove('active');
+                        }
+                    });
+                });
+            });
+            
+            document.querySelector('.rating-submit').addEventListener('click', function() {
+                if (selectedRating > 0) {
+                    showToast(`Thank you for rating ${productName} with ${selectedRating} stars!`);
+                    // Here you would normally send this rating to your backend
+                } else {
+                    showToast('Please select a star rating before submitting');
+                }
+            });
+        }
+        
+        // Toggle search bar visibility
+        function toggleSearch() {
+            showToast('Search functionality will be implemented soon!');
+        }
+        
+        // Show toast message
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            
+            toastMessage.textContent = message;
+            toast.style.display = 'block';
+            
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => {
+                    toast.style.display = 'none';
+                    toast.style.opacity = '1';
+                }, 500);
+            }, 3000);
+        }
     </script>
 </body>
 </html>
