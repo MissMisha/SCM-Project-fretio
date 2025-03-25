@@ -496,6 +496,53 @@
     nav ul li a:hover {
         background-color: rgba(255, 215, 0, 0.2);
     }
+    .profile-container {
+        position: relative;
+    }
+    
+    .dropdown {
+        display: block; /* Keep block layout for transition */
+        opacity: 0;
+        visibility: hidden;
+        position: absolute;
+        top: 30px;
+        right: 0;
+        background-color: rgba(0, 0, 0, 0.9);
+        border-radius: 4px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        min-width: 150px;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    
+    .profile-container:hover .dropdown {
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .dropdown a {
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 15px;
+        display: block;
+        transition: all 0.3s ease;
+    }
+    
+    .dropdown a:hover {
+        background-color: rgba(255, 215, 0, 0.2);
+        color: #FFD700;
+    }
+
+    /* Optionally, add a slight hover effect to the profile icon */
+    .profile-btn {
+        transition: transform 0.3s ease;
+    }
+    
+    .profile-container:hover .profile-btn {
+        transform: scale(1.1);
+    }
+    
+    
 }
     </style>
 </head>
@@ -690,9 +737,9 @@
     <script>
         // Profile dropdown functionality
         document.querySelector('.profile-btn').addEventListener('click', () => {
-            const dropdown = document.querySelector('.dropdown');
-            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-        });
+        document.querySelector('.profile-container').classList.toggle('active');
+    });
+        
 
         // Search functionality
         function toggleSearch() {
