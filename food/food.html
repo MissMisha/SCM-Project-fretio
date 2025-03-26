@@ -1011,4 +1011,33 @@
     </script>
     <script src="../otherpages/cart.js"></script>
 </body>
+</html>></i></a>
+            </div>
+
+            <div class="copyright">
+                Copyright © 2025 Fretio. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Profile dropdown functionality
+        document.querySelector('.profile-btn').addEventListener('click', () => {
+            const dropdown = document.querySelector('.dropdown');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Search functionality
+        function toggleSearch() {
+            const searchBar = document.getElementById('search-bar');
+            searchBar.style.display = searchBar.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function searchProducts() {
+            const searchInput = document.querySelector('.search-bar input').value;
+            alert(`Searching for: ${searchInput}`);
+        }
+    </script>
+    <script src="../otherpages/cart.js"></script>
+</body>
 </html>
