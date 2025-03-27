@@ -98,13 +98,8 @@ function updateCartTotals() {
     // You can add tax calculation, shipping, etc. here
     const total = subtotal;
     
-    const subtotalElement = document.getElementById('subtotal-amount');
-    const totalElement = document.getElementById('total-amount');
-    
-    if (subtotalElement) subtotalElement.textContent = `₹${subtotal.toFixed(2)}`;
-    if (totalElement) totalElement.textContent = `₹${total.toFixed(2)}`;
-    
-    return { subtotal, total };
+    document.getElementById('subtotal-amount').textContent = `₹${subtotal.toFixed(2)}`;
+    document.getElementById('total-amount').textContent = `₹${total.toFixed(2)}`;
 }
 
 function updateCartBadge() {
@@ -205,145 +200,8 @@ function checkout() {
         return;
     }
     
-    // Redirect to checkout page
-    window.location.href = '../otherpages/checkout.html';
-}
-
-function goToCheckout() {
-    if (cart.length === 0) {
-        showToast('Your cart is empty!');
-        return;
-    }
-    
-    // Redirect to checkout page
-    window.location.href = '../otherpages/checkout.html';
-}
-
-function placeOrder() {
-    if (cart.length === 0) {
-        showToast('Your cart is empty!');
-        return;
-    }
-    
-    // Get form inputs
-    const firstName = document.getElementById('firstName')?.value;
-    const lastName = document.getElementById('lastName')?.value;
-    const email = document.getElementById('email')?.value;
-    const phone = document.getElementById('phone')?.value;
-    const address = document.getElementById('address')?.value;
-    
-    // Validate form
-    if (!firstName || !lastName || !email || !phone || !address) {
-        showToast('Please fill in all required fields');
-        return;
-    }
-    
-    // Create order object with cart items and shipping details
-    const order = {
-        items: [...cart],
-        customer: {
-            firstName,
-            lastName,
-            email,
-            phone,
-            address,
-            city: document.getElementById('city')?.value,
-            zipCode: document.getElementById('zipCode')?.value,
-            country: document.getElementById('country')?.value
-        },
-        totals: calculateOrderTotals(),
-        orderDate: new Date().toISOString(),
-        status: 'pending'
-    };
-    
-    // Save order to localStorage (in a real app, this would be sent to a server)
-    saveOrder(order);
-    
-    // Clear cart
-    clearCart();
-    
-    // Show success message
-    showToast('Your order has been placed successfully!');
-    
-    // Redirect to thank you page after a delay
-    setTimeout(() => {
-        window.location.href = '../otherpages/thank-you.html';
-    }, 2000);
-}
-
-function saveOrder(order) {
-    // Get existing orders from localStorage
-    const orders = JSON.parse(localStorage.getItem('fretioOrders')) || [];
-    
-    // Add new order with unique ID
-    order.id = generateOrderId();
-    orders.push(order);
-    
-    // Save back to localStorage
-    localStorage.setItem('fretioOrders', JSON.stringify(orders));
-}
-
-function generateOrderId() {
-    return 'ORD-' + Date.now() + '-' + Math.floor(Math.random() * 1000);
-}
-
-function calculateOrderTotals() {
-    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    const shipping = 40; // Fixed shipping cost
-    const tax = subtotal * 0.05; // 5% tax
-    const total = subtotal + shipping + tax;
-    
-    return {
-        subtotal,
-        shipping,
-        tax,
-        total
-    };
-}
-
-function loadOrderSummary() {
-    const summaryItems = document.getElementById('summary-items');
-    if (!summaryItems) return;
-    
-    summaryItems.innerHTML = '';
-    
-    if (cart.length === 0) {
-        summaryItems.innerHTML = '<p>Your cart is empty.</p>';
-        return;
-    }
-    
-    let subtotal = 0;
-    
-    cart.forEach(item => {
-        const itemTotal = item.price * item.quantity;
-        subtotal += itemTotal;
-        
-        const itemElement = document.createElement('div');
-        itemElement.className = 'summary-item';
-        itemElement.innerHTML = `
-            <img src="${item.image}" alt="${item.name}" class="item-image">
-            <div class="item-details">
-                <div class="item-name">${item.name}</div>
-                <div class="item-price">₹${item.price.toFixed(2)}</div>
-                <div class="item-quantity">Quantity: ${item.quantity}</div>
-            </div>
-        `;
-        
-        summaryItems.appendChild(itemElement);
-    });
-    
-    // Update summary totals
-    const totals = calculateOrderTotals();
-    
-    const summarySubtotalElement = document.getElementById('summary-subtotal');
-    const summaryTaxElement = document.getElementById('summary-tax');
-    const summaryShippingElement = document.getElementById('summary-shipping');
-    const summaryTotalElement = document.getElementById('summary-total');
-    
-    if (summarySubtotalElement) summarySubtotalElement.textContent = `₹${totals.subtotal.toFixed(2)}`;
-    if (summaryTaxElement) summaryTaxElement.textContent = `₹${totals.tax.toFixed(2)}`;
-    if (summaryShippingElement) summaryShippingElement.textContent = `₹${totals.shipping.toFixed(2)}`;
-    if (summaryTotalElement) summaryTotalElement.textContent = `₹${totals.total.toFixed(2)}`;
+    alert('Proceeding to checkout...');
+    // In a real application, you would redirect to a checkout page
 }
 
 function showToast(message) {
@@ -368,34 +226,17 @@ function showToast(message) {
     }
     
     // Set message and display toast
-    const toastMessage = document.getElementById('toastMessage');
-    if (toastMessage) {
-        toastMessage.textContent = message;
-        toast.style.display = 'block';
-    } else {
-        toast.textContent = message;
-        toast.style.opacity = '1';
-    }
+    toast.textContent = message;
+    toast.style.opacity = '1';
     
     // Hide toast after 3 seconds
     setTimeout(() => {
-        if (toastMessage) {
-            toast.style.display = 'none';
-        } else {
-            toast.style.opacity = '0';
-        }
+        toast.style.opacity = '0';
     }, 3000);
 }
 
 // Initialize cart when DOM is ready
-document.addEventListener('DOMContentLoaded', function() {
-    initializeCart();
-    
-    // Load order summary on checkout page if applicable
-    if (window.location.href.includes('checkout.html')) {
-        loadOrderSummary();
-    }
-});
+document.addEventListener('DOMContentLoaded', initializeCart);
 
 // Add to cart button
 document.querySelector('.add-to-cart-btn').setAttribute('onclick', "addToCart('med1', 'Paracetamol', 29.00, 'https://cdn01.pharmeasy.in/dam/products_otc/I05582/dolo-650-tablet-15s-2-1671741628.jpg')");
