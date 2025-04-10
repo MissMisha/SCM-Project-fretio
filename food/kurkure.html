@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kurkure Puffcorn - Fretio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../otherpages/cart.css">
+    <script src="../otherpages/cart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Background with Gradient & Modern Colors - matching homepage */
+        body {
+            background: linear-gradient(to bottom, #1a1a1a, #2c2c2c, #333333);
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background-color: rgba(0, 0, 0, 0.9);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .logo {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #FFD700;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: #FFD700;
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-icons i {
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-icons i:hover {
+            color: #FFD700;
+            transform: scale(1.1);
+        }
+
+        .cart-icon-container {
+            position: relative;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #FFD700;
+            color: #000;
+            font-size: 12px;
+            padding: 2px 6px;
+            border-radius: 50%;
+            font-weight: 600;
+        }
+
+        .main-content {
+            display: flex;
+            padding: 7rem 4rem 2rem;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-details {
+            flex: 1;
+        }
+
+        .product-title {
+            color: #FFD700;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .product-card {
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 12px;
+            padding: 1.5rem;
+            position: relative;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .heart-icon {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 24px;
+            color: #fff;
+        }
+
+        .heart-icon:hover {
+            color: red;
+        }
+
+        .product-image {
+            width: 300px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-info {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .product-name {
+            color: #FFD700;
+            margin-top: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .product-price {
+            font-size: 1.8rem;
+            color: #fff;
+            margin-top: 0.5rem;
+            font-weight: 600;
+        }
+
+        .product-availability {
+            font-size: 0.9rem;
+            color: #4CAF50;
+            margin: 0.5rem 0;
+        }
+
+        /* Rating System */
+        .rating-container {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .rating-stars {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .star {
+            color: #cccccc;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .star:hover, .star.active {
+            color: #FFD700;
+        }
+
+        .rating-submit {
+            background-color: #444;
+            border: none;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .rating-submit:hover {
+            background-color: #555;
+        }
+
+        .add-to-cart {
+            background: #FFD700;
+            color: #000;
+            border: none;
+            width: 100%;
+            padding: 1rem;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .add-to-cart:hover {
+            background-color: #e6b800;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .description {
+            flex: 2;
+        }
+
+        .description-title {
+            color: #FFD700;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            border-bottom: 2px solid #FFD700;
+            padding-bottom: 0.5rem;
+        }
+
+        .description-content {
+            line-height: 1.8;
+        }
+
+        .description-content ul {
+            list-style: none;
+        }
+
+        .description-content ul li {
+            margin-bottom: 1rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .description-content ul li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #FFD700;
+        }
+
+        .nutritional-facts {
+            margin-top: 30px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .nutritional-facts h3 {
+            color: #FFD700;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .nutritional-facts table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .nutritional-facts table tr {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nutritional-facts table td {
+            padding: 8px 0;
+        }
+
+        .nutritional-facts table td:last-child {
+            text-align: right;
+        }
+
+        .disclaimer {
+            margin-top: 1.5rem;
+            color: #ccc;
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+
+        /* Toast Notification */
+        #toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 4px;
+            z-index: 2000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border: 1px solid #FFD700;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+                padding: 7rem 2rem 2rem;
+            }
+            
+            .navbar {
+                padding: 15px 20px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+
+            .product-image {
+                width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <img src="../home/logo.png" alt="Fretio Logo" class="logo">
+        <div class="nav-links">
+            <a href="../index.html">HOME</a>
+            <a href="../medicine/medi.html">MEDICINE</a>
+            <a href="food.html">FOOD ITEMS</a>
+            <a href="../clothes/clothes.html">CLOTHES</a>
+        </div>
+        <div class="nav-icons">
+            <i class="fas fa-search" onclick="toggleSearch()"></i>
+            <div class="cart-icon-container">
+                <i class="fas fa-shopping-cart" onclick="toggleCart()"></i>
+                <span class="cart-badge" id="cart-badge">0</span>
+            </div>
+            <i class="fas fa-user profile-btn"></i>
+        </div>
+    </nav>
+
+    <div class="search-bar" id="search-bar" style="display: none;">
+        <input type="text" placeholder="Search for snacks...">
+        <button onclick="searchProducts()">Search</button>
+    </div>
+
+    <main class="main-content">
+        <div class="product-details">
+            <h1 class="product-title">Kurkure Puffcorn</h1>
+            <div class="product-card">
+                <i class="far fa-heart heart-icon"></i>
+                <img src="https://www.jiomart.com/images/product/original/491055246/kurkure-yummy-cheese-puffcorn-55-g-product-images-o491055246-p491055246-0-202409041842.jpg?im=Resize=(1000,1000)" alt="Kurkure Puffcorn" class="product-image">
+                
+                <div class="product-info">
+                    <h2 class="product-name">Kurkure Yummy Cheese Puffcorn</h2>
+                    <div class="product-price">₹15.00</div>
+                    <div class="product-availability">In Stock</div>
+                </div>
+                
+                <!-- Rating System -->
+                <div class="rating-container">
+                    <p>Rate this product</p>
+                    <div class="rating-stars">
+                        <i class="fas fa-star star" data-value="1"></i>
+                        <i class="fas fa-star star" data-value="2"></i>
+                        <i class="fas fa-star star" data-value="3"></i>
+                        <i class="fas fa-star star" data-value="4"></i>
+                        <i class="fas fa-star star" data-value="5"></i>
+                    </div>
+                    <button class="rating-submit">Submit Rating</button>
+                </div>
+                
+                <button class="add-to-cart" onclick="addToCart('snack2', 'Kurkure Puffcorn', 15.00, 'https://www.jiomart.com/images/product/original/491055246/kurkure-yummy-cheese-puffcorn-55-g-product-images-o491055246-p491055246-0-202409041842.jpg?im=Resize=(1000,1000)')">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="description">
+            <h2 class="description-title">Kurkure Yummy Cheese Puffcorn Description</h2>
+            <div class="description-content">
+                <p>Experience the light, airy crunch and irresistible cheesy flavor of Kurkure Yummy Cheese Puffcorn - the perfect anytime snack that melts in your mouth with every bite.</p>
+                <ul>
+                    <li>Uniquely shaped corn puffs with delicious cheese flavor</li>
+                    <li>Light and airy texture that melts in your mouth</li>
+                    <li>Perfect for movie nights, parties, or on-the-go snacking</li>
+                    <li>Convenient packaging keeps puffcorn fresh and flavorful</li>
+                    <li>A beloved snack for cheese lovers of all ages</li>
+                </ul>
+
+                <div class="nutritional-facts">
+                    <h3>Nutritional Information</h3>
+                    <table>
+                        <tr>
+                            <td>Serving Size</td>
+                            <td>55g</td>
+                        </tr>
+                        <tr>
+                            <td>Calories</td>
+                            <td>270 kcal</td>
+                        </tr>
+                        <tr>
+                            <td>Total Fat</td>
+                            <td>15g</td>
+                        </tr>
+                        <tr>
+                            <td>Saturated Fat</td>
+                            <td>7g</td>
+                        </tr>
+                        <tr>
+                            <td>Sodium</td>
+                            <td>220mg</td>
+                        </tr>
+                        <tr>
+                            <td>Total Carbohydrates</td>
+                            <td>28g</td>
+                        </tr>
+                        <tr>
+                            <td>Protein</td>
+                            <td>3g</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <p class="disclaimer">Disclaimer: Despite our attempts to provide you with the most accurate information possible, the actual product packaging and materials may contain more or different information than displayed on our website. We recommend that you always read labels, warnings, and directions before consuming or using any product.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal">
+        <div class="cart-header">
+            <h2>Your Cart</h2>
+            <button class="close-cart" onclick="toggleCart()">&times;</button>
+        </div>
+        <div id="cart-items">
+            <!-- Cart items will be dynamically added here -->
+        </div>
+        <div class="cart-summary">
+            <div>
+                <span>Subtotal:</span>
+                <span id="subtotal-amount">₹0.00</span>
+            </div>
+            <div class="total">
+                <span>Total:</span>
+                <span id="total-amount">₹0.00</span>
+            </div>
+            <button class="checkout-btn" onclick="goToCheckout()">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartBadge();
+            
+            // Set up star rating system
+            const stars = document.querySelectorAll('.star');
+            let rating = 0;
+            
+            stars.forEach(star => {
+                star.addEventListener('click', function() {
+                    rating = this.dataset.value;
+                    stars.forEach(s => {
+                        if (s.dataset.value <= rating) {
+                            s.classList.add('active');
+                        } else {
+                            s.classList.remove('active');
+                        }
+                    });
+                });
+            });
+            
+            // Handle favorite icon
+            const heartIcon = document.querySelector('.heart-icon');
+            heartIcon.addEventListener('click', function() {
+                if (this.classList.contains('far')) {
+                    this.classList.remove('far');
+                    this.classList.add('fas');
+                    this.style.color = 'red';
+                    showToast('Added to favorites!');
+                } else {
+                    this.classList.remove('fas');
+                    this.classList.add('far');
+                    this.style.color = '#fff';
+                    showToast('Removed from favorites!');
+                }
+            });
+            
+            // Rating submission
+            const ratingSubmit = document.querySelector('.rating-submit');
+            ratingSubmit.addEventListener('click', function() {
+                if (rating > 0) {
+                    showToast(`Thank you for rating ${rating} stars!`);
+                } else {
+                    showToast('Please select a rating first');
+                }
+            });
+        });
+        
+        // Toggle search bar
+        function toggleSearch() {
+            const searchBar = document.getElementById('search-bar');
+            searchBar.style.display = searchBar.style.display === 'none' ? 'flex' : 'none';
+        }
+        
+        // Toggle cart modal
+        function toggleCart() {
+            const cartModal = document.getElementById('cart-modal');
+            if (cartModal.style.display === 'block') {
+                cartModal.style.display = 'none';
+            } else {
+                updateCartDisplay();
+                cartModal.style.display = 'block';
+            }
+        }
+        
+        // Go to checkout page
+        function goToCheckout() {
+            window.location.href = '../otherpages/checkout.html';
+        }
+        
+        // Show toast notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.opacity = '1';
+            
+            setTimeout(() => {
+                toast.style.opacity = '0';
+            }, 3000);
+        }
+    </script>
+</body>
+</html> 

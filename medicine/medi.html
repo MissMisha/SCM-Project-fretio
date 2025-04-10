@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicines - Fretio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../otherpages/cart.css">
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Background with Gradient & Modern Colors */
+        body {
+            background: linear-gradient(to bottom, #1a1a1a, #2c2c2c, #333333);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Header Styling */
+        header {
+            background-color: rgba(0, 0, 0, 0.9);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 25px;
+        }
+
+        nav ul li {
+            list-style: none;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            color: #FFD700;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: #FFD700;
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Header Icons */
+        .header-icons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .header-icons i {
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .header-icons i:hover {
+            color: #FFD700;
+            transform: scale(1.1);
+        }
+
+        /* Search Bar */
+        .search-bar {
+            display: none;
+            position: absolute;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 999;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .search-bar input {
+            padding: 10px 15px;
+            width: 50%;
+            max-width: 600px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .search-bar button {
+            padding: 10px 20px;
+            background-color: #FFD700;
+            color: #000;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar button:hover {
+            background-color: #e6b800;
+        }
+
+        /* Profile Dropdown */
+        .profile-container {
+            position: relative;
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            top: 30px;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            border-radius: 4px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            min-width: 150px;
+        }
+
+        .dropdown a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 15px;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown a:hover {
+            background-color: rgba(255, 215, 0, 0.2);
+            color: #FFD700;
+        }
+
+        /* Responsive Navbar */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            .header-icons {
+                gap: 15px;
+            }
+        }
+
+        /* Page Content */
+        .page-content {
+            padding-top: 120px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .title-section {
+            text-align: center;
+            padding: 2rem 0;
+            animation: fadeIn 1s ease-in-out 0.5s forwards;
+        }
+
+        .title {
+            font-family: 'Poppins', sans-serif;
+            color: #FFD700;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.6);
+        }
+
+        .breadcrumb {
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            padding: 0 2rem;
+            margin: 2rem auto;
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out 0.8s forwards;
+        }
+
+        .product-card {
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 8px;
+            overflow: hidden;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(255, 215, 0, 0.3);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            margin-bottom: 1rem;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        .product-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #FFD700;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            display: block;
+            margin: 0.5rem 0;
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        .product-availability {
+            font-size: 0.9rem;
+            color: #4CAF50;
+            margin: 0.5rem 0;
+        }
+
+        .btn-add-cart {
+            background-color: #FFD700;
+            color: #000;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin-top: 0.5rem;
+            display: inline-block;
+        }
+
+        .btn-add-cart:hover {
+            background-color: #e6b800;
+            transform: translateY(-3px);
+        }
+
+        /* Footer Section */
+        .footer {
+            background: #000;
+            padding: 40px 10px;
+            margin-top: 30px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            gap: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-links a {
+            color: #FFD700;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            color: #FFD700;
+            font-size: 24px;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.2);
+            color: #fff;
+        }
+
+        .copyright {
+            color: #999;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        /* Responsive Grid */
+        @media (max-width: 1200px) {
+            .products-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <header>
+        <div class="logo">
+            <img src="../home/logo.png" alt="Fretio Logo">
+        </div>
+        
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="medi.html" class="active">Medicine</a></li>
+                <li><a href="../food/food.html">Food Items</a></li>
+                <li><a href="../clothes/clothes.html">Clothes</a></li>
+            </ul>
+        </nav>
+        
+        <div class="header-icons">
+            <i class="fas fa-search" onclick="toggleSearch()"></i>
+            <div class="cart-icon-container">
+                <i class="fas fa-shopping-cart" onclick="toggleCart()"></i>
+                <span class="cart-badge" id="cart-badge">0</span>
+            </div>
+            <div class="profile-container">
+                <i class="fas fa-user profile-btn"></i>
+                <div class="dropdown">
+                    <a href="#"><i class="fas fa-user-circle"></i> Profile</a>
+                    <a href="#"><i class="fas fa-cog"></i> Settings</a>
+                    <a href="#"><i class="fas fa-list"></i> Orders</a>
+                    <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Search bar div that appears when search button is clicked -->
+    <div id="search-bar" class="search-bar">
+        <input type="text" placeholder="Search for medicines...">
+        <button onclick="searchProducts()">Search</button>
+    </div>
+
+    <div class="page-content">
+        <div class="title-section">
+            <h1 class="title">Medicines</h1>
+            <div class="breadcrumb">Home > Medicines</div>
+        </div>
+
+        <div class="products-grid">
+            <!-- Paracetamol -->
+            <div class="product-card">
+                <a href="medical1.html?id=med1&name=Paracetamol&price=29.00&img=Paracetamol.jpeg" style="text-decoration: none; color: inherit;">
+                    <img src="Paracetamol.jpeg" alt="Paracetamol" class="product-image">
+                    <div class="product-title">Paracetamol</div>
+                    <span class="product-price">₹29.00</span>
+                    <div class="product-availability">In Stock</div>
+                </a>
+                <button class="btn-add-cart" onclick="addToCart('med1', 'Paracetamol', 29.00, 'Paracetamol.jpeg')">Add to Cart</button>
+            </div>
+
+            <!-- Crocin Pain Relief -->
+            <div class="product-card">
+                <a href="medical1.html?id=med2&name=Crocin Pain Relief&price=67.00&img=Crocin Pain Relief.jpeg" style="text-decoration: none; color: inherit;">
+                    <img src="Crocin Pain Relief.jpeg" alt="Crocin Pain Relief" class="product-image">
+                    <div class="product-title">Crocin Pain Relief</div>
+                    <span class="product-price">₹67.00</span>
+                    <div class="product-availability">In Stock</div>
+                </a>
+                <button class="btn-add-cart" onclick="addToCart('med2', 'Crocin Pain Relief', 67.00, 'Crocin Pain Relief.jpeg')">Add to Cart</button>
+            </div>
+
+            <!-- Sporlac DS Tablet -->
+            <div class="product-card">
+                <a href="medical1.html?id=med3&name=Sporlac DS Tablet&price=151.00&img=Sporlac DS Tablet.jpeg" style="text-decoration: none; color: inherit;">
+                    <img src="Sporlac DS Tablet.jpeg" alt="Sporlac DS Tablet" class="product-image">
+                    <div class="product-title">Sporlac DS Tablet</div>
+                    <span class="product-price">₹151.00</span>
+                    <div class="product-availability">In Stock</div>
+                </a>
+                <button class="btn-add-cart" onclick="addToCart('med3', 'Sporlac DS Tablet', 151.00, 'Sporlac DS Tablet.jpeg')">Add to Cart</button>
+            </div>
+
+            <!-- Amoxycillin and Potassium -->
+            <div class="product-card">
+                <a href="medical1.html?id=med4&name=Amoxycillin and Potassium&price=161.00&img=Amoxycillin and Potassium.jpeg" style="text-decoration: none; color: inherit;">
+                    <img src="Amoxycillin and Potassium.jpeg" alt="Amoxycillin and Potassium" class="product-image">
+                    <div class="product-title">Amoxycillin and Potassium</div>
+                    <span class="product-price">₹161.00</span>
+                    <div class="product-availability">Limited Stock</div>
+                </a>
+                <button class="btn-add-cart" onclick="addToCart('med4', 'Amoxycillin and Potassium', 161.00, 'Amoxycillin and Potassium.jpeg')">Add to Cart</button>
+            </div>
+
+            <!-- Dolo 650 Tablet -->
+            <div class="product-card">
+                <a href="medical1.html?id=med5&name=Dolo 650 Tablet&price=32.00&img=Dolo 650 Tablet.jpeg" style="text-decoration: none; color: inherit;">
+                    <img src="Dolo 650 Tablet.jpeg" alt="Dolo 650" class="product-image">
+                    <div class="product-title">Dolo 650 Tablet</div>
+                    <span class="product-price">₹32.00</span>
+                    <div class="product-availability">In Stock</div>
+                </a>
+                <button class="btn-add-cart" onclick="addToCart('med5', 'Dolo 650 Tablet', 32.00, 'Dolo 650 Tablet.jpeg')">Add to Cart</button>
+            </div>
+
+            <!-- Acidity Relief Tablets -->
+            <div class="product-card">
+                <a href="medical1.html?id=med6&name=Acidity Relief Tablets&price=85.00&img=Acidity Relief Tablets.jpeg" style="text-decoration: none; color: inherit;">
+                    <img src="Acidity Relief Tablets.jpeg" alt="Acidity Relief" class="product-image">
+                    <div class="product-title">Acidity Relief Tablets</div>
+                    <span class="product-price">₹85.00</span>
+                    <div class="product-availability">Limited Stock</div>
+                </a>
+                <button class="btn-add-cart" onclick="addToCart('med6', 'Acidity Relief Tablets', 85.00, 'Acidity Relief Tablets.jpeg')">Add to Cart</button>
+            </div>
+
+            <!-- Vitamin D3 Supplements -->
+            <div class="product-card">
+                <a href="medical1.html?id=med7&name=Vitamin D3 Supplements&price=190.00&img=Vitamin D3 Supplements.jpeg" style="text-decoration: none; color: inherit;">
+                    <img src="Vitamin D3 Supplements.jpeg" alt="Vitamin D3" class="product-image">
+                    <div class="product-title">Vitamin D3 Supplements</div>
+                    <span class="product-price">₹190.00</span>
+                    <div class="product-availability">In Stock</div>
+                </a>
+                <button class="btn-add-cart" onclick="addToCart('med7', 'Vitamin D3 Supplements', 190.00, 'Vitamin D3 Supplements.jpeg')">Add to Cart</button>
+            </div>
+
+            <!-- Antibacterial Cream -->
+            <div class="product-card">
+                <a href="medical1.html?id=med8&name=Antibacterial Cream&price=120.00&img=Antibacterial Cream.jpeg" style="text-decoration: none; color: inherit;">
+                    <img src="Antibacterial Cream.jpeg" alt="Antibacterial Cream" class="product-image">
+                    <div class="product-title">Antibacterial Cream</div>
+                    <span class="product-price">₹120.00</span>
+                    <div class="product-availability">In Stock</div>
+                </a>
+                <button class="btn-add-cart" onclick="addToCart('med8', 'Antibacterial Cream', 120.00, 'Antibacterial Cream.jpeg')">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="cart-modal">
+        <div class="cart-container">
+            <div class="cart-header">
+                <h2 class="cart-title">Your Shopping Cart</h2>
+                <button class="close-cart" onclick="toggleCart()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="cart-items" id="cart-items">
+                <!-- Cart items will be added here dynamically -->
+            </div>
+            <div class="cart-summary">
+                <div class="subtotal">
+                    <span>Subtotal:</span>
+                    <span id="subtotal-amount">₹0.00</span>
+                </div>
+                <div class="total">
+                    <span>Total:</span>
+                    <span class="total-amount" id="total-amount">₹0.00</span>
+                </div>
+                <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" style="display: none; position: fixed; bottom: 20px; right: 20px; background-color: rgba(0, 0, 0, 0.8); color: white; padding: 15px 25px; border-radius: 5px; z-index: 1002; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); border-left: 4px solid #FFD700;">
+        <span id="toastMessage"></span>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="../otherpages/contact.html">Contact us</a>
+                <a href="../otherpages/aboutus.html">About us</a>
+                <a href="../otherpages/privacy.html">Privacy Policy</a>
+                <a href="../otherpages/return-policy.html">Return Policy</a>
+            </div>
+
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            </div>
+
+            <div class="copyright">
+                Copyright © 2025 Fretio. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Profile dropdown functionality
+        document.querySelector('.profile-btn').addEventListener('click', () => {
+            const dropdown = document.querySelector('.dropdown');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Search functionality
+        function toggleSearch() {
+            const searchBar = document.getElementById('search-bar');
+            searchBar.style.display = searchBar.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function searchProducts() {
+            const searchInput = document.querySelector('.search-bar input').value;
+            alert(`Searching for: ${searchInput}`);
+        }
+    </script>
+    <script src="../otherpages/cart.js"></script>
+</body>
+</html>

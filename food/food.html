@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snacks - Fretio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../otherpages/cart.css">
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Background with Gradient & Modern Colors */
+        body {
+            background: linear-gradient(to bottom, #1a1a1a, #2c2c2c, #333333);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Header Styling */
+        header {
+            background-color: rgba(0, 0, 0, 0.9);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 25px;
+        }
+
+        nav ul li {
+            list-style: none;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            color: #FFD700;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: #FFD700;
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Header Icons */
+        .header-icons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .header-icons i {
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .header-icons i:hover {
+            color: #FFD700;
+            transform: scale(1.1);
+        }
+
+        /* Search Bar */
+        .search-bar {
+            display: none;
+            position: absolute;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 999;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .search-bar input {
+            padding: 10px 15px;
+            width: 50%;
+            max-width: 600px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .search-bar button {
+            padding: 10px 20px;
+            background-color: #FFD700;
+            color: #000;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar button:hover {
+            background-color: #e6b800;
+        }
+
+        /* Profile Dropdown */
+        .profile-container {
+            position: relative;
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            top: 30px;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            border-radius: 4px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            min-width: 150px;
+        }
+
+        .dropdown a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 15px;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown a:hover {
+            background-color: rgba(255, 215, 0, 0.2);
+            color: #FFD700;
+        }
+
+        /* Page Content */
+        .page-content {
+            padding-top: 120px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .title-section {
+            text-align: center;
+            padding: 2rem 0;
+            animation: fadeIn 1s ease-in-out 0.5s forwards;
+        }
+
+        .title {
+            font-family: 'Poppins', sans-serif;
+            color: #FFD700;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.6);
+        }
+
+        .breadcrumb {
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            padding: 0 2rem;
+            margin: 2rem auto;
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out 0.8s forwards;
+        }
+
+        .product-card {
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 8px;
+            overflow: hidden;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(255, 215, 0, 0.3);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            margin-bottom: 1rem;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        .product-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #FFD700;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            display: block;
+            margin: 0.5rem 0;
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        .product-availability {
+            font-size: 0.9rem;
+            color: #4CAF50;
+            margin: 0.5rem 0;
+        }
+
+        .btn-add-cart {
+            background-color: #FFD700;
+            color: #000;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin-top: 0.5rem;
+            display: inline-block;
+        }
+
+        .btn-add-cart:hover {
+            background-color: #e6b800;
+            transform: translateY(-3px);
+        }
+
+        /* Cart Modal */
+        #cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 400px;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.95);
+            padding: 20px;
+            z-index: 1001;
+            overflow-y: auto;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .cart-header h2 {
+            font-size: 24px;
+            color: #FFD700;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-cart:hover {
+            color: #FFD700;
+        }
+
+        #cart-items {
+            margin-bottom: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            margin-bottom: 10px;
+            border: 1px solid rgba(255, 215, 0, 0.1);
+        }
+
+        .cart-item-image {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-right: 15px;
+            background-color: #fff;
+            padding: 5px;
+        }
+
+        .cart-item-details {
+            flex-grow: 1;
+        }
+
+        .cart-item-title {
+            font-weight: 500;
+            margin-bottom: 5px;
+            color: #FFD700;
+        }
+
+        .cart-item-price {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quantity-btn {
+            background: rgba(255, 215, 0, 0.2);
+            border: none;
+            color: #fff;
+            width: 25px;
+            height: 25px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .quantity-btn:hover {
+            background: rgba(255, 215, 0, 0.4);
+        }
+
+        .quantity-input {
+            width: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            color: #fff;
+            text-align: center;
+            border-radius: 4px;
+        }
+
+        .remove-item {
+            background: none;
+            border: none;
+            color: #ff4444;
+            cursor: pointer;
+            padding: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .remove-item:hover {
+            transform: scale(1.1);
+        }
+
+        .cart-summary {
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .cart-summary div {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .cart-summary .total {
+            font-size: 20px;
+            font-weight: 700;
+            color: #FFD700;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #FFD700;
+            border: none;
+            border-radius: 4px;
+            color: #000;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .checkout-btn:hover {
+            background-color: #e6b800;
+            transform: translateY(-3px);
+        }
+
+        /* Toast Notification */
+        #toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 4px;
+            z-index: 2000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border: 1px solid #FFD700;
+        }
+
+        /* Footer Section */
+        .footer {
+            background: #000;
+            padding: 40px 10px;
+            margin-top: 30px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            gap: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-links a {
+            color: #FFD700;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            color: #FFD700;
+            font-size: 24px;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.2);
+            color: #fff;
+        }
+
+        .copyright {
+            color: #999;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        /* Responsive Grid */
+        @media (max-width: 1200px) {
+            .products-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Responsive Navbar */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            .header-icons {
+                gap: 15px;
+            }
+        }
+
+        /* Cart Badge */
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #FFD700;
+            color: #000;
+            font-size: 12px;
+            padding: 2px 6px;
+            border-radius: 50%;
+            font-weight: 600;
+        }
+
+        .cart-icon-container {
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="../home/logo.png" alt="Fretio Logo">
+        </div>
+        
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../medicine/medi.html">Medicine</a></li>
+                <li><a href="food.html" class="active">Food Items</a></li>
+                <li><a href="../clothes/clothes.html">Clothes</a></li>
+            </ul>
+        </nav>
+        
+        <div class="header-icons">
+            <i class="fas fa-search" onclick="toggleSearch()"></i>
+            <div class="cart-icon-container">
+                <i class="fas fa-shopping-cart" onclick="toggleCart()"></i>
+                <span class="cart-badge" id="cart-badge">0</span>
+            </div>
+            <div class="profile-container">
+                <i class="fas fa-user profile-btn"></i>
+                <div class="dropdown">
+                    <a href="#"><i class="fas fa-user-circle"></i> Profile</a>
+                    <a href="#"><i class="fas fa-cog"></i> Settings</a>
+                    <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="search-bar">
+        <input type="text" placeholder="Search for snacks...">
+        <button onclick="searchProducts()">Search</button>
+    </div>
+
+    <div class="page-content">
+        <div class="title-section">
+            <h1 class="title">Delicious Snacks</h1>
+            <p class="breadcrumb">Home / Food Items / Snacks</p>
+        </div>
+
+        <div class="products-grid">
+            <!-- Lays Chips -->
+            <div class="product-card">
+                <img src="https://www.jiomart.com/images/product/original/490000331/lay-s-india-s-magic-masala-potato-chips-40-g-product-images-o490000331-p490000331-0-202410251815.jpg?im=Resize=(420,420)" alt="Lays Chips" class="product-image">
+                <div class="product-title">Lays Chips</div>
+                <div class="product-price">₹20.00</div>
+                <div class="product-availability">In Stock</div>
+                <button class="btn-add-cart" onclick="addToCart('snack1', 'Lays Chips', 20.00, 'https://m.media-amazon.com/images/I/71pHdJZgN4L._SL1500_.jpg')">Add to Cart</button>
+            </div>
+
+            <!-- Kurkure -->
+            <div class="product-card">
+                <img src="https://www.jiomart.com/images/product/original/491055246/kurkure-yummy-cheese-puffcorn-55-g-product-images-o491055246-p491055246-0-202409041842.jpg?im=Resize=(1000,1000)" alt="Kurkure" class="product-image">
+                <div class="product-title">Kurkure Puffcorn</div>
+                <div class="product-price">₹15.00</div>
+                <div class="product-availability">In Stock</div>
+                <button class="btn-add-cart" onclick="addToCart('snack2', 'Kurkure', 15.00, 'https://m.media-amazon.com/images/I/71RmmI-2aqL._SL1500_.jpg')">Add to Cart</button>
+            </div>
+
+            <!-- Doritos -->
+            <div class="product-card">
+                <img src="https://www.jiomart.com/images/product/original/491696363/doritos-cheese-nachos-82-5-g-product-images-o491696363-p590122127-0-202407021619.jpg?im=Resize=(420,420)" alt="Doritos" class="product-image">
+                <div class="product-title">Doritos</div>
+                <div class="product-price">₹35.00</div>
+                <div class="product-availability">In Stock</div>
+                <button class="btn-add-cart" onclick="addToCart('snack3', 'Doritos', 35.00, 'https://m.media-amazon.com/images/I/81Oz+RQSgZL._SL1500_.jpg')">Add to Cart</button>
+            </div>
+
+            <!-- Bingo Mad Angles -->
+            <div class="product-card">
+                <img src="https://www.jiomart.com/images/product/original/490373600/bingo-mad-angles-achaari-masti-mango-pickle-flavour-crunchy-triangle-chips-pack-60-g-product-images-o490373600-p490373600-0-202501201251.jpg?im=Resize=(1000,1000)" alt="Bingo Mad Angles" class="product-image">
+                <div class="product-title">Bingo Mad Angles</div>
+                <div class="product-price">₹25.00</div>
+                <div class="product-availability">In Stock</div>
+                <button class="btn-add-cart" onclick="addToCart('snack4', 'Bingo Mad Angles', 25.00, 'https://m.media-amazon.com/images/I/61Ub+G1XUwL._SL1500_.jpg')">Add to Cart</button>
+            </div>
+
+            <!-- Oreo Cookies -->
+            <div class="product-card">
+                <img src="https://www.jiomart.com/images/product/original/491338268/cadbury-oreo-strawberry-cream-biscuits-113-75-g-product-images-o491338268-p491338268-0-202501281154.jpg?im=Resize=(1000,1000)" alt="Oreo Cookies" class="product-image">
+                <div class="product-title">Oreo Cookies</div>
+                <div class="product-price">₹30.00</div>
+                <div class="product-availability">In Stock</div>
+                <button class="btn-add-cart" onclick="addToCart('snack5', 'Oreo Cookies', 30.00, 'https://m.media-amazon.com/images/I/71iBwNnq1DL._SL1500_.jpg')">Add to Cart</button>
+            </div>
+
+            <!-- Britannia Good Day -->
+            <div class="product-card">
+                <img src="https://www.jiomart.com/images/product/original/490176189/britannia-good-day-pista-badam-cookies-100-g-product-images-o490176189-p490176189-0-202304271905.jpg?im=Resize=(1000,1000)" alt="Britannia Good Day" class="product-image">
+                <div class="product-title">Britannia Good Day</div>
+                <div class="product-price">₹22.00</div>
+                <div class="product-availability">In Stock</div>
+                <button class="btn-add-cart" onclick="addToCart('snack6', 'Britannia Good Day', 22.00, 'https://m.media-amazon.com/images/I/71qh-tyomPL._SL1080_.jpg')">Add to Cart</button>
+            </div>
+
+            <!-- Haldiram's Bhujia -->
+            <div class="product-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTapWEhi7C3z0QB2Bqrebldd12qj38PIKB0vA&s" alt="Haldiram's Bhujia" class="product-image">
+                <div class="product-title">Haldiram's Bhujia</div>
+                <div class="product-price">₹45.00</div>
+                <div class="product-availability">In Stock</div>
+                <button class="btn-add-cart" onclick="addToCart('snack7', 'Haldiram\'s Bhujia', 45.00, 'https://m.media-amazon.com/images/I/61+cQCCGpYL._SL1000_.jpg')">Add to Cart</button>
+            </div>
+
+            <!-- Pringles -->
+            <div class="product-card">
+                <img src="https://www.jiomart.com/images/product/original/492172684/pringles-grab-n-go-sour-cream-and-onion-flavour-potato-chips-40-g-can-product-images-o492172684-p609666517-0-202408082024.jpg?im=Resize=(1000,1000)" alt="Pringles" class="product-image">
+                <div class="product-title">Pringles</div>
+                <div class="product-price">₹110.00</div>
+                <div class="product-availability">In Stock</div>
+                <button class="btn-add-cart" onclick="addToCart('snack8', 'Pringles', 110.00, 'https://m.media-amazon.com/images/I/71DjjCDz5iL._SL1500_.jpg')">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal">
+        <div class="cart-header">
+            <h2>Your Cart</h2>
+            <button class="close-cart" onclick="toggleCart()">&times;</button>
+        </div>
+        <div id="cart-items">
+            <!-- Cart items will be dynamically added here -->
+        </div>
+        <div class="cart-summary">
+            <div>
+                <span>Subtotal:</span>
+                <span id="subtotal-amount">₹0.00</span>
+            </div>
+            <div class="total">
+                <span>Total:</span>
+                <span id="total-amount">₹0.00</span>
+            </div>
+            <button class="checkout-btn" onclick="goToCheckout()">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast"></div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="../otherpages/contact.html">Contact</a>
+                <a href="../otherpages/about.html">About</a>
+                <a href="../otherpages/privacy.html">Privacy Policy</a>
+                <a href="../otherpages/return.html">Return Policy</a>
+            </div>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 Fretio. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../otherpages/cart.js"></script>
+    <script>
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartBadge();
+        });
+
+        // Toggle search bar
+        function toggleSearch() {
+            const searchBar = document.querySelector('.search-bar');
+            searchBar.style.display = searchBar.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        // Search functionality
+        function searchProducts() {
+            const searchInput = document.querySelector('.search-bar input').value.toLowerCase();
+            const productCards = document.querySelectorAll('.product-card');
+            
+            productCards.forEach(card => {
+                const title = card.querySelector('.product-title').textContent.toLowerCase();
+                if (title.includes(searchInput)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Toggle cart modal
+        function toggleCart() {
+            const cartModal = document.getElementById('cart-modal');
+            if (cartModal.style.display === 'block') {
+                cartModal.style.display = 'none';
+            } else {
+                updateCartDisplay();
+                cartModal.style.display = 'block';
+            }
+        }
+
+        // Profile dropdown
+        document.querySelector('.profile-btn').addEventListener('click', function() {
+            const dropdown = document.querySelector('.dropdown');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Close dropdown when clicking outside
+        window.addEventListener('click', function(e) {
+            if (!e.target.matches('.profile-btn')) {
+                const dropdown = document.querySelector('.dropdown');
+                if (dropdown.style.display === 'block') {
+                    dropdown.style.display = 'none';
+                }
+            }
+        });
+
+        // Go to checkout page
+        function goToCheckout() {
+            window.location.href = '../otherpages/checkout.html';
+        }
+
+        // Show toast notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.opacity = '1';
+            
+            setTimeout(() => {
+                toast.style.opacity = '0';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Return Policy - Fretio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Background with Gradient & Modern Colors */
+        body {
+            background: linear-gradient(to bottom, #1a1a1a, #2c2c2c, #333333);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Header Styling */
+        header {
+            background-color: rgba(0, 0, 0, 0.9);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 25px;
+        }
+
+        nav ul li {
+            list-style: none;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            color: #FFD700;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: #FFD700;
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Header Icons */
+        .header-icons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .header-icons i {
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .header-icons i:hover {
+            color: #FFD700;
+            transform: scale(1.1);
+        }
+
+        /* Search Bar */
+        .search-bar {
+            display: none;
+            position: absolute;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 999;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .search-bar input {
+            padding: 10px 15px;
+            width: 50%;
+            max-width: 600px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .search-bar button {
+            padding: 10px 20px;
+            background-color: #FFD700;
+            color: #000;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar button:hover {
+            background-color: #e6b800;
+        }
+
+        /* Profile Dropdown */
+        .profile-container {
+            position: relative;
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            top: 30px;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            border-radius: 4px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            min-width: 150px;
+        }
+
+        .dropdown a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 15px;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown a:hover {
+            background-color: rgba(255, 215, 0, 0.2);
+            color: #FFD700;
+        }
+
+        /* Shopping Cart Modal */
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1001;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cart-container {
+            background-color: #1a1a1a;
+            width: 80%;
+            max-width: 800px;
+            max-height: 80vh;
+            border-radius: 10px;
+            padding: 25px;
+            position: relative;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .cart-title {
+            color: #FFD700;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-cart:hover {
+            color: #FFD700;
+            transform: scale(1.1);
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding-right: 10px;
+            margin-bottom: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            object-fit: cover;
+            margin-right: 15px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+
+        .cart-item-price {
+            color: #FFD700;
+            font-weight: 500;
+        }
+
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            padding: 5px;
+        }
+
+        .quantity-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 16px;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .quantity-btn:hover {
+            color: #FFD700;
+        }
+
+        .quantity-input {
+            width: 35px;
+            text-align: center;
+            font-size: 16px;
+            border: none;
+            background: none;
+            color: #fff;
+        }
+
+        .remove-item {
+            background: none;
+            border: none;
+            color: #ff6b6b;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .remove-item:hover {
+            color: #ff0000;
+            transform: scale(1.1);
+        }
+
+        .cart-summary {
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .subtotal {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .total {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .total-amount {
+            color: #FFD700;
+        }
+
+        .checkout-btn {
+            background-color: #FFD700;
+            color: #000;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .checkout-btn:hover {
+            background-color: #e6b800;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .empty-cart-message {
+            text-align: center;
+            padding: 40px 0;
+            color: #999;
+            font-size: 1.1rem;
+        }
+        
+        .empty-cart-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+            color: #666;
+        }
+
+        /* Cart badge */
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: #FF0000;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .cart-icon-container {
+            position: relative;
+        }
+
+        /* Page Content */
+        .page-title {
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 100px;
+            color: #FFD700;
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 20px auto 40px;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            animation: fadeIn 1s ease-in-out 0.3s forwards;
+        }
+
+        /* Return Policy Content Styling */
+        .policy-section {
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .policy-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h2 {
+            color: #FFD700;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #444;
+            padding-bottom: 10px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 15px;
+            line-height: 1.7;
+            font-size: 1.1rem;
+            position: relative;
+            padding-left: 10px;
+        }
+
+        li::before {
+            content: '';
+            display: none;
+        }
+
+        /* Specific styling for policy section list items */
+        .policy-section ul li {
+            margin-bottom: 15px;
+            line-height: 1.7;
+            font-size: 1.1rem;
+            position: relative;
+            padding-left: 10px;
+        }
+
+        .policy-section ul li::before {
+            content: '•';
+            color: #FFD700;
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+
+        /* Update to make bullet points only appear in main content lists, not in navigation */
+        nav ul {
+            padding-left: 0;
+            margin-bottom: 0;
+        }
+
+        nav ul li {
+            padding-left: 0;
+            margin-bottom: 0;
+        }
+
+        .highlight {
+            color: #FFD700;
+            font-weight: 600;
+        }
+
+        /* Footer Section */
+        .footer {
+            background: #000;
+            padding: 40px 10px;
+            margin-top: 30px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            gap: 20px;
+        }
+
+        .footer-logo {
+            height: 50px;
+            margin-bottom: 10px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-links a {
+            color: #FFD700;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            color: #FFD700;
+            font-size: 24px;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.2);
+            color: #fff;
+        }
+
+        .copyright {
+            color: #999;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            .header-icons {
+                gap: 15px;
+            }
+            header {
+                padding: 15px 20px;
+            }
+            .page-title {
+                font-size: 2rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+            main {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="../home/logo.png" alt="Fretio Logo">
+        </div>
+        
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../medicine/medi.html">Medicine</a></li>
+                <li><a href="../food/food.html">Food Items</a></li>
+                <li><a href="../clothes/clothes.html">Clothes</a></li>
+            </ul>
+        </nav>
+        
+        <div class="header-icons">
+            <i class="fas fa-search" onclick="toggleSearch()"></i>
+            <div class="cart-icon-container">
+                <i class="fas fa-shopping-cart" onclick="toggleCart()"></i>
+                <span class="cart-badge" id="cart-badge">0</span>
+            </div>
+            <div class="profile-container">
+                <i class="fas fa-user profile-btn"></i>
+                <div class="dropdown">
+                    <a href="signup.html"><i class="fas fa-user-plus"></i> Sign up</a>
+                    <a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a>
+                    <a href="#"><i class="fas fa-wallet"></i> Wallet</a>
+                    <a href="#"><i class="fas fa-exchange-alt"></i> Buy/Sell</a>
+                    <a href="#"><i class="fas fa-history"></i> History</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Search bar div that appears when search button is clicked -->
+    <div id="search-bar" class="search-bar">
+        <input type="text" placeholder="Search for products...">
+        <button onclick="searchProducts()">Search</button>
+    </div>
+
+    <!-- Shopping Cart Modal -->
+    <div id="cart-modal" class="cart-modal">
+        <div class="cart-container">
+            <div class="cart-header">
+                <h2 class="cart-title">Your Shopping Cart</h2>
+                <button class="close-cart" onclick="toggleCart()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="cart-items" id="cart-items">
+                <!-- Cart items will be added here dynamically -->
+            </div>
+            <div class="cart-summary">
+                <div class="subtotal">
+                    <span>Subtotal:</span>
+                    <span id="subtotal-amount">₹0.00</span>
+                </div>
+                <div class="total">
+                    <span>Total:</span>
+                    <span class="total-amount" id="total-amount">₹0.00</span>
+                </div>
+                <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <h1 class="page-title">Return Policy</h1>
+
+    <main>
+        <div class="policy-section">
+            <h2>Our Commitment to You</h2>
+            <p>At <span class="highlight">Fretio</span>, we are dedicated to providing a seamless and satisfactory experience for our users. Please review our return policy below:</p>
+            <ul>
+                <li>Once an order has been collected by the customer, returns are not permissible.</li>
+                <li>For any inquiries or concerns regarding a product, we encourage you to reach out directly to the seller.</li>
+                <li>Fretio serves as a platform facilitating connections between buyers and sellers and does not assume responsibility for any disputes or issues that may arise from transactions.</li>
+            </ul>
+        </div>
+
+        <div class="policy-section">
+            <h2>Platform Role</h2>
+            <p>
+                As a peer-to-peer marketplace, Fretio acts solely as an intermediary platform that connects campus community members for buying and selling goods. We do not:
+            </p>
+            <ul>
+                <li>Take possession of items listed on our platform</li>
+                <li>Verify the condition of items exchanged</li>
+                <li>Guarantee the quality or authenticity of products</li>
+                <li>Process returns between users</li>
+            </ul>
+            <p>
+                All transactions are conducted directly between users, and any arrangements regarding returns should be negotiated between the involved parties.
+            </p>
+        </div>
+
+        <div class="policy-section">
+            <h2>Recommendations for Buyers</h2>
+            <p>
+                To ensure a satisfactory transaction experience, we recommend the following practices:
+            </p>
+            <ul>
+                <li>Thoroughly examine product descriptions, images, and details before completing a purchase</li>
+                <li>Communicate clearly with sellers about your expectations and any questions you may have</li>
+                <li>Inspect items at the time of collection before finalizing the transaction</li>
+                <li>Consider arranging to meet in public places for item exchanges</li>
+                <li>Use the Fretio chat feature to keep all communications on the platform for reference</li>
+            </ul>
+        </div>
+
+        <div class="policy-section">
+            <h2>Reporting Issues</h2>
+            <p>
+                While Fretio does not process returns, we take the safety and satisfaction of our community seriously. If you encounter any of the following situations, please report them to our support team:
+            </p>
+            <ul>
+                <li>Fraudulent activity or misrepresentation of items</li>
+                <li>Safety concerns during transactions</li>
+                <li>Harassment or inappropriate behavior from other users</li>
+                <li>Technical issues with the platform affecting your transaction</li>
+            </ul>
+            <p>
+                Our team will review each report and take appropriate action according to our community guidelines and terms of service.
+            </p>
+        </div>
+
+        <div class="policy-section">
+            <h2>Contact Information</h2>
+            <p>
+                For any questions or concerns regarding our Return Policy, please contact our support team at:
+            </p>
+            <p>
+                <span class="highlight">Email:</span> support@fretio.com
+            </p>
+            <p>
+                <span class="highlight">Support Hours:</span> Monday to Friday, 9 AM to 6 PM IST
+            </p>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <img src="../home/logo.png" alt="Fretio Logo" class="footer-logo">
+            </div>
+            <div class="footer-links">
+                <a href="contact.html">Contact us</a>
+                <a href="aboutus.html">About us</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="return-policy.html" class="active">Return Policy</a>
+            </div>
+
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            </div>
+
+            <div class="copyright">
+                Copyright © 2025 Fretio. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize cart from localStorage or create new cart
+        let cart = JSON.parse(localStorage.getItem('fretioCart')) || [];
+        
+        // Update cart badge on page load
+        updateCartBadge();
+
+        // Profile dropdown functionality
+        document.querySelector('.profile-btn').addEventListener('click', () => {
+            const dropdown = document.querySelector('.dropdown');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Search functionality
+        function toggleSearch() {
+            const searchBar = document.getElementById('search-bar');
+            searchBar.style.display = searchBar.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function searchProducts() {
+            const searchInput = document.querySelector('.search-bar input').value;
+            alert(`Searching for: ${searchInput}`);
+        }
+
+        // Cart functionality
+        function toggleCart() {
+            const cartModal = document.getElementById('cart-modal');
+            
+            if (cartModal.style.display === 'flex') {
+                cartModal.style.display = 'none';
+                document.body.style.overflow = 'auto'; // Enable scrolling
+            } else {
+                renderCartItems();
+                cartModal.style.display = 'flex';
+                document.body.style.overflow = 'hidden'; // Disable background scrolling
+            }
+        }
+
+        function renderCartItems() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = `
+                    <div class="empty-cart-message">
+                        <div class="empty-cart-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <p>Your cart is empty</p>
+                        <p>Browse our products and add items to your cart</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            let cartHTML = '';
+            
+            cart.forEach(item => {
+                cartHTML += `
+                    <div class="cart-item" data-id="${item.id}">
+                        <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                        <div class="cart-item-details">
+                            <div class="cart-item-title">${item.name}</div>
+                            <div class="cart-item-price">₹${item.price.toFixed(2)}</div>
+                        </div>
+                        <div class="cart-item-actions">
+                            <div class="quantity-control">
+                                <button class="quantity-btn" onclick="updateQuantity(${item.id}, ${item.quantity - 1})">-</button>
+                                <input type="number" class="quantity-input" value="${item.quantity}" min="1" max="10" 
+                                    onchange="updateQuantity(${item.id}, this.value)">
+                                <button class="quantity-btn" onclick="updateQuantity(${item.id}, ${item.quantity + 1})">+</button>
+                            </div>
+                            <button class="remove-item" onclick="removeItem(${item.id})">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            cartItemsContainer.innerHTML = cartHTML;
+            updateCartTotals();
+        }
+
+        function updateCartTotals() {
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            // You can add tax calculation, shipping, etc. here
+            const total = subtotal;
+            
+            document.getElementById('subtotal-amount').textContent = `₹${subtotal.toFixed(2)}`;
+            document.getElementById('total-amount').textContent = `₹${total.toFixed(2)}`;
+        }
+
+        function updateCartBadge() {
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const badge = document.getElementById('cart-badge');
+            
+            badge.textContent = totalItems;
+            
+            if (totalItems === 0) {
+                badge.style.display = 'none';
+            } else {
+                badge.style.display = 'flex';
+            }
+        }
+
+        function addToCart(id, name, price, image, quantity = 1) {
+            // Check if item already exists in cart
+            const existingItemIndex = cart.findIndex(item => item.id === id);
+            
+            if (existingItemIndex !== -1) {
+                // Update quantity if item exists
+                cart[existingItemIndex].quantity += quantity;
+            } else {
+                // Add new item if it doesn't exist
+                cart.push({
+                    id,
+                    name,
+                    price,
+                    image,
+                    quantity
+                });
+            }
+            
+            // Save cart to localStorage
+            saveCart();
+            
+            // Update UI
+            updateCartBadge();
+            
+            // Show confirmation
+            showToast(`${name} added to cart!`);
+        }
+
+        function updateQuantity(id, newQuantity) {
+            newQuantity = parseInt(newQuantity);
+            
+            if (isNaN(newQuantity) || newQuantity < 1) {
+                newQuantity = 1;
+            }
+            
+            const itemIndex = cart.findIndex(item => item.id === id);
+            
+            if (itemIndex !== -1) {
+                if (newQuantity === 0) {
+                    // Remove item if quantity is 0
+                    removeItem(id);
+                } else {
+                    // Update quantity
+                    cart[itemIndex].quantity = newQuantity;
+                    saveCart();
+                    renderCartItems();
+                    updateCartBadge();
+                }
+            }
+        }
+
+        function removeItem(id) {
+            cart = cart.filter(item => item.id !== id);
+            saveCart();
+            renderCartItems();
+            updateCartBadge();
+            
+            // Show confirmation
+            showToast('Item removed from cart');
+        }
+
+        function saveCart() {
+            localStorage.setItem('fretioCart', JSON.stringify(cart));
+        }
+
+        function clearCart() {
+            cart = [];
+            saveCart();
+            renderCartItems();
+            updateCartBadge();
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                showToast('Your cart is empty!');
+                return;
+            }
+            
+            alert('Proceeding to checkout...');
+            // In a real application, you would redirect to a checkout page
+        }
+
+        function showToast(message) {
+            // Create toast element if it doesn't exist
+            let toast = document.getElementById('toast');
+            
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.id = 'toast';
+                toast.style.position = 'fixed';
+                toast.style.bottom = '30px';
+                toast.style.left = '50%';
+                toast.style.transform = 'translateX(-50%)';
+                toast.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+                toast.style.color = '#fff';
+                toast.style.padding = '12px 20px';
+                toast.style.borderRadius = '5px';
+                toast.style.zIndex = '2000';
+                toast.style.opacity = '0';
+                toast.style.transition = 'opacity 0.3s ease';
+                document.body.appendChild(toast);
+            }
+            
+            // Set message and display toast
+            toast.textContent = message;
+            toast.style.opacity = '1';
+            
+            // Hide toast after 3 seconds
+            setTimeout(() => {
+                toast.style.opacity = '0';
+            }, 3000);
+        }
+
+        // Animation for elements when they come into view
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.policy-section');
+            
+            elements.forEach(element => {
+                const rect = element.getBoundingClientRect();
+                const isVisible = (rect.top >= 0 && rect.top <= window.innerHeight);
+                
+                if (isVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        // Listen for scroll events
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+
+        // Example function to add product to cart (for demonstration purposes)
+        function addProductExample() {
+            // This would normally be called from product pages when clicking "Add to Cart" buttons
+            addToCart(
+                101, // Product ID
+                'Paracetamol 500mg', // Product name
+                199.99, // Product price
+                '../medicine/img/para.jpg', // Product image
+                1 // Quantity
+            );
+        }
+    </script>
+</body>
+</html>

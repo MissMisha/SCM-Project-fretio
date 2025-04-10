@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Fretio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Background with Gradient & Modern Colors */
+        body {
+            background: linear-gradient(to bottom, #1a1a1a, #2c2c2c, #333333);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Header Styling */
+        header {
+            background-color: rgba(0, 0, 0, 0.9);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 25px;
+        }
+
+        nav ul li {
+            list-style: none;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            color: #FFD700;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: #FFD700;
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Header Icons */
+        .header-icons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .header-icons i {
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .header-icons i:hover {
+            color: #FFD700;
+            transform: scale(1.1);
+        }
+
+        /* Search Bar */
+        .search-bar {
+            display: none;
+            position: absolute;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 999;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .search-bar input {
+            padding: 10px 15px;
+            width: 50%;
+            max-width: 600px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .search-bar button {
+            padding: 10px 20px;
+            background-color: #FFD700;
+            color: #000;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar button:hover {
+            background-color: #e6b800;
+        }
+
+        /* Profile Dropdown */
+        .profile-container {
+            position: relative;
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            top: 30px;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            border-radius: 4px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            min-width: 150px;
+        }
+
+        .dropdown a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 15px;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown a:hover {
+            background-color: rgba(255, 215, 0, 0.2);
+            color: #FFD700;
+        }
+
+        /* Page Content */
+        .page-title {
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 100px;
+            color: #FFD700;
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 20px auto 40px;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            animation: fadeIn 1s ease-in-out 0.3s forwards;
+        }
+
+        /* Privacy Content Styling */
+        .privacy-section {
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .privacy-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h2 {
+            color: #FFD700;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #444;
+            padding-bottom: 10px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .highlight {
+            color: #FFD700;
+            font-weight: 600;
+        }
+
+        /* Footer Section */
+        .footer {
+            background: #000;
+            padding: 40px 10px;
+            margin-top: 30px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            gap: 20px;
+        }
+
+        .footer-logo {
+            height: 50px;
+            margin-bottom: 10px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-links a {
+            color: #FFD700;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            color: #FFD700;
+            font-size: 24px;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.2);
+            color: #fff;
+        }
+
+        .copyright {
+            color: #999;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            .header-icons {
+                gap: 15px;
+            }
+            header {
+                padding: 15px 20px;
+            }
+            .page-title {
+                font-size: 2rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+            main {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="../home/logo.png" alt="Fretio Logo">
+        </div>
+        
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../medicine/medi.html">Medicine</a></li>
+                <li><a href="../food/food.html">Food Items</a></li>
+                <li><a href="../clothes/clothes.html">Clothes</a></li>
+            </ul>
+        </nav>
+        
+        <div class="header-icons">
+            <i class="fas fa-search" onclick="toggleSearch()"></i>
+            <i class="fas fa-shopping-cart" onclick="viewCart()"></i>
+            <div class="profile-container">
+                <i class="fas fa-user profile-btn"></i>
+                <div class="dropdown">
+                    <a href="signup.html"><i class="fas fa-user-plus"></i> Sign up</a>
+                    <a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a>
+                    <a href="#"><i class="fas fa-wallet"></i> Wallet</a>
+                    <a href="#"><i class="fas fa-exchange-alt"></i> Buy/Sell</a>
+                    <a href="#"><i class="fas fa-history"></i> History</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Search bar div that appears when search button is clicked -->
+    <div id="search-bar" class="search-bar">
+        <input type="text" placeholder="Search for products...">
+        <button onclick="searchProducts()">Search</button>
+    </div>
+
+    <h1 class="page-title">Privacy Policy</h1>
+
+    <main>
+        <div class="privacy-section">
+            <h2>Information We Collect</h2>
+            <p>
+                At Fretio, we collect various types of information to provide you with a seamless and personalized experience. The information we collect includes:
+            </p>
+            <p>
+                <span class="highlight">Personal Information:</span> When you register with Fretio, we collect basic details such as your name, email address, phone number, and university affiliation to create and manage your account.
+            </p>
+            <p>
+                <span class="highlight">Transaction Information:</span> We collect data related to your transactions on our platform, including items you list, purchase, or rent, as well as payment information to process transactions.
+            </p>
+            <p>
+                <span class="highlight">Usage Information:</span> We gather data about your interactions with our platform, including browsing history, search queries, and features you use to enhance your experience and improve our services.
+            </p>
+        </div>
+
+        <div class="privacy-section">
+            <h2>How We Use Your Information</h2>
+            <p>
+                The information we collect is used for the following purposes:
+            </p>
+            <p>
+                <span class="highlight">Service Provision:</span> To facilitate transactions between users, process payments, and provide customer support.
+            </p>
+            <p>
+                <span class="highlight">Account Management:</span> To create and maintain your account, authenticate your identity, and personalize your experience.
+            </p>
+            <p>
+                <span class="highlight">Communication:</span> To send important updates about your transactions, account status, and platform changes.
+            </p>
+            <p>
+                <span class="highlight">Improvement of Services:</span> To enhance existing features, develop new services, and optimize platform performance based on user feedback and behavior.
+            </p>
+        </div>
+
+        <div class="privacy-section">
+            <h2>Information Sharing</h2>
+            <p>
+                We understand the importance of privacy and handle your information with utmost care. We share your information only in the following circumstances:
+            </p>
+            <p>
+                <span class="highlight">With Other Users:</span> We share necessary information with other users to facilitate transactions, such as contact details and transaction history.
+            </p>
+            <p>
+                <span class="highlight">Service Providers:</span> We may share information with trusted third-party service providers who assist us in operating our platform, processing payments, and analyzing data.
+            </p>
+            <p>
+                <span class="highlight">Legal Compliance:</span> We may disclose information when required by law, regulation, or legal process, or to protect the rights and safety of our users and the public.
+            </p>
+        </div>
+
+        <div class="privacy-section">
+            <h2>Your Rights and Choices</h2>
+            <p>
+                You have several rights regarding your personal information:
+            </p>
+            <p>
+                <span class="highlight">Access and Update:</span> You can access and update your personal information through your account settings at any time.
+            </p>
+            <p>
+                <span class="highlight">Data Deletion:</span> You can request the deletion of your account and associated personal information by contacting our support team.
+            </p>
+            <p>
+                <span class="highlight">Communication Preferences:</span> You can manage your communication preferences and opt out of marketing communications while still receiving essential updates related to your transactions and account.
+            </p>
+        </div>
+
+        <div class="privacy-section">
+            <h2>Security Measures</h2>
+            <p>
+                We implement robust security measures to protect your information from unauthorized access, alteration, disclosure, or destruction. These measures include encryption, secure protocols, regular security assessments, and employee training on privacy and security practices.
+            </p>
+            <p>
+                While we strive to protect your information, no method of transmission over the Internet or electronic storage is 100% secure. We encourage you to take steps to protect your account, such as using strong passwords and not sharing your login credentials.
+            </p>
+        </div>
+
+        <div class="privacy-section">
+            <h2>Policy Updates</h2>
+            <p>
+                We may update this Privacy Policy from time to time to reflect changes in our practices or legal requirements. We will notify you of significant changes through email or a prominent notice on our platform. We encourage you to review our Privacy Policy periodically to stay informed about how we are protecting your information.
+            </p>
+        </div>
+
+        <div class="privacy-section">
+            <h2>Contact Us</h2>
+            <p>
+                If you have any questions, concerns, or requests regarding this Privacy Policy or our privacy practices, please contact us at:
+            </p>
+            <p>
+                <span class="highlight">Email:</span> privacy@fretio.com
+            </p>
+            <p>
+                <span class="highlight">Address:</span> Fretio Headquarters, Tech Hub, University Campus, New Delhi, India
+            </p>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <img src="../home/logo.png" alt="Fretio Logo" class="footer-logo">
+            </div>
+            <div class="footer-links">
+                <a href="contact.html">Contact us</a>
+                <a href="aboutus.html">About us</a>
+                <a href="privacy.html" class="active">Privacy Policy</a>
+                <a href="return-policy.html">Return Policy</a>
+            </div>
+
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            </div>
+
+            <div class="copyright">
+                Copyright © 2025 Fretio. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Profile dropdown functionality
+        document.querySelector('.profile-btn').addEventListener('click', () => {
+            const dropdown = document.querySelector('.dropdown');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Search functionality
+        function toggleSearch() {
+            const searchBar = document.getElementById('search-bar');
+            searchBar.style.display = searchBar.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function searchProducts() {
+            const searchInput = document.querySelector('.search-bar input').value;
+            alert(`Searching for: ${searchInput}`);
+        }
+
+        // View cart functionality
+        function viewCart() {
+            alert('Shopping cart will be implemented soon!');
+        }
+
+        // Animation for elements when they come into view
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.privacy-section');
+            
+            elements.forEach(element => {
+                const rect = element.getBoundingClientRect();
+                const isVisible = (rect.top >= 0 && rect.top <= window.innerHeight);
+                
+                if (isVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        // Listen for scroll events
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+    </script>
+</body>
+</html>
